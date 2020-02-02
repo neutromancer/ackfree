@@ -353,7 +353,7 @@ begin
  tmspot:=map[therecx,therecy,therex,therey].o;       {}{}{}
  writelog(0,'wtrymove: from '+strnum(herex)+','+strnum(herey)+' to '+strnum(therex)+','+strnum(therey)+' obj='+strnum(tmspot));
  if tmspot=255 then tmresult:=99 else
- begin 
+ begin
 
  if tmspot<>0 then if obj^[tmspot].t<6 then if obj^[tmspot].d[8]=3 then
    begin
@@ -399,7 +399,7 @@ begin
 
   actionparser(tmresult,tmspot,tmdata,0,
    therex+16*(therecx-1)-1,therey+16*(therecy-1)-1,herex+15,herey+15);
-   
+
  end else
   begin
    tmresult:=0;if ack.stepsound<>0 then
@@ -408,7 +408,7 @@ begin
   end;
   end; {creature check}
   end; {fly}
-  
+
  wtrymove:=tmresult;
 end;
 
@@ -511,7 +511,7 @@ begin
  herex:=xloc*xstep; herey:=yloc*ystep;
  done:=false;
  count:=0;
- 
+
  repeat
   if (round(herex/xstep)=xsc) AND (round(herey/ystep)=ysc) then
     done:=true {we've arrived}
@@ -524,8 +524,8 @@ begin
 	  then
 	 begin
 	  {check what we are shooting over}
-	  if shootingover<>255 then 
-      if (shootingover<>0) then 
+	  if shootingover<>255 then
+      if (shootingover<>0) then
 	   begin
        {it is an object...}
         case obj^[shootingover].t of
@@ -535,7 +535,7 @@ begin
 	   end; {object}
 	   if done then begin;xsc:=round(herex/xstep);ysc:=round(herey/ystep);end;
 	  end; {check}
-	  
+	
     end; {look}
    inc(herex,run);inc(herey,rise);
    inc(count);if count>300 then done:=true;
@@ -562,7 +562,7 @@ begin
 			begin
 			 {process terrain destruction}
 			 if obj^[bigthing].d[8]>5 then begin
-			   writelog(obj^[bigthing].d[8]-5,'Running terrain death macro');			 
+			   writelog(obj^[bigthing].d[8]-5,'Running terrain death macro');			
 			  run_macro(obj^[bigthing].d[8]-5);
 			  end;
               if obj^[bigthing].d[12]=0 then
@@ -596,7 +596,7 @@ begin
                 moved:=true;CHUNKSAVE:=true;
                 {replace with...}
                end;
-			end; {terrain destruction}   
+			end; {terrain destruction}
 end;
 
 
@@ -669,8 +669,8 @@ begin
     {if creature has armor, process it}
     if crc^[rcrc^[who].crcsource].ar<>0 then
         with crc^[rcrc^[who].crcsource] do
-         if 
-		 ( obj^[ar].d[6] > random(100) ) then 
+         if
+		 ( obj^[ar].d[6] > random(100) ) then
 		  begin;damage:=damage-obj^[ar].d[5];if damage<0 then damage:=0;end;
 
     {if creature is invulnerable, damage becomes zero}
@@ -736,7 +736,7 @@ begin
       {drop remains, if any}
       for i:=3 downto 1 do if crc^[rcrc^[who].crcsource].inv[i]<>0 then
        with crc^[rcrc^[who].crcsource] do
-        if (obj^[inv[i]].t<6) or (inv[i]=1) or ((random(100)<invn[i]) or (ack.ackversion<31)) then	   
+        if (obj^[inv[i]].t<6) or (inv[i]=1) or ((random(100)<invn[i]) or (ack.ackversion<31)) then	
         begin
          if obj^[inv[i]].t<6 then
           begin
@@ -770,7 +770,7 @@ begin
     for i:=1 to 7 do  {for each slot}
      if ack.parmor[i]<>0 then    {if wearing armor}
       if ack.countarmor[i]=0 then      {and its not disabled}
-       if 
+       if
 	   ( obj^[ack.parmor[i]].d[6] > random(100) ) then  {and random coverage}
         damage:=damage-obj^[ack.parmor[i]].d[5];    {then absorb damage}
 
@@ -787,7 +787,7 @@ begin
       if crc^[rcrc^[who].crcsource].touchm<>0 then
        if weapon0t=7 then
 	   if ack.ackversion>=30 then run_macro(crc^[rcrc^[who].crcsource].touchm);
-	   
+	
       if hitpoints<=0 then scrollsay('YOU HAVE BEEN KILLED!');
 
      end else
@@ -966,7 +966,7 @@ var motionx,motiony,attacklocx,attacklocy:byte; {what it would like to do}
 
 
 function checkdest(xscc,yscc,who:integer):boolean;
-var 
+var
     mapobj,mapobjdata,creaturevehicle:byte;
     passable:boolean;
     therecx,therex,therecy,therey:byte;
@@ -974,7 +974,7 @@ var
 {$I I_CHKDST.PAS} {the same code is used by wmap and room regions}
 	
  begin
- 
+
   therecx:=((xinloc+xscc+10) DIV 16)+1;
   therecy:=((yinloc+yscc+11) DIV 16)+1;
   therex:=((xinloc+xscc+10) MOD 16)+1;
@@ -983,7 +983,7 @@ var
   mapobjdata:=map[therecx,therecy,therex,therey].d;
   trueterrain(mapobj,mapobjdata); {now figure out what's really there}	
   creaturevehicle:=crc^[rcrc^[who].crcsource].veh;
-  
+
   {perform the actual check... }
   passable:=checkdest2(mapobj,creaturevehicle);
 
@@ -1114,7 +1114,7 @@ begin
  regattacknum:=1;
 
   for xsc:=0 to 10 do for ysc:=0 to 8 do anim_screen[xsc+1,ysc+1].aggro:=false;
- 
+
  for xsc:=0 to 10 do for ysc:=0 to 8 do
    if map[((xinloc+xsc+10) DIV 16)+1,((yinloc+ysc+11) DIV 16)+1,
      ((xinloc+xsc+10) MOD 16)+1,((yinloc+ysc+11) MOD 16)+1].o=255
@@ -1128,7 +1128,7 @@ begin
       ((xinloc+xsc+10) MOD 16)+1,((yinloc+ysc+11) MOD 16)+1].d;
      scanalign(anger,crc^[crcsource].t,attacklocx,attacklocy,crcsource);
 
-     if found then 
+     if found then
       with crc^[crcsource] do begin
        attacker_alignment:=t;
        inc(aggro); anim_screen[xsc+1,ysc+1].aggro:=true;
@@ -1159,9 +1159,9 @@ begin
          ((yinloc+ysc+11) DIV 16)+1,((xinloc+xsc+10) MOD 16)+1,
          ((yinloc+ysc+11) MOD 16)+1].d]=movedindex
            then fight:=false;
-		   
+		
        if not fight then begin
-		 writelog(199,'creature is moving');	   
+		 writelog(199,'creature is moving');	
          xmotion:=0;ymotion:=0;
          if xsc>5 then xmotion:=-1;
          if xsc<5 then xmotion:=1;
@@ -1173,13 +1173,13 @@ begin
           if random(2)=1 then ymotion:=0 else xmotion:=0;
          if checkdest(xsc+xmotion,ysc+ymotion,mee) then
           movecreature(xsc,ysc,xsc+xmotion,ysc+ymotion)
-		  else begin;fight:=true;writelog(0,'cannot move, will try fighting');end; 
+		  else begin;fight:=true;writelog(0,'cannot move, will try fighting');end;
          {do motion}
-        end;		   
-		   
+        end;		
+		
        if fight then
 	   begin
-		 writelog(199,'creature is fighting');	   
+		 writelog(199,'creature is fighting');	
 	   if ((foundrange>1) AND (fr<>0)) or ((foundrange<=1000) AND (fw<>0)) then
         begin
 
@@ -1189,7 +1189,7 @@ begin
          registerattacks[regattacknum,2]:=yinloc+ysc+11;
          registerattacks[regattacknum,3]:=attacklocx;
          registerattacks[regattacknum,4]:=attacklocy;
-         if (foundrange<=1000) and (fw<>0) then 
+         if (foundrange<=1000) and (fw<>0) then
             registerattacks[regattacknum,5]:=fw else
             registerattacks[regattacknum,5]:=0;
          if (foundrange>1000) or (fw=0) then
@@ -1197,7 +1197,7 @@ begin
            registerattacks[regattacknum,6]:=0;
          registerattacks[regattacknum,7]:=whoops;
          registerattacks[regattacknum,8]:=crcsource;
-         if regattacknum<16 then 
+         if regattacknum<16 then
 		   inc(regattacknum);
 
          creaturemoved[map[((xinloc+xsc+10) DIV 16)+1,
@@ -1260,7 +1260,7 @@ for xsc:=0 to 10 do for ysc:=0 to 8 do
          ((yinloc+ysc+11) MOD 16)+1].d;
 		    trueterrain(tto,ttd);
 			anim_screen[xsc+1,ysc+1].under:=tto;
-	   end;	 
+	   end;	
     anim_screen[xsc+1,ysc+1].tb:=false;
 	
    end
@@ -1270,7 +1270,7 @@ for xsc:=0 to 10 do for ysc:=0 to 8 do
         creatureslot:=map[((xinloc+xsc+10) DIV 16)+1,
          ((yinloc+ysc+11) DIV 16)+1,((xinloc+xsc+10) MOD 16)+1,
          ((yinloc+ysc+11) MOD 16)+1].d;
-		if transparency then 
+		if transparency then
 		 begin
 		  anim_screen[xsc+1,ysc+1].under:=rcrc^[creatureslot].obj;
 		  if obj^[anim_screen[xsc+1,ysc+1].under].t>5 then
@@ -1284,7 +1284,7 @@ for xsc:=0 to 10 do for ysc:=0 to 8 do
 		    trueterrain(tto,ttd);
 			anim_screen[xsc+1,ysc+1].under:=tto;
 		   end;	
-		 end; 
+		 end;
         if ((obj^[rcrc^[creatureslot].obj].t<3)
          and (obj^[rcrc^[creatureslot].obj].d[13]<>0))
          then
@@ -1296,7 +1296,7 @@ for xsc:=0 to 10 do for ysc:=0 to 8 do
          else
           begin
            visimap[xsc,ysc]:=crc^[rcrc^[creatureslot].crcsource].g1;
-           if crc^[rcrc^[creatureslot].crcsource].g2=0 then 
+           if crc^[rcrc^[creatureslot].crcsource].g2=0 then
 		    anim_screen[xsc+1,ysc+1].tb:=false else anim_screen[xsc+1,ysc+1].tb:=true;
            anim_screen[xsc+1,ysc+1].tb4:=true;
            with anim_screen[xsc+1,ysc+1] do
@@ -1440,8 +1440,8 @@ if nowviewdistance<16 then
          anim_screen[xsc,ysc].tb:=false;
 		 anim_screen[xsc,ysc].lit:=1;
 		 anim_screen[xsc,ysc].under:=0;
-		end; 
-       
+		end;
+
       end else if (anim_screen[xsc,ysc].lit AND 2)=2 then
        begin
         for xlit:=0 to 4 do
@@ -1454,8 +1454,8 @@ if nowviewdistance<16 then
 		   (xlit+ylit<>0) and
 		   (xlit*10 + ylit <> 40) and
 		   (xlit*10 + ylit <> 44) and
-		   (xlit*10 + ylit <> 4) 
-		   then	   
+		   (xlit*10 + ylit <> 4)
+		   then	
 		    anim_screen[xsc+xlit-2,ysc+ylit-2].lit:=anim_screen[xsc+xlit-2,ysc+ylit-2].lit OR 1;
 
        end;
@@ -1466,22 +1466,22 @@ if nowviewdistance<16 then
   begin
    visimap[5,4]:=curricon;
    anim_screen[6,5].tb:=false;
-  end; 
+  end;
  for xsc:=0 to 10 do for ysc:=0 to 8 do
   {if visimap[xsc,ysc]<>0 then}
-  if anim_screen[xsc+1,ysc+1].lit>0 then 
+  if anim_screen[xsc+1,ysc+1].lit>0 then
     begin
 	 if visimap[xsc,ysc]=DECOGRP then
 	   putgrap2((xsc)*4+XCONST+3,ysc*16+(YCONST*4)+10,anim_screen[xsc+1,ysc+1].t2)
-	 else if anim_screen[xsc+1,ysc+1].under=0 then 
+	 else if anim_screen[xsc+1,ysc+1].under=0 then
 	  putgrap((xsc)*4+XCONST+3,ysc*16+(YCONST*4)+10,visimap[xsc,ysc])
-	  else 
+	  else
 	     puttransgrap11((xsc)*4+XCONST+3,ysc*16+(YCONST*4)+10,visimap[xsc,ysc],obj^[anim_screen[xsc+1,ysc+1].under].d[1]);
 	end
-   else 
+   else
     if visimap[xsc,ysc]=DECOGRP then
 	 putdarkgrap2((xsc)*4+XCONST+3,ysc*16+(YCONST*4)+10,anim_screen[xsc+1,ysc+1].t2,ack.darkforeground,ack.darkbackground)
-	 else 
+	 else
 	  begin
 	   if anim_screen[xsc+1,ysc+1].under=0 then
 	    putdarkgrap((xsc)*4+XCONST+3,ysc*16+(YCONST*4)+10,visimap[xsc,ysc])
@@ -1490,8 +1490,8 @@ if nowviewdistance<16 then
 		  visimap[xsc,ysc],obj^[anim_screen[xsc+1,ysc+1].under].d[1]);
 		 anim_screen[xsc+1,ysc+1].tb:=false;
 		 end;
-	   
-	  end; 
+	
+	  end;
 
  {clearbottom;}
  savepage;
@@ -1529,15 +1529,15 @@ begin
  onlycell:=false;
  xchunkloc:=xchunk;ychunkloc:=ychunk;xinloc:=x;yinloc:=y;
  getchunks(xchunkloc,ychunkloc);
- 
- if entrancemacro<>0 then 
+
+ if entrancemacro<>0 then
   begin
    writelog(entrancemacro,'Running entrance macro');
    run_macro(entrancemacro);
-   
-  end; 
- 
- 
+
+  end;
+
+
  showwalk;
  done:=false;moved:=true;
 repeat
@@ -1573,7 +1573,7 @@ repeat
  *)
 
  if ack.hp[0]=0 then begin;playerdeath;readkey_time:=0;readkey_default:=#255;end;
- 
+
  if macro_teleport then
   begin
     readkey_time:=0;
@@ -1604,7 +1604,7 @@ repeat
    if global_room<>0 then xchunk:=global_room;}
    macro_teleport:=false;
   end;
-  
+
  { teleport_xchunk:=xchunkloc;
   teleport_ychunk:=ychunkloc;
   teleport_yloc:=yinloc;
@@ -1726,32 +1726,32 @@ begin
 	  passtime(region.room.wallgrap[15]);end
        else begin;chunkmove(NORTH);moved:=true;arrowmoved:=true;
 	   passtime(region.room.wallgrap[15]);end;
-	  lastmov:=1; 
-	  end; 
+	  lastmov:=1;
+	  end;
   'K':begin
       if wtrymove(xinloc-1,yinloc,xinloc,yinloc)=0 then
        if checkfuel then if xinloc>1 then begin;passtime(region.room.wallgrap[15]);
 	   moved:=true;arrowmoved:=true;dec(xinloc);end
        else begin;chunkmove(WEST);moved:=true;arrowmoved:=true;
 	   passtime(region.room.wallgrap[15]);end;
-	  lastmov:=4; 	   
-	  end; 
+	  lastmov:=4; 	
+	  end;
   'M':begin
       if wtrymove(xinloc+1,yinloc,xinloc,yinloc)=0 then
        if checkfuel then if xinloc<16 then begin;passtime(region.room.wallgrap[15]);
 	   moved:=true;arrowmoved:=true;inc(xinloc);end
        else begin;chunkmove(EAST);moved:=true;arrowmoved:=true;
 	   passtime(region.room.wallgrap[15]);end;
-	  lastmov:=3; 	   
-	  end; 
+	  lastmov:=3; 	
+	  end;
   'P':begin
       if wtrymove(xinloc,yinloc+1,xinloc,yinloc)=0 then
        if checkfuel then if yinloc<16 then begin;passtime(region.room.wallgrap[15]);
 	   moved:=true;arrowmoved:=true;inc(yinloc);end
        else begin;chunkmove(SOUTH);moved:=true;arrowmoved:=true;
 	   passtime(region.room.wallgrap[15]);end;
-	  lastmov:=2; 	   
-	  end; 
+	  lastmov:=2; 	
+	  end;
   end;
   #32:begin;clear_keyboard_buffer;moved:=true;passtime(region.room.wallgrap[15]);end;
   #9:begin
@@ -1759,19 +1759,19 @@ begin
      end;
   'A':begin
        ack.invisible:=0; {attacking breaks invis}
-	   
+	
        oops_i_missed:=false;
        passtime(2); {attacking takes time}
-	   
+	
        if ack.pweapready<>0 then
         if ack.pinv[ack.pweapready]=0 then ack.pweapready:=0;
 		  {make sure you actually own the weapon you're attacking with}
-		  
+		
        moved:=true;
        attacker_alignment:=5; {signals to other procedures that you're the attacker}
-	   
+	
        weapon2t:=0;weapon2n:=0;weapon1t:=0;weapon1n:=0; {reset weapon numbers}
-	   
+	
        if ack.pweapready<>0 then
         begin;weapon1t:=obj^[ack.pweapready].t;
         weapon1n:=ack.pweapready;end;  {load your held weapon into #1}
@@ -1783,7 +1783,7 @@ begin
 
 
 
-      if action_weap<>23 then 
+      if action_weap<>23 then
 	  {if this is not an action-triggered attack,
 	    check for ammo, etc.}
       begin
@@ -1853,7 +1853,7 @@ begin
             clearbottom;
            end;
        end; {if not 23}
-	   
+	
        if action_weap=23 then
 	   {load action weapon into #1, clear #2}
         begin
@@ -1868,8 +1868,8 @@ begin
 			 weapon1t:=weapon2t;
 			 weapon1n:=weapon2n;
 			 weapon2t:=0;
-			 weapon2n:=0; 
-			end;	   
+			 weapon2n:=0;
+			end;	
 		
        if (weapon1t=0) and (weapon2t=0) then
         begin
@@ -1883,7 +1883,7 @@ begin
         if (weapon1t=8) then {if weapon 1 is ranged}
          {if obj^[weapon1n].d[5] DIV 16 < 11 then}
           maxrange:=obj^[weapon1n].d[5] MOD 16;
-		  
+		
         if (weapon2t=8) then
         { if obj^[weapon2n].d[5] DIV 16 < 11 then}
           if maxrange<obj^[weapon2n].d[5] MOD 16 then
@@ -1938,16 +1938,16 @@ if ymod<>99 then
   if abs(wyloc-yloc)>abs(wxloc-xloc) then xmod:=0 else ymod:=0;
  end;
 end;
-       if distance(xloc,yloc,wxloc,wyloc)>1 then 
+       if distance(xloc,yloc,wxloc,wyloc)>1 then
 	     begin
-		  if weapon1t=7 then 
+		  if weapon1t=7 then
 		    begin
 			 weapon1t:=weapon2t;
 			 weapon1n:=weapon2n;
 			 weapon2t:=0;
 			 weapon2n:=0;
 			end;
-		  if weapon2t=7 then 
+		  if weapon2t=7 then
 		    begin
 			 weapon2t:=0;
 			 weapon2n:=0;
@@ -2077,11 +2077,11 @@ until done2;
            if hp>=round(dropping*0.50) then s:='WOUNDED' else
            if hp>=round(dropping*0.25) then s:='HEAVILY WOUNDED' else
             s:='CRITICAL';
-		  if ack.cheat=123 then 
+		  if ack.cheat=123 then
 		    begin
 			 s:='#'+strnum(putgrapc)+',H='+strnum(hp)+'/'+strnum(dropping)+',M='+
 			  strnum(motive)+',A='+strnum(anger);
-			end; 
+			end;
           end;
         bottomsay(2,'CONDITION: Û1'+s);
         {see creature}
@@ -2152,7 +2152,7 @@ until done2;
         bottomsay(2,'TRY DROPPING EXTRA ITEMS.');
         moved:=true;
        end;
- 
+
   #255:begin
        { passtime(region.room.wallgrap[15]);
         putgrapc:=wtrymove(xinloc,yinloc,xinloc,yinloc); }
@@ -2184,7 +2184,7 @@ until done2;
    {action-triggered talk}
    conversation(talktome,vehcount);
    talktome:=0;
-  end else 
+  end else
   begin
    ack.invisible:=0;
    passtime(11);
@@ -2217,8 +2217,8 @@ inc(dropping);
 until dropping>3;
   if dropping<50 then bottomsay(0,'NOBODY THERE!');
       end;
-	  
-	  
+	
+	
   'D':
      begin
        readkey_time:=R150;
@@ -2237,7 +2237,7 @@ until dropping>3;
          if dri>2550 then dri:=2550;
 		 if dri>(trunc(ack.pcash/10)*10) then dri:=(trunc(ack.pcash/10)*10);
          if (dri1<>0) or (dri=0) then dropping:=0;
-		 dri:=(dri DIV 10)*10; 
+		 dri:=(dri DIV 10)*10;
          end;
     if dropping<>0 then
      begin
@@ -2271,7 +2271,7 @@ until dropping>3;
 		 bottomsay(2,'CAN''T DROP THINGS THERE!');
 		 erasebottom:=3;
 		 end
-	    else 
+	    else
 		 begin
 		  if region.room.wallgrap[7]=1 then
 		   begin
@@ -2323,8 +2323,8 @@ until dropping>3;
     flopitem(xmod,ymod,dropping,dri DIV 10);
    end;
   end;
-	  
-	  
+	
+	
   'X':if Ack.PLvehicle<>0 then
         begin
 		   macrosuccess:=1;
@@ -2364,11 +2364,11 @@ until dropping>3;
              veh[vehcount].ychunk:=ychunkloc;
              map[2,2,xinloc,yinloc].o:=i;
              map[2,2,xinloc,yinloc].d:=vehcount;
-			 
+			
 			 vehcount:=i;
              if i=ack.plvehicle then
 			  ack.plvehicle:=0;
-			 
+			
 
              erasebottom:=3;
 
@@ -2427,7 +2427,7 @@ until dropping>3;
                    else flopitem(xmod,ymod,obj^[vehcount].d[12],1);
                end;
 
-              
+
 
 
           end; {gathering}
@@ -2501,7 +2501,7 @@ until dropping>3;
 		 writelog(0,'vehicle boarding macro');
          run_macro(obj^[map[2,2,xinloc,yinloc].o].d[5]);
 		 if macrosuccess=0 then writelog(0,'vehicle boarding macro returned FAIL!');
-		end; 
+		end;
        if macrosuccess>0 then
         begin
          CHUNKSAVE:=true;
@@ -2551,7 +2551,7 @@ until dropping>3;
 
 
    #201:begin
-   
+
                readkey_time:=R150;
         if arcade then readkey_default:=#255 else
          readkey_default:=#1;
@@ -2600,7 +2600,7 @@ until done;
    writelog(thisregion,'Leaving for new region: '+strnum(rgn));
    if region.room.wallgrap[4]>0 then
     run_macro(region.room.wallgrap[4]); {old exit macro: wallgrap 4}
- 
+
   end;
  resurrect:=false;
  if doublepass then actionparser(0,0,0,0,0,0,0,0);

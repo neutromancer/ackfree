@@ -132,7 +132,7 @@ begin
    for fc:=1 to 32 do
      wc[fc].x:=0;
    for fc:=1 to WANDERMAX do
-     wander_index^[fc].x:=0;	 
+     wander_index^[fc].x:=0;	
    rewrite(wcf);
    write(wcf,wc);
    close(wcf);
@@ -149,7 +149,7 @@ begin
 	  begin
 	   read(wcf,wc);
 	   copywc(32 * fc);
-	   
+	
 	  end;
     end;	
    close(wcf);
@@ -166,7 +166,7 @@ begin
  assign(rcrcf,ADVNAME+MAPCFILE+strnum(n));
  {$I-} reset(rcrcf); {$I+}
  if ioresult<>0 then exit;
- 
+
    read(rcrcf,rc);
    copyrc(0);
    if eof(rcrcf) then
@@ -184,8 +184,8 @@ begin
 	   copyrc(64 * fc);
 	  end;
     end;
- 
- 
+
+
  close(rcrcf);
  if region.rooms>20 then
    begin
@@ -398,7 +398,7 @@ begin
  end;
 
   for i:=1 to WANDERMAX do
-   if (wander_index^[i].x=room) 
+   if (wander_index^[i].x=room)
      then
       say(wander_index^[i].xin*4-2 +(32-(roomwide*2)) ,wander_index^[i].yin*16-10 +(88-(roomtall*8)),0,'W');
 
@@ -420,7 +420,7 @@ begin
  clearscreen;
  for c1:=1 to region.rooms do
    with region.room do
-    if x1[c1]<>0 then 
+    if x1[c1]<>0 then
 	 begin
 	  boxx(x1[c1]-1,y1[c1],x2[c1]-1,y2[c1]);
 	  {draw contents of room}
@@ -429,8 +429,8 @@ begin
 	   if rmcnt^[px,py]=0 then
 	   putthing(px-1,py*4,mapcolors[0])
 	   else putthing(px-1,py*4,mapcolors[locnt^[rmcnt^[px,py]].obj]);
-	   
-	 end; 
+	
+	 end;
  for c1:=1 to region.rooms do
    with region.room do
    if x1[c1]<>0 then say(region.room.x1[c1]-1,region.room.y1[c1]*4,6,chr(64+c1));
@@ -487,7 +487,7 @@ begin
    else
    putgrap(x*4-3 +(32-(roomwide*2)) ,y*16-14 +(88-(roomtall*8)),
      obj^[map[2,2,x,y].o].d[1]);
-  end  
+  end
   else
    begin
     putgrap(x*4-3 +(32-(roomwide*2)) ,y*16-14 +(88-(roomtall*8)),
@@ -603,34 +603,34 @@ begin
   showwalk;
   say(52,50,0,'             ');
   say(12,160,0,'ZOOM VIEW');
-  
-  
+
+
   wmapw:=1;wmaph:=1;
   for topx:=1 to 32 do for topy:=1 to 32 do
-   if region.room.wmap[topx,topy]<>0 then 
+   if region.room.wmap[topx,topy]<>0 then
 	begin
 	if topx>wmapw then wmapw:=topx;
 	if topy>wmaph then wmaph:=topy;
 	end;
-  
 
-  
-  
-  
+
+
+
+
           assign(chf,ADVNAME+MAPAFILE+strnum(thisregion));
           {$I-} reset(chf); {$I+}
           if region.rooms<>254 then begin;topx:=1;topy:=1;end;
           if ioresult=0 then
- 
+
 
           begin
            for xchunkloc:=1 to wmapw do
             for ychunkloc:=1 to wmaph do
 			 begin
-			 
+			
 			  topx:=(94 - (wmapw*2)) + ((xchunkloc-1)*4);
 			  topy:=(81 - (wmaph*2)) + ((ychunkloc-1)*4);
-			 
+			
        		  {topx:=160-((wmapw DIV 2) *4)+((xchunkloc -1)*4);
 			  topy:=65-((wmaph DIV 2) *4)+((ychunkloc -1)*4);}
               if region.room.wmap[xchunkloc,ychunkloc]=0 then
@@ -648,10 +648,10 @@ begin
               end;
              end;
           end;
- 
+
          {$I-} close(chf); {$I+}
- 
-  
+
+
  		newx1:= 161 - (wmapw*2) -66;
 		newx2:= 162 + (wmapw*2) -66;
 		
@@ -661,11 +661,11 @@ begin
 		sketchline(newx1,newy1,newx1,newy2,hi(TEXTC0)); {left}
 		sketchline(newx1,newy1,newx2,newy1,hi(TEXTC0)); {top}
 		sketchline(newx2,newy1,newx2,newy2,hi(TEXTC0)); {right}
-		sketchline(newx1,newy2,newx2,newy2,hi(TEXTC0)); {bottom} 
-  
-	 
-	 
-	 
+		sketchline(newx1,newy2,newx2,newy2,hi(TEXTC0)); {bottom}
+
+	
+	
+	
   if (wmaph=1) and (wmapw=1) then
    begin;xchunkloc:=1;ychunkloc:=1;end else
    begin
@@ -688,8 +688,8 @@ begin
        putthing(topx+cellx,4*(topy+celly),5); }
 	topx:=(162 - (wmapw*2)) + ((cellx-1)*4) -66;
 	topy:=(66 - (wmaph*2)) + ((celly-1)*4) +14;
-	xorthing2(topx,topy);	  
-			  
+	xorthing2(topx,topy);	
+			
     j2:=upcase_sync(readkey);
 	xorthing2(topx,topy);
   {  if region.rooms=254 then
@@ -702,7 +702,7 @@ begin
      if (cellx=1) or (cellx=wmapw) or (celly=1) or (celly=wmaph)
       then putthing(topx+cellx,4*(topy+celly),3)
       else putthing(topx+cellx,4*(topy+celly),0); }
-	  
+	
     case j2 of
      #0:case readkey of
          #59:help;

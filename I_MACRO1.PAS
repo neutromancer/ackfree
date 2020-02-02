@@ -129,7 +129,7 @@ begin
 	    s:=strvar(data[1,1],data[1,2],data[1,3])+' '+
         strvar(data[2,1],data[2,2],data[2,3])+' '+
 		'#'+strnum(data[3,3])+'-'+obj^[data[3,3]].n
-		else 
+		else
 		s:=strvar(data[1,1],data[1,2],data[1,3])+' '+
         strvar(data[2,1],data[2,2],data[2,3])+' '+
         strvar(data[3,1],data[3,2],data[3,3]);
@@ -164,8 +164,8 @@ begin
 
   if macrolistheader(f) then begin
 
-   
-   
+
+
 
    assign(df,ADVNAME+MACROFILE);
     {$I-} reset(df); {$I+}
@@ -198,7 +198,7 @@ begin
    (*
    writeln(f,' ');
    writeln(f,' ');
-   writeln(f,'Raw macro file dump:');   
+   writeln(f,'Raw macro file dump:');
    reset(df);
    w:=0;
    while not eof(df) do
@@ -209,7 +209,7 @@ begin
 	end;
    close(df);
    *)
- (*  
+ (*
    writeln(f,' ');
    writeln(f,' ');
    writeln(f,'Exec table:');
@@ -426,11 +426,11 @@ begin
  if pos('<',s)>4 then
    begin;insert(' ARG',s,pos('<',s));insert(' ',s,pos('<',s)+1);end;
  if pos('!',s)>4 then
-   begin;insert(' ARG',s,pos('!',s));insert(' ',s,pos('!',s)+1);end;   
+   begin;insert(' ARG',s,pos('!',s));insert(' ',s,pos('!',s)+1);end;
  if pos('&',s)>4 then
-   begin;insert(' ARG',s,pos('&',s));insert(' ',s,pos('&',s)+1);end;  
+   begin;insert(' ARG',s,pos('&',s));insert(' ',s,pos('&',s)+1);end;
  if pos('|',s)>4 then
-   begin;insert(' ARG',s,pos('|',s));insert(' ',s,pos('|',s)+1);end;     
+   begin;insert(' ARG',s,pos('|',s));insert(' ',s,pos('|',s)+1);end;
  while pos('  ',s)<>0 do
   delete(s,pos('  ',s),1);
  for i:=1 to 6 do sub[i]:='';
@@ -457,13 +457,13 @@ begin
        if sub[i]='ARG<' then data[i,1]:=5;
 	   if sub[i]='ARG!' then data[i,1]:=8;
 	   if sub[i]='ARG&' then data[i,1]:=9;
-	   if sub[i]='ARG|' then data[i,1]:=10;	   
+	   if sub[i]='ARG|' then data[i,1]:=10;	
        if length(sub[i])=1 then
         if (sub[i,1]>='A') and (sub[i,1]<='Z') then
          begin;data[i,1]:=1;data[i,2]:=ord(sub[i,1])-64;end;
 	   if length(sub[i])=2 then if sub[i,2]='2' then
         if (sub[i,1]>='A') and (sub[i,1]<='Z') then
-         begin;data[i,1]:=30;data[i,2]:=ord(sub[i,1])-64;end;	   
+         begin;data[i,1]:=30;data[i,2]:=ord(sub[i,1])-64;end;	
        if sub[i]='HP' then begin;data[i,1]:=2;data[i,2]:=0;end;
        if sub[i]='HPMAX' then begin;data[i,1]:=2;data[i,2]:=1;end;
        if sub[i]='MP' then begin;data[i,1]:=2;data[i,2]:=2;end;
@@ -483,7 +483,7 @@ begin
        if pos('WORN[',sub[i])<>0 then
         begin;val( copy(sub[i],6,length(sub[i])-6), data[i,2],i1);
          data[i,1]:=31;end;	
-       if sub[i]='WEAPON' then data[i,1]:=32;	 
+       if sub[i]='WEAPON' then data[i,1]:=32;	
        if sub[i]='LOC[RG]' then data[i,1]:=4;
        if sub[i]='LOC[RM]' then data[i,1]:=5;
        if sub[i]='LOC[X]' then data[i,1]:=6;
@@ -507,16 +507,16 @@ begin
 	  { if sub[i]='AUTORUN' then data[i,1]:=27;}
 	   if sub[i]='INVISDUR' then data[i,1]:=28;
 	   if sub[i]='INVISICO' then data[i,1]:=29;
-	   
+	
 	   if sub[i]='WMUSIC' then data[i,1]:=33;
 	   if sub[i]='CMUSIC' then data[i,1]:=34;
-	   if sub[i]='LASTMOV' then data[i,1]:=35;   
+	   if sub[i]='LASTMOV' then data[i,1]:=35;
 
        if pos('HELLO[',sub[i])<>0 then
         begin;val( copy(sub[i],7,length(sub[i])-7), data[i,2],i1);
-         data[i,1]:=36;end;		 
-	   
-	   	   
+         data[i,1]:=36;end;		
+	
+	   	
 	   if pos('NOMOVE(',sub[i])<>0 then
 	     begin
 		  data[i,1]:=26;
@@ -623,7 +623,7 @@ begin
 	     macro^[thisline]:=clipboard;
          say(8,(thisline-topline)*8+30,0,blankspace);
          writeline((thisline-topline)*8+30,thisline);
-		end; 
+		end;
 	#24:begin
 	     clipboard:=macro^[thisline];
 	     macro^[thisline].cmd:=0;
@@ -771,7 +771,7 @@ begin
   clearscreen;
   if j='X' then say(6,180,0,'EXPORT COMPLETED');
   if j='D' then say(6,180,0,'DEFRAG COMPLETED');
-  
+
   quittime:=false;
 macroeditmenu;
  j:=upcase_sync(readkey);

@@ -16,14 +16,14 @@ implementation
 
 var starting_h:word;
 
-  
+
 function getclock;
 var
  hh,mm,ss,ms:word;
 begin
  gettime(hh,mm,ss,ms);
  if starting_h > hh then hh:=hh+24;
- getclock := ((ms) DIV 100) + (ss*10) + (mm*600) + (hh*36000); 
+ getclock := ((ms) DIV 100) + (ss*10) + (mm*600) + (hh*36000);
 end;
 
 function supergetclock;
@@ -32,11 +32,11 @@ var
 begin
  gettime(hh,mm,ss,ms);
  if starting_h > hh then hh:=hh+24;
- supergetclock := ((ms) ) + (ss*1000) + (mm*60000) + (hh*3600000); 
+ supergetclock := ((ms) ) + (ss*1000) + (mm*60000) + (hh*3600000);
 
 end;
- 
-(* 
+
+(*
 
 1 hour = 60 min = 3600 sec = 3600000 ms
 
@@ -52,20 +52,20 @@ var
  hh,mm,ss,ms,timenow,delayend:word;
 begin
  gettime(hh,mm,ss,ms);
- 
- if starting_h > hh then hh:=hh+24; 
- 
+
+ if starting_h > hh then hh:=hh+24;
+
  hh:=hh - starting_h;
- 
+
  delayend := ((ms + delayms) DIV 100) +
-              (ss*10) + (mm*600) + (hh*36000);           
-			 
+              (ss*10) + (mm*600) + (hh*36000);
+			
  repeat
    gettime(hh,mm,ss,ms);
-   if starting_h > hh then hh:=hh+24; 
+   if starting_h > hh then hh:=hh+24;
    hh:=hh - starting_h;
    timenow := ((ms) DIV 100) +
-              (ss*10) + (mm*600) + (hh*36000); 
+              (ss*10) + (mm*600) + (hh*36000);
  until timenow>=delayend;
 end;
 
@@ -81,23 +81,23 @@ begin
 end else
 begin
  gettime(hh,mm,ss,ms);
- 
- if starting_h > hh then hh:=hh+24; 
- 
+
+ if starting_h > hh then hh:=hh+24;
+
  hh:=hh - starting_h;
- 
+
  delayend := ((ms + delayms) DIV 100) +
-              (ss*10) + (mm*600) + (hh*36000);           
-			 
+              (ss*10) + (mm*600) + (hh*36000);
+			
  repeat
    gettime(hh,mm,ss,ms);
-   if starting_h > hh then hh:=hh+24; 
+   if starting_h > hh then hh:=hh+24;
    hh:=hh - starting_h;
    timenow := ((ms) DIV 100) +
-              (ss*10) + (mm*600) + (hh*36000); 
+              (ss*10) + (mm*600) + (hh*36000);
  until timenow>=delayend;
 end;
-  
+
 end;
 
 
@@ -112,7 +112,7 @@ end;
 
 
 procedure calibratedelay;
-  
+
  {calibrate 1/20sec delay}
 var
  w,w2:longint; w3:word;
@@ -120,7 +120,7 @@ var
  f:file of longint;
  cal:array[1..3] of longint;
  i:byte;
-begin 
+begin
 
 assign(f,path);
 {$I-} reset(f);
@@ -130,12 +130,12 @@ begin
  read(f,delay_calibration);
  close(f);
 end
-else 
+else
 begin
 for i:=1 to 3 do
 begin
 
-repeat 
+repeat
  c:=supergetclock;
  w2:=6000;
  for w:=1 to w2 do w3:=round(0.01*w/2+sqrt(w));
@@ -147,8 +147,8 @@ until c3>0;
  writeln('Time required: ',c3);
  writeln('1 sec worth of iterations: ',delay_calibration); }
  cal[i]:=delay_calibration;
- 
-end; 
+
+end;
 
 if cal[1]>cal[2] then begin; c:=cal[2]; cal[2]:=cal[1]; cal[1]:=c; end;
 if cal[2]>cal[3] then begin; c:=cal[3]; cal[3]:=cal[2]; cal[2]:=c; end;
@@ -166,25 +166,25 @@ end;
 {
 readln;
 for c3:=1 to 16 do
-begin 
+begin
  c:=supergetclock;
  write('Testing 0.1 sec delay...');
  w2:=delay_calibration DIV 10;
 
  for w:=1 to w2 do w3:=round(0.01*w/2+sqrt(w));
  c2:=supergetclock;
- writeln('Actual delay ',c2-c,' ms'); 
-end; 
+ writeln('Actual delay ',c2-c,' ms');
+end;
 
 for c3:=1 to 6 do
-begin 
+begin
  c:=supergetclock;
  write('Testing 1 sec delay...');
  w2:=delay_calibration;
 
  for w:=1 to w2 do w3:=round(0.01*w/2+sqrt(w));
  c2:=supergetclock;
- writeln('Actual delay ',c2-c,' ms'); 
+ writeln('Actual delay ',c2-c,' ms');
 end; }
 
 end;

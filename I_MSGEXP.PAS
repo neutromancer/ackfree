@@ -67,7 +67,7 @@ begin
   assign(f,'MESSAGES.TXT');
  {$I-} rewrite(f); {$I+}
  if IOresult=0 then begin
-  writeln(f,'Adventure name: '+ADVNAME); 
+  writeln(f,'Adventure name: '+ADVNAME);
   msgexptext(f,1);
   msgexptext(f,2);
 
@@ -99,8 +99,8 @@ begin
     end; {shortmessage loop}
    close(sf);
    end; {short msg section}
-   
-   
+
+
    assign(sf,ADVNAME+SHORTMSGFILE2);
    {$I-} reset(sf); {$I+}
    if ioresult=0 then
@@ -126,8 +126,8 @@ begin
     end; {shortmessage loop}
    close(sf);
    end; {short msg section}
-   
-   
+
+
     assign(lf,ADVNAME+LONGMSGFILE);
     {$I-} reset(lf); {$I+}
     if ioresult=0 then
@@ -207,7 +207,7 @@ begin
        {and load the rest of the conversation}
        while (talkbuff.next<>0) and (i2<1001) do
        begin
-		talkpointers[i2]:=talkbuff.next;	   
+		talkpointers[i2]:=talkbuff.next;	
         seek(df,talkbuff.next);
         read(df,talkbuff);
         talk^[i2]:=talkbuff;
@@ -308,12 +308,12 @@ begin
 	 begin
 	  seek(df,i);
 	  read(df,talkbuff);
-      write(df2,talkbuff);	  	  
-	 end; 
+      write(df2,talkbuff);	  	
+	 end;
 	  {the talkbuff.next from df2 are wrong, but we'll fix them later}
-	  
-	nextwrite:=256;  
-	  
+	
+	nextwrite:=256;
+	
 	for i:=1 to 255 do
      begin
 	  seek(df,i);
@@ -331,11 +331,11 @@ begin
 		talkbuff.next:=realnext;
 		
 	   end; {while}
-	  
+	
 
 
-     end;	{i} 
-	 
+     end;	{i}
+	
 	close(df);
 	close(df2);
 	reset(df2);
@@ -348,7 +348,7 @@ begin
 	  write(df2,talkbuff);
 	 end;
 
-    close(df2);	 
+    close(df2);	
 	
    end;
-end;   
+end;

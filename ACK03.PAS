@@ -283,7 +283,7 @@ begin
 
  paramcountnum:=paramcount;
  if (paramstr(paramcount)='-exit') or (paramstr(paramcount)='-EXIT') then
-  dec(paramcountnum); 
+  dec(paramcountnum);
  disablemouse:=true;
  if (paramstr(paramcountnum)='-mouse') or (paramstr(paramcountnum)='-MOUSE') then
   begin; dec(paramcountnum); disablemouse:=false; end;
@@ -379,7 +379,7 @@ end;
  ADVNAME:='ACKDATA1';
  loadfont;
  say(30,60,0,'Loading...');
- loadbmppalette(ACKVERSION,ADVNAME,systemdir);  
+ loadbmppalette(ACKVERSION,ADVNAME,systemdir);
  lastcfgload:='NONAME';
  ADVNAME:='NONAME';
 {if paramcount<>0 then tryfile(paramstr(1));}
@@ -389,7 +389,7 @@ end;
  graphic^[i+241]:=icons^[i+23];
  graphic^[i+242]:=icons^[i+9];
  graphic^[i+243]:=icons^[i+24];
- graphic^[i+244]:=icons^[i+11]; 
+ graphic^[i+244]:=icons^[i+11];
 
  {saveicons('ACKDATA1.ICO');}
 
@@ -405,8 +405,8 @@ end;
  d_c:=concat(d_c,' ',d_s,' LO');
 
   begin
-  
-  
+
+
      daughter:=adv_to_load;
 
      say(10,60,0,'Loading Adventure...');
@@ -419,7 +419,7 @@ end;
 
 	   if disablemouse=false then exec(systemdir+'ACK01.EXE','F'+systemdir+'*'+daughter)
              else exec(systemdir+'ACK01.EXE','f'+systemdir+'*'+daughter);
-	   
+	
        i1:=2;if graphic^[i1,1,1]<>255 then
         begin
          i1:=1;hres:='';

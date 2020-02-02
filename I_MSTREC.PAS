@@ -33,7 +33,7 @@ type masterrec = RECORD
   viewdistance:byte;
   alignment:byte;
   variables:array[1..26] of byte;
-  textcolors:array[0..6] of word; 
+  textcolors:array[0..6] of word;
   experience:word; level:byte;
   levelexp:array[2..10] of word;
   levelmacro:array[2..10] of byte;
@@ -66,7 +66,7 @@ type masterrec = RECORD
   darkbackground:byte;
 
   fly,nomove_n,nomove_s,nomove_e,nomove_w,unused:boolean;
-  
+
   variables2:array[1..26] of byte; {26}
   variables2hi:array[8..26] of byte; {19}
 {  moreblankspace:string[18];

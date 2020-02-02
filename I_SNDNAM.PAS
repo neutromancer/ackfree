@@ -33,12 +33,12 @@ begin
 	   {sound out of range}
 	   soundname:=strnum(snd)+'-???';
 	  end else
-	  begin 
+	  begin
 	 assign(f,bgi_dir+'\SOUNDS\DEFAULT\SOUNDS.TXT');
 	 {$I-} reset(f); {$I+}
 	 if ioresult=0 then
 	  begin
-	       
+	
 	     for i:=0 to snd do readln(f,s);
          readln(f,s);
          close(f);
@@ -52,8 +52,8 @@ begin
 
 	
    end;	
-   
-   
+
+
 
 
 

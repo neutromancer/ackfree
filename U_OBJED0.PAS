@@ -153,7 +153,7 @@ begin
   44:S:='SET HP REGEN RATE';
   45:S:='SET MP REGEN RATE';
   46:S:='SET HP POISON RATE';
-  47:S:='RUN DIALOGUE';  
+  47:S:='RUN DIALOGUE';
   end; {case}
   for i:=length(s) to 24 do s:=concat(s,' ');
   straction:=s;
@@ -287,8 +287,8 @@ begin
  23:s:='ANYTHING AT ALL';
 
  24:s:='VARIABLE IS 0';
- 25:s:='VARIABLE ISN''T 0'; 
- 
+ 25:s:='VARIABLE ISN''T 0';
+
  end;
   for i:=length(s) to 18 do s:=concat(s,' ');
   strpassable:=s;
@@ -304,7 +304,7 @@ begin
     begin
     if pssp>26 then s:=chr((pssp-26) + 64)+'2'
      else s:=chr((pssp) + 64);
-	end else s:='?'; 
+	end else s:='?';
   2,3,4:s:=objnam(pssp);
   5:s:=objnames[pssp];
   6..18:s:=concat('N = ',strnum(pssp));
@@ -320,8 +320,8 @@ begin
   0:s:='ONLY IF DESTROYED';
   1:s:='IF ACTION TRIGGERED';
   2:s:='IF PASSED';
-  3:s:='WHILE IMPASSABLE';  
-  6..255:s:='IF DESTROYED ['+strnum(disap-5)+']';  
+  3:s:='WHILE IMPASSABLE';
+  6..255:s:='IF DESTROYED ['+strnum(disap-5)+']';
  end;
   for i:=length(s) to 18 do s:=concat(s,' ');
  strdisappear:=s;

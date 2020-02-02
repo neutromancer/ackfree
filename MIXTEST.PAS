@@ -80,7 +80,7 @@ program MixTest;
                   ExitProc := @OurExitProc;
 *)
 
-				  
+				
                 end
           end;
     end;

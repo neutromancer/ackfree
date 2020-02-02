@@ -148,15 +148,15 @@ var
   newroomnum: byte;
   loopx1, loopx2, loopy1, loopy2, loopx, loopy, buffercount: byte;
   loopbuffer:array[0..176] of byte;
-  
- 
+
+
 	
 	
 	
 function getthing(xx,yy:integer):byte;
 var i,i2:integer;
 begin
- for i:=yy+1 to yy+4 do 
+ for i:=yy+1 to yy+4 do
   for i2:=0 to 3 do
    getthing:=mem[scrnl:(xx*4)+i2+scrnh[i]];
 end;	
@@ -186,7 +186,7 @@ begin
 	  begin
 	            wmapw:=1;wmaph:=1;
                 for topx:=1 to 32 do for topy:=1 to 32 do
-                 if region.room.wmap[topx,topy]<>0 then 
+                 if region.room.wmap[topx,topy]<>0 then
 				  begin
 				   if topx>wmapw then wmapw:=topx;
 				   if topy>wmaph then wmaph:=topy;
@@ -213,7 +213,7 @@ if region.rooms=254 then
       say(2,182,5,' V Û0 VIEW MAP   Û5 O Û0 OPTIONS');
       {boxx((40-((wmapw+2) DIV 2)),(16-((wmaph+2) DIV 2)),
                   (40-((wmapw+2) DIV 2))+wmapw+1,(16-((wmaph+2) DIV 2))+wmaph+1);}
-				  
+				
 		{newx1:=	(40-((wmapw+2) DIV 2)) *4;
 		newy1:= (16-((wmaph+2) DIV 2));
 		newx2:= ((40-((wmapw+2) DIV 2))+wmapw+1) *4;
@@ -229,8 +229,8 @@ if region.rooms=254 then
 		sketchline(newx1,newy1,newx2,newy1,hi(TEXTC0)); {top}
 		sketchline(newx2,newy1,newx2,newy2,hi(TEXTC0)); {right}
 		sketchline(newx1,newy2,newx2,newy2,hi(TEXTC0)); {bottom}
-				  
-				  
+				
+				
         say(36-(wmapw DIV 2)-length(strnum(wmaph*16)),64,0,strnum(wmaph*16));
         say(38,68+((wmaph*4) DIV 2),0,strnum(wmapw*16));
 		{display mini map preview}
@@ -240,16 +240,16 @@ if region.rooms=254 then
           {$I-} reset(chf); {$I+}
           if region.rooms<>254 then begin;topx:=1;topy:=1;end;
           if ioresult=0 then
- 
+
 
           begin
            for xchunkloc:=1 to wmapw do
             for ychunkloc:=1 to wmaph do
 			 begin
-			 
+			
 			  topx:=(162 - (wmapw*2)) + ((xchunkloc-1)*4);
 			  topy:=(66 - (wmaph*2)) + ((ychunkloc-1)*4);
-			 
+			
        		  {topx:=160-((wmapw DIV 2) *4)+((xchunkloc -1)*4);
 			  topy:=65-((wmaph DIV 2) *4)+((ychunkloc -1)*4);}
               if region.room.wmap[xchunkloc,ychunkloc]=0 then
@@ -267,9 +267,9 @@ if region.rooms=254 then
               end;
              end;
           end;
- 
+
          {$I-} close(chf); {$I+}
- 
+
 
 
 
@@ -351,7 +351,7 @@ if region.rooms=254 then
                 region.rooms:=255;clearscreen;
 			    wmapw:=1;wmaph:=1;
                 for topx:=1 to 32 do for topy:=1 to 32 do
-                 if region.room.wmap[topx,topy]<>0 then 
+                 if region.room.wmap[topx,topy]<>0 then
 				  begin
 				   if topx>wmapw then wmapw:=topx;
 				   if topy>wmaph then wmaph:=topy;
@@ -363,7 +363,7 @@ if region.rooms=254 then
            end;
           until done2;
            helpindex:=oldh;
-          end;	 
+          end;	
      #46:if region.rooms<>254 then
           begin {alt-C}
            oldh:=helpindex; helpindex:=60;
@@ -417,10 +417,10 @@ if region.rooms=254 then
             cwmap_scrollbars;
             previewcells(topx,topy);
           end;
-		  
-    end; {case}		  
-		  
-     'O':begin 
+		
+    end; {case}		
+		
+     'O':begin
           redispmenu:=true;
           done2:=false;
           oldh:=helpindex;helpindex:=78;
@@ -568,7 +568,7 @@ if region.rooms=254 then
            end;
          end;
 
-     'V':begin 
+     'V':begin
          redispmenu:=true;
          done2:=false;
           assign(chf,ADVNAME+MAPAFILE+strnum(thisregion));
@@ -749,15 +749,15 @@ if region.rooms=254 then
            if (wmaph=1) and (wmapw=1) then
             begin;xchunkloc:=1;ychunkloc:=1;end else
             begin
-			 
+			
              cellx:=1;celly:=1;
              repeat
               done2:=false;
 			  topx:=(162 - (wmapw*2)) + ((cellx-1)*4);
-			  topy:=(66 - (wmaph*2)) + ((celly-1)*4) -1;			  
+			  topy:=(66 - (wmaph*2)) + ((celly-1)*4) -1;			
               xorthing2(topx,topy);
               j2:=upcase_sync(readkey);
-              xorthing2(topx,topy);              
+              xorthing2(topx,topy);
 
              case j2 of
               #0:case readkey of
@@ -800,7 +800,7 @@ if region.rooms=254 then
 
 
 
-     'O':begin 
+     'O':begin
           redispmenu:=true;
           done2:=false;
           oldh:=helpindex;helpindex:=78;
@@ -843,8 +843,8 @@ if region.rooms=254 then
 
 		  if region.room.wallgrap[7]=0 then s:='NO' else s:='YES';
           say(5,92,5,' D Û0: DISABLE "DROP" COMMAND: '+s);
-	  
-		  
+	
+		
           say(5,102,5,'ESCÛ0: EXIT');
           case upcase_sync(readkey) of
            #0:case readkey of
@@ -852,8 +852,8 @@ if region.rooms=254 then
               { #99:exportmap(thisregion);
 			   #99:importmap(thisregion);}
 
-			   
-			   
+			
+			
 			   end; {case}
 		   'D':begin
 		        if region.room.wallgrap[7]=0 then region.room.wallgrap[7]:=1 else region.room.wallgrap[7]:=0;
@@ -946,7 +946,7 @@ if region.rooms=254 then
           previewrooms;
           helpindex:=oldh;
          end;
-    #0:case readkey of		 
+    #0:case readkey of		
      #59:help;
      #68:begin;done:=true;quittime:=true;end;
     end;
@@ -966,23 +966,23 @@ if region.rooms=254 then
         sanitycheck;
         deleteroom(chooseroom('DELETE'));
         previewrooms;
-       end; 
-	   
-	   
+       end;
+	
+	
 
 
- 
-  
-  
+
+
+
    'A':begin
-   
-   
-        
+
+
+
         {make sure there is room for the room}
 		if region.rooms<16 then newroomnum:=region.rooms+1 else
 		 newroomnum:=0;
 		for buffercount:=region.rooms downto 1 do
-		 if region.room.x1[buffercount]=0 then 
+		 if region.room.x1[buffercount]=0 then
 		  newroomnum:=buffercount;
 		
 		if newroomnum<>0 then
@@ -990,7 +990,7 @@ if region.rooms=254 then
 		
 		begin
 		
-   
+
         drawingphase:=1;
         s:='                                        ';
         say(2,173,0,s);say(2,182,0,s);say(2,191,0,s);
@@ -1001,21 +1001,21 @@ if region.rooms=254 then
 		repeat
 		
 		  if drawingphase=2 then
-			  {draw box}		  
+			  {draw box}		
 		    begin
 			
 			  buffercount:=0;
-			  
-			  if pointx>newx1 then 
+			
+			  if pointx>newx1 then
 			   begin; loopx1:=newx1; loopx2:=pointx; end
 			   else begin; loopx1:=pointx; loopx2:=newx1; end;
-			   
-			  if pointy>newy1 then 
+			
+			  if pointy>newy1 then
 			   begin; loopy1:=newy1; loopy2:=pointy; end
-			   else begin; loopy1:=pointy; loopy2:=newy1; end;			   
-			   
+			   else begin; loopy1:=pointy; loopy2:=newy1; end;			
+			
 			  for loopx:=loopx1 to loopx2 do
-			   for loopy:=loopy1 to loopy2 do			  
+			   for loopy:=loopy1 to loopy2 do			
 			    if (loopx=loopx1) or (loopx=loopx2)
 				 or (loopy=loopy1) or (loopy=loopy2)
 				 then
@@ -1028,7 +1028,7 @@ if region.rooms=254 then
 
 			  say(15,191,0,'WIDTH: '+strnum(loopx2-loopx1+1)+' ');
 			  say(45,191,0,'HEIGHT: '+strnum(loopy2-loopy1+1)+' ');
-			   
+			
 			end;
 
 			
@@ -1041,12 +1041,12 @@ if region.rooms=254 then
 			
 		  {get keypress}
 		  j:=upcase_sync(readkey);
-		   
+		
 
 
 	      {un-draw pointer}
 		  putthing(pointx-1,pointy*4,loopbuffer[0]);
-		  
+		
 
 		  if drawingphase=2 then
           {un-draw box}
@@ -1056,13 +1056,13 @@ if region.rooms=254 then
 			   for loopy:=loopy1 to loopy2 do	
 			    if (loopx=loopx1) or (loopx=loopx2)
 				 or (loopy=loopy1) or (loopy=loopy2)
-				 then			   
+				 then			
 			   begin
 			    inc(buffercount);
 				putthing(loopx-1,loopy*4,loopbuffer[buffercount]);
 			   end;			
 			
-			end;		   
+			end;		
 
 			
 			
@@ -1082,7 +1082,7 @@ if region.rooms=254 then
                'K':if (pointx>1) and (abs((pointx-1)-newx1)<=15) then dec(pointx);
                'M':if (pointx<80) and (abs((pointx+1)-newx1)<=15) then inc(pointx);
 			   end; {0 case}	
-		   #27:drawingphase:=27;	   
+		   #27:drawingphase:=27;	
 		   #32,#13: if drawingphase=1 then
 		       begin
 			     {user selected first corner}
@@ -1095,14 +1095,14 @@ if region.rooms=254 then
                 begin
 			     {user selected final corner}
                  drawingphase:=3;
-				 
+				
 				 if pointx>newx1 then newx2:=pointx else
 				  begin;newx2:=newx1;newx1:=pointx;end;
-				  
+				
 				 if pointy>newy1 then newy2:=pointy else
-				  begin;newy2:=newy1;newy1:=pointy;end;				  
-				 
-                end;			   
+				  begin;newy2:=newy1;newy1:=pointy;end;				
+				
+                end;			
 		    end; {case}
 			
 
@@ -1115,7 +1115,7 @@ if region.rooms=254 then
          {sanity check: loop from x1+1 to x2-1,  etc, make sure there is no overlap}
 	     for loopx:=newx1+1 to newx2-1 do
 		  for loopy:=newy1+1 to newy2-1 do
-		  
+		
 		   for buffercount:=region.rooms downto 1 do
 		    if region.room.x1[buffercount]<>0 then
 
@@ -1123,11 +1123,11 @@ if region.rooms=254 then
 			   (loopx>=region.room.x1[buffercount]) and
 			   (loopy<=region.room.y2[buffercount]) and
 			   (loopy>=region.room.y1[buffercount])
-			    then 
+			    then
 				 begin
  				  drawingphase:=4;
-				 end; 
-			 
+				 end;
+			
 
 		{if sanity check passed, create room}
 		if drawingphase=3 then
@@ -1136,7 +1136,7 @@ if region.rooms=254 then
 		 region.room.x1[newroomnum]:=newx1;
 		 region.room.x2[newroomnum]:=newx2;
 		 region.room.y1[newroomnum]:=newy1;
-		 region.room.y2[newroomnum]:=newy2;		 
+		 region.room.y2[newroomnum]:=newy2;		
          region.room.name[newroomnum]:='NEW ROOM';		
 		end; {create room}
 		
@@ -1147,9 +1147,9 @@ if region.rooms=254 then
 	   end; {available room check}
 		
 	   end; {'A'}
-	   
-	   
-(*	   
+	
+	
+(*	
    'A':begin
         sc2:=0;minpx:=1;minpy:=1;maxpx:=80;maxpy:=40;
         for sc1:=region.rooms downto 1 do
@@ -1295,11 +1295,11 @@ if region.rooms=254 then
          end;
         previewrooms;
       end;
-*)	  
-	  
-	  
-	  
-	  
+*)	
+	
+	
+	
+	
    #27:done:=true;
   end;
   until done;
@@ -1413,9 +1413,9 @@ begin
  getmem(locnt, LOCNTMAX * sizeof(loccontrec));
  getmem(obj, (MAXOBJS+2) * sizeof(objectrec));obj^[0].d[1]:=0;
  getmem(talk, 1001 * sizeof (talkrec) );
- getmem(graphic2, (GRAPS+1)*256 ); 
+ getmem(graphic2, (GRAPS+1)*256 );
  getmem(wander_index, (WANDERMAX+1) * sizeof(wander_record));
- getmem(rcrc, (RCMAX+1) * sizeof(rregioncreature)); 
+ getmem(rcrc, (RCMAX+1) * sizeof(rregioncreature));
  i:=0;
   obj^[i+255].t:=3;
  getmem(crc, MAXCRCS * sizeof(creaturerec));
@@ -1442,7 +1442,7 @@ begin
  helpindex:=9;
  loadconfig;
  loadmapcolors;
- loadgraps2(true); 
+ loadgraps2(true);
  TEXTC0:=ack.textcolors[0];
  TEXTC1:=ack.textcolors[1];
  TEXTC2:=ack.textcolors[2];

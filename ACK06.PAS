@@ -10,7 +10,7 @@ uses u_vars,u_graph,graph,u_adv,crt2,dos,u_fonts,u_graps,u_io,u_help,u_sound;
 {$I I_BYTCPY.PAS}
 
 var sr:searchrec;
-  i,fc:integer; 
+  i,fc:integer;
   files:array[0..18] of string;
   j:char;
   s,ext:string;
@@ -40,12 +40,12 @@ begin
    say(3,36,0,'   Or, create from a kit:');
    for i:=1 to fc do
     say(3,36+(i*10),6,' '+chr(65+i)+' Û1: '+files[i]);
-   
+
    j:=upcase(readkey);
    i:=ord(j)-65;
    if (i>=0) and (i<=fc) then
      begin
-	  if i=0 then say(3,16,5,' A ') else say(3,36+(i*10),5,' '+chr(65+i)+' '); 
+	  if i=0 then say(3,16,5,' A ') else say(3,36+(i*10),5,' '+chr(65+i)+' ');
       say(8,180,0,'Enter a name for your adventure.');
 	  s:=readlin(30,190,8,0);
       if ((s<>'') and (s<>#27)) then
@@ -64,8 +64,8 @@ begin
         while doserror=0 do
          begin
 		  ext:=copy(sr.name,pos('.',sr.name),length(sr.name)-pos('.',sr.name)+1);
-		  
-		  
+		
+		
           if sr.name[1]<>'.' then
 		  begin
 		   if pos(files[i],sr.name)=1 then
@@ -73,7 +73,7 @@ begin
 		     if pos('.KIT',sr.name)<>0 then
 			  bytecopy(bgi_dir+'\kits\'+files[i]+'\'+sr.name,s+'.MST')
 			  else bytecopy(bgi_dir+'\kits\'+files[i]+'\'+sr.name,s+ext)
-			end 
+			end
 		   else
             bytecopy(bgi_dir+'\kits\'+files[i]+'\'+sr.name,sr.name);
           end;
@@ -92,9 +92,9 @@ begin
 		 begin
 	      say(4,180,0,s+' has been created with the');
 		  say(4,190,0,files[i]+' kit. Press any key to exit.');
-		 end; 
+		 end;
 		j:=readkey; if j=#0 then j:=readkey;
-	   
+	
 	   end;
      end;
   end else

@@ -17,20 +17,20 @@ var
 
 begin
  gettime(hh,mm,ss,ms);
- 
- if starting_h > hh then hh:=hh+24; 
- 
+
+ if starting_h > hh then hh:=hh+24;
+
  hh:=hh - starting_h;
- 
+
  delayend := ((ms + delayms) DIV 100) +
-              (ss*10) + (mm*600) + (hh*36000);           
-			 
+              (ss*10) + (mm*600) + (hh*36000);
+			
  repeat
    gettime(hh,mm,ss,ms);
-   if starting_h > hh then hh:=hh+24; 
+   if starting_h > hh then hh:=hh+24;
    hh:=hh - starting_h;
    timenow := ((ms) DIV 100) +
-              (ss*10) + (mm*600) + (hh*36000); 
+              (ss*10) + (mm*600) + (hh*36000);
  until timenow>=delayend;
 end;
 

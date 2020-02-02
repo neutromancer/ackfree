@@ -13,20 +13,20 @@ begin
         if creaturevehicle=255 then passable:=true else
 		case spacepass of
 		 23:passable:=true; {anything at all}
-		 1,2:if creaturevehicle=0 then 
+		 1,2:if creaturevehicle=0 then
 		     begin {creature has no vehicle, so this is a simple yes/no decision: }
 			  if spacepass=1 then passable:=true else passable:=false;
 			 end else
 		     begin {creature has a vehicle, so we need to see how this will play out. }
-			 
+			
 			    if obj^[creaturevehicle].t>5 then
 			         begin {creature "vehicle" is an item, check for issues}
 				      if spacepass=2 then
  				         begin {vehicle is required}
-				          if creaturevehicle=spacepassdata 
+				          if creaturevehicle=spacepassdata
 						    then passable:=true; {does creature have the required item?}
-						  if obj^[creaturevehicle].t=10 then 
-						    if obj^[creaturevehicle].d[2]=spacepassdata 
+						  if obj^[creaturevehicle].t=10 then
+						    if obj^[creaturevehicle].d[2]=spacepassdata
 						     then passable:=true; {does creature have a vehicle that counts as the required item?}
 				         end else
 				     begin {vehicle is not required}
@@ -43,9 +43,9 @@ begin
 				
 	         end; {vehicle check}
 
-  		  else passable:=false; {else from case-statement, covering impassable or player-only conditions}	 
+  		  else passable:=false; {else from case-statement, covering impassable or player-only conditions}	
 		 end; {case, space passable setting}
-		 
+		
 	   end; {analyze space}
   end; {case, object number}
   checkdest2:=passable;

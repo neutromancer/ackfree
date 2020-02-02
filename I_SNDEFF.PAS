@@ -24,10 +24,10 @@
  var dirinfo: searchrec;
      f:file of byte;
  begin
- 
+
     assign(f,strnum(n)+'.'+ext);
 	{$I-} reset(f); {$I+}
-    if ioresult=0 then 
+    if ioresult=0 then
 	 begin
 	  custom_content_exists:=strnum(n)+'.'+ext;
 	  close(f);
@@ -58,19 +58,19 @@ begin
  FindFirst(bgi_dir+'sounds\default\ack'+strnum(n)+'.RAW', AnyFile, dirinfo);
  if doserror=0 then stock_sound_exists:=bgi_dir+'sounds\default\'+dirinfo.name else
   stock_sound_exists:='';
-end; 
- 
+end;
+
  begin
 
   if snd=65530 then
     begin
       stopsound(1);
-         
+
     end else
 	if snd<>0 then begin
 	 s:=custom_content_exists(snd,'RAW');
 	 if s='' then s:=stock_sound_exists(snd);
 	 if s<>'' then playsound(s,channel);
-    end; 
- 
+    end;
+
 end;

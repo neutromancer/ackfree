@@ -478,7 +478,7 @@ begin
 
  paramcount2:=paramcount;
  if (paramstr(paramcount)='-exit') or (paramstr(paramcount)='-EXIT') then
-  dec(paramcount2); 
+  dec(paramcount2);
  disablemouse:=true;
  if (paramstr(paramcount2)='-mouse') or (paramstr(paramcount2)='-MOUSE') then
   begin; disablemouse:=false; initmouse; showmouse; dec(paramcount2); end;

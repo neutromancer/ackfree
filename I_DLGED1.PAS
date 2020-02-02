@@ -149,15 +149,15 @@ begin
  say(1,190,5,'ƒ„QÛ0:QUESTION  Û5ƒ„RÛ0:RENAME  Û5ƒ„AÛ0:APPEND');
  i:=topicat+top;
  if top<>0 then say(70,33,1,strnum(top));
- 
+
  repeat
   if talk^[i].datatype=0 then
     talksay(8,34+(i-topicat-top)*8,talk^[i].data)
-   else 
+   else
     begin
 	 say(8,34+(i-topicat-top)*8,1,copy(talk^[i].data,1,10));
 	 if talk^[i].data[5]='-' then
-	  if talk^[i].data[1]='C' then 
+	  if talk^[i].data[1]='C' then
 	   say(28,34+(i-topicat-top)*8,1,copy(talk^[i].data,12,4))
 	   else
 	    begin
@@ -172,7 +172,7 @@ begin
   end;
   inc(i);
  until (talk^[i].headertype<2) or (i-(topicat+top)>=16);
- 
+
  lines:=i-(topicat+top);
  morelines:=0;
  if lines=16 then
@@ -317,7 +317,7 @@ end;
 
 begin
  if not objok then exit;
- if s[5]='H' then 
+ if s[5]='H' then
   begin
    for i:=1 to 16 do merch[i]:=ord(s[14+i]);
    buy:=ord(s[13]);
@@ -384,7 +384,7 @@ begin
   {16 row display, top line is top+}
  row:=1;column:=1; {the current char is talk^[topicat+top+row-1].data[column]}
 repeat
- done:=false; 
+ done:=false;
  if newtop then begin;showresponse;checklength;newtop:=false;end;
  with talk^[topicat+top+row-1] do
   if (datatype=0) then
@@ -401,20 +401,20 @@ repeat
 
  case j of
   #13:begin;column:=1;if row<lines then inc(row);end;
-  
+
   #0:case j0 of
      #59:help;
      'H':begin
-          if row>1 then dec(row) else 
-            if top>0 then 
+          if row>1 then dec(row) else
+            if top>0 then
             begin
              dec(top);
              newtop:=true;
             end;
          end;
      'P':begin
-          if row<lines then inc(row) else 
-            if ((lines=16) and (morelines>0)) then 
+          if row<lines then inc(row) else
+            if ((lines=16) and (morelines>0)) then
            begin
             inc(top);
             newtop:=true;
@@ -432,7 +432,7 @@ repeat
           with talk^[topicat+top+row-1] do
            talksay(6+column*2,26+row*8,data[column]);
           if column<30 then inc(column) else
-             begin;column:=1;if row<lines then inc(row);end;	 
+             begin;column:=1;if row<lines then inc(row);end;	
 	     end;
      #32:begin {alt D}
           deleteline(topicat,topicat+top+row-1);
@@ -456,14 +456,14 @@ repeat
            checklength;
 
           end;
-		  
+		
      #30:begin {alt I}
           insertline(lines+1);
           showresponse;
           checklength;
          end;
-  
-		  
+
+		
       #20:if talk^[topicat+top+row-1].datatype<>0 then begin {alt t}
            talk^[topicat+top+row-1].datatype:=0;
            talk^[topicat+top+row-1].data:=' ';
@@ -679,7 +679,7 @@ procedure talkedit(whatt:byte);
 
 procedure showtopics;
  var i:integer;
- 
+
   function texist(n:word):boolean;
  var f:file of byte; s:string[12];
   begin
@@ -689,7 +689,7 @@ procedure showtopics;
    if ioresult=0 then begin;close(f);texist:=true;end
     else texist:=false;
   end;
- 
+
 begin
  clearscreen;
  if texist(whatt) then
@@ -701,7 +701,7 @@ begin
    say(0,1,6,' EDIT DIALOGUE                         ');
    say(66,1,4,' #'+strnum(whatt)+' ');
 
-  end; 
+  end;
  say(5,11,5,' F Û0ILE: '+talk^[1].data);
  say(1,23,0,'CURRENT TOPICS:');
  say(1,180,0,'PRESS Û5 F3 Û0 TO CREATE A TOPIC,');
@@ -711,15 +711,15 @@ begin
  topic[1]:='(INTRO)';
  topic[2]:='(BYE)';
  topic[3]:='(?)';
- for i:=2 to 999 do if (talk^[i].headertype=1) 
- 
- and 
+ for i:=2 to 999 do if (talk^[i].headertype=1)
+
+ and
   (talk^[i].header<>'(INTRO)')
-  and 
+  and
   (talk^[i].header<>'(BYE)')
-   and 
+   and
   (talk^[i].header<>'(?)')
-  
+
   then begin
    inc(fc);
    topic[fc]:=talk^[i].header;

@@ -35,7 +35,7 @@ begin
     begin
 	 roomunder[c1-x1[n]+1,c2-y1[n]+1]:=0;
      point:=roomloc(n,c1-x1[n]+1,c2-y1[n]+1);
-     if point=0 then 
+     if point=0 then
 	  begin
 	   b1:=0;
 
@@ -44,7 +44,7 @@ begin
       begin
        b1:=locnt^[point].obj;
        b2:=locnt^[point].objcode;
-	   
+	
 	   if (b1=255) or (obj^[b1].t>5) then
 	   begin
 	   donedigging:=locnt^[point].p=0;
@@ -56,7 +56,7 @@ begin
 		 if (locnt^[nextpoint].obj<>0) and (locnt^[nextpoint].obj<>255)
 		  then if obj^[locnt^[nextpoint].obj].t<6 then
 		   begin; roomunder[c1-x1[n]+1,c2-y1[n]+1]:=locnt^[nextpoint].obj; donedigging:=true; end;
-		   
+		
 		end;
 		{writelog(0,'digging result at '+strnum(c1-x1[n]+1)+','+
 		strnum(c2-y1[n]+1)+' was '+strnum(roomunder[c1-x1[n]+1,c2-y1[n]+1]));}
@@ -273,7 +273,7 @@ begin
  count:=0;
  writelog(0,'roomprojectile: herex:'+strnum(herex)+' herey:'+strnum(herey)+
  ' run:'+strnum(run)+' rise:'+strnum(rise)+' xstep:'+strnum(xstep)+' ystep:'+strnum(ystep));
- 
+
   repeat
   if (round(herex/xstep)=x) AND (round(herey/ystep)=y) then
     begin;done:=true;writelog(0,'roomprojectile: arrival');end {we've arrived}
@@ -287,7 +287,7 @@ begin
 	  {check what we are shooting over}
 	  if shootingover<>255 then {no friendly fire, the AI isn't nearly smart enough}
 
-      if (shootingover<>0) then 
+      if (shootingover<>0) then
 	   begin
        {it is an object...}
         case obj^[shootingover].t of
@@ -297,13 +297,13 @@ begin
 	   end; {object}
 	   if done then begin;x:=round(herex/xstep);y:=round(herey/ystep);end;
 	  end; {check}
-	  
+	
     end; {look}
    inc(herex,run);inc(herey,rise);
    inc(count);if count>300 then done:=true;
   until done;
- 
- writelog(0,'roomprojectile end: '+strnum(px)+','+strnum(py)+' - '+strnum(x)+','+strnum(y)); 
+
+ writelog(0,'roomprojectile end: '+strnum(px)+','+strnum(py)+' - '+strnum(x)+','+strnum(y));
 
 
 end;
@@ -345,7 +345,7 @@ begin
                 getroom(room);moved:=true;
                 {replace with...}
                end;
-			end;   
+			end;
 end;
 
 
@@ -420,8 +420,8 @@ begin
     {if creature has armor, process it}
     if crc^[rcrc^[who].crcsource].ar<>0 then
         with crc^[rcrc^[who].crcsource] do
-         if 
-		 ( obj^[ar].d[6] > random(100) ) then 
+         if
+		 ( obj^[ar].d[6] > random(100) ) then
 		  begin;damage:=damage-obj^[ar].d[5];if damage<0 then damage:=0;end;
 
     {if creature is invulnerable, damage becomes zero}
@@ -753,7 +753,7 @@ var motionx,motiony,attacklocx,attacklocy:byte; {what it would like to do}
 
 
 function checkdest(xscc,yscc:integer;who:byte):boolean;
-var 
+var
     mapobj,mapobjdata,creaturevehicle:byte;
     passable:boolean;
 	point,nextpoint:word;
@@ -780,7 +780,7 @@ var
 		 if (locnt^[nextpoint].obj<>0) and (locnt^[nextpoint].obj<>255)
 		  then if obj^[locnt^[nextpoint].obj].t<6 then
 		   begin; mapobj:=locnt^[nextpoint].obj; donedigging:=true; end;
-		   
+		
 		end;
 	  end;	
 
@@ -792,7 +792,7 @@ var
   if (xscc=xloc) and (yscc=yloc) then passable:=false;
 
   {return the result}
-  checkdest:=passable;	  
+  checkdest:=passable;	
 end;
 	
 
@@ -847,7 +847,7 @@ begin
  foundrange:=32760;
  if anger=0 then exit;
  if (anger>4) or (anger=ack.alignment) or (ack.criminal=crcalign) then
-  if (ack.hp[0]>0) and (ack.invisible=0) and (resurrect=false) then 
+  if (ack.hp[0]>0) and (ack.invisible=0) and (resurrect=false) then
   begin
    {if random(6)<4 then
     soundeffect(hi(crcsounds[rcrc^[this_crcsource].crcsource]));}
@@ -952,12 +952,12 @@ begin
          if (ymotion<>0) and (xmotion<>0) then
           if random(2)=1 then ymotion:=0 else xmotion:=0;
          if checkdest(x+xmotion,y+ymotion,map[2,2,x,y].d) then
-          movecreature(x,y,x+xmotion,y+ymotion) 
-		   else begin;fight:=true;writelog(0,'cannot move, will try fighting');end; 
+          movecreature(x,y,x+xmotion,y+ymotion)
+		   else begin;fight:=true;writelog(0,'cannot move, will try fighting');end;
 
          {do motion}
-        end;		   
-		   
+        end;		
+		
        if fight then
         begin
 		 writelog(199,'creature is fighting');
@@ -1028,7 +1028,7 @@ begin
    begin
     quasimap[x,y]:=obj^[obj8].d[1];
     anim_screen[x,y].tb:=false;
-		if transparency then 
+		if transparency then
 		if (obj^[obj8].t>5) then
 		 begin
 		  {this is an item, drill down}
@@ -1043,9 +1043,9 @@ begin
 	    if transparency then
 		 begin
 		  {this is a creature, drill down}
-		  
+		
 		  anim_screen[x,y].under:=roomunder[x,y];
-		 end; 
+		 end;
         if ((obj^[rcrc^[creatureslot].obj].t<3)
          and (obj^[rcrc^[creatureslot].obj].d[13]<>0))
          then
@@ -1073,7 +1073,7 @@ begin
        {animation sequence}
        {if anim_phase_one then }
         quasimap[x,y]:=obj^[obj8].d[1];
-	  
+	
 
         { else
          quasimap[x,y]:=obj^[map[2,2,x,y].o].d[6]; }
@@ -1193,11 +1193,11 @@ end;
        anim_screen[x,y].tb:=false;
        anim_screen[x,y].lit:=1;
 	   anim_screen[x,y].under:=0;
-      end else 
+      end else
 	  begin
 	  if (anim_screen[x,y].lit AND 2)=2 then
        begin
-	   
+	
       {  for xlit:=0 to 2 do
          for ylit:=0 to 2 do
           anim_screen[x+xlit-1,y+ylit-1].lit:=anim_screen[x+xlit-1,y+ylit-1].lit OR 1; }
@@ -1212,11 +1212,11 @@ end;
 		   (xlit+ylit<>0) and
 		   (xlit*10 + ylit <> 40) and
 		   (xlit*10 + ylit <> 44) and
-		   (xlit*10 + ylit <> 4) 
-		   then	   
+		   (xlit*10 + ylit <> 4)
+		   then	
 		    anim_screen[x+xlit-2,y+ylit-2].lit:=anim_screen[x+xlit-2,y+ylit-2].lit OR 1;
-		  
-		  
+		
+		
 
        end;
 	   if quasimap[x,y]=DECOGRP then
@@ -1233,12 +1233,12 @@ begin
  anim_screen[px,py].tb:=false;
  quasimap[px,py]:=curricon;
 
-end; 
+end;
  map[2,2,px,py].o:=oldspot;
- if transparency then anim_screen[px,py].under:=map[2,2,px,py].o; 
+ if transparency then anim_screen[px,py].under:=map[2,2,px,py].o;
  for y:=1 to roomtall do for x:=1 to roomwide do
    {if quasimap[x,y]<>0 then}
-  if anim_screen[x,y].lit=0 then 
+  if anim_screen[x,y].lit=0 then
   begin
    if quasimap[x,y]=DECOGRP then
     putdarkgrap2((x*4-3 +(32-(roomwide*2))),(y*16-14 +(88-(roomtall*8))),anim_screen[x,y].t2,
@@ -1250,19 +1250,19 @@ end;
 	  else begin
          	putdarktransgrap11((x*4-3 +(32-(roomwide*2))),
              (y*16-14 +(88-(roomtall*8))),quasimap[x,y],obj^[anim_screen[x,y].under].d[1]);
-			end; 
+			end;
      anim_screen[x,y].tb:=false;
-	end; 
+	end;
   end
-   else 
+   else
    if quasimap[x,y]=DECOGRP then
    putgrap2((x*4-3 +(32-(roomwide*2))),(y*16-14 +(88-(roomtall*8))),anim_screen[x,y].t2)
-   else 
+   else
     begin
 	 if anim_screen[x,y].under=0 then
 	  putgrap((x*4-3 +(32-(roomwide*2))),(y*16-14 +(88-(roomtall*8))),quasimap[x,y]) else
 	 puttransgrap11((x*4-3 +(32-(roomwide*2))),(y*16-14 +(88-(roomtall*8))),quasimap[x,y],obj^[anim_screen[x,y].under].d[1]);
-	end; 
+	end;
 
   {clearbottom;}
  savepage;
@@ -1272,7 +1272,7 @@ end;
    ylit:=registerattacks[x,4];
    roomprojectile(registerattacks[x,1],registerattacks[x,2],xlit,ylit,registerattacks[x,7]);
    if (registerattacks[x,3]=xlit) and (registerattacks[x,4]=ylit) then
-   begin {only bother attacking if you can hit}  
+   begin {only bother attacking if you can hit}
     attacker_id:= registerattacks[x,8];
     attacking(registerattacks[x,1],registerattacks[x,2],
             registerattacks[x,3],registerattacks[x,4],
@@ -1318,14 +1318,14 @@ begin
  newroom:=true;
  done:=false;
   getroom(room);
-  
- if entrancemacro<>0 then 
+
+ if entrancemacro<>0 then
   begin
    writelog(entrancemacro,'Running entrance macro');
    run_macro(entrancemacro);
-   
-  end;   
-  
+
+  end;
+
   xloc:=x;yloc:=y;
   anim_wide:=roomwide;anim_tall:=roomtall;
   erasebottom:=6;
@@ -1366,7 +1366,7 @@ repeat
  if macro_teleport then
   begin
    if moved then maponly(room,xloc,yloc);
-   
+
     readkey_time:=0;
     readkey_default:=#201;
     macrosuccess:=1;
@@ -1383,18 +1383,18 @@ repeat
 	end;	
     region.port[thisportal].ry:=global_ychunk;
     region.port[thisportal].x:=global_xloc;
-    region.port[thisportal].y:=global_yloc;   
-   
-   
+    region.port[thisportal].y:=global_yloc;
+
+
    (*
-   
+
    done:=true;
    rgn:=global_region;
    room:=global_xchunk;
    ydummy:=global_ychunk;
    x:=global_xloc;
    y:=global_yloc;
-   xloc:=global_xloc; 
+   xloc:=global_xloc;
    yloc:=global_yloc;
    if global_room<>0 then room:=global_room; *)
    macro_teleport:=false;
@@ -1433,7 +1433,7 @@ repeat
 {REVISIT?}
    if doublepass then actionparser(0,0,0,0,0,0,0,0);
   if not done then begin
-  
+
   if moved then
   if region.room.wallgrap[16]<>0 then
    begin
@@ -1443,7 +1443,7 @@ repeat
     end else run_macro(region.room.wallgrap[16]-1);
    end;
   moved:=false;
- 
+
  if action_weap=22 then
   begin
    wxloc:=xloc;
@@ -1523,12 +1523,12 @@ repeat
         else if rtryval=5 then begin;moved:=true;
          if checkfuel then begin;dec(yloc);arrowmoved:=true;end;
 		 end;
-       end;lastmov:=1; 
+       end;lastmov:=1;
       end;
   'K':begin
       if xloc>2 then begin;moved:=true;passtime(region.room.wallgrap[15]);
        if rtrymove(xloc-1,yloc,xloc,yloc,room)<99 then
-       if checkfuel then 
+       if checkfuel then
 	   begin;dec(xloc);arrowmoved:=true;end;
 	   end else
        begin
@@ -1542,7 +1542,7 @@ repeat
   'M':begin
       if xloc<roomwide-1 then begin;moved:=true;passtime(region.room.wallgrap[15]);
       if rtrymove(xloc+1,yloc,xloc,yloc,room)<99
-      then if checkfuel then 
+      then if checkfuel then
 	  begin;inc(xloc);arrowmoved:=true;end;
 	  end else
        begin
@@ -1551,12 +1551,12 @@ repeat
         else if rtryval=5 then begin;moved:=true;
          if checkfuel then begin;inc(xloc);arrowmoved:=true;end;
 		 end;
-       end;lastmov:=3; 
-	  end; 
+       end;lastmov:=3;
+	  end;
   'P':begin
       if yloc<roomtall-1 then begin;moved:=true;passtime(region.room.wallgrap[15]);
       if rtrymove(xloc,yloc+1,xloc,yloc,room)<99
-      then if checkfuel then 
+      then if checkfuel then
 	  begin;inc(yloc);arrowmoved:=true;end;
 	  end else
        begin
@@ -1566,8 +1566,8 @@ repeat
          if checkfuel then begin;inc(yloc);arrowmoved:=true;end;
 		 end;
        end;
-	   lastmov:=2; 
-	  end; 
+	   lastmov:=2;
+	  end;
   end;
 
   #32:begin;clear_keyboard_buffer;moved:=true;passtime(region.room.wallgrap[15]);end;
@@ -1589,7 +1589,7 @@ repeat
         if obj^[ack.plvehicle].d[4]<>0 then
          begin;weapon2t:=obj^[obj^[ack.plvehicle].d[4]].t;
          weapon2n:=obj^[ack.plvehicle].d[4];end;
-      
+
 
       if action_weap<>23 then
       begin
@@ -1818,9 +1818,9 @@ end;
            readkey_default:=#1;
           erasebottom:=2;clearbottom;end;
        end;
-	   
-  
-	   
+	
+
+	
 (*  'W':if erasebottom<100 then
         begin
          erasebottom:=109;
@@ -1878,7 +1878,7 @@ until done2;
             s:='CRITICAL';
 		   if ack.cheat=123 then s:=strnum(hp)+' of '+strnum(dropping)+' HP';
           end;
-		  		  
+		  		
         bottomsay(2,'CONDITION: Û1'+s);
         {see creature}
        end
@@ -1945,7 +1945,7 @@ until done2;
      erasebottom:=3;
       end; {look}
   #199:key_report:=NOT key_report;
-  
+
 
   'D':
 	 begin
@@ -1958,14 +1958,14 @@ until done2;
         begin
          clearbottom;
 
-         if Ack.PCASH>2550 then dri:=2550 else dri:=trunc(Ack.PCASH/10)*10;		 
+         if Ack.PCASH>2550 then dri:=2550 else dri:=trunc(Ack.PCASH/10)*10;		
          bottomsay(1,'DROP HOW MUCH? (UP TO '+strnum(dri)+')');
          bottomsay(2,'Û1AMOUNT:');
          val(readlin(17,188,4,1),dri,dri1);
          if dri>2550 then dri:=2550;
 		 if dri>(trunc(ack.pcash/10)*10) then dri:=(trunc(ack.pcash/10)*10);
          if (dri1<>0) or (dri=0) then dropping:=0;
-		 dri:=trunc(dri/10)*10; 
+		 dri:=trunc(dri/10)*10;
          end;
     if dropping<>0 then
      begin
@@ -1991,13 +1991,13 @@ until done2;
         dri1:=obj^[map[2,2,xmod,ymod].o].t else dri1:=3;
 		if ((dri1=1) or (dri1=2)) and (obj^[map[2,2,xmod,ymod].o].d[4]>127) then dropping:=0;
        if (dri1=3) or (dri1=4) or (dri1=5) or (dri1=10) then dropping:=0;
-	   
+	
 	   if dropping=0 then
 	    begin
 		 bottomsay(2,'CAN''T DROP THINGS THERE!');
 		 erasebottom:=3;
 		 end
-	    else 
+	    else
 		 begin
 		  if region.room.wallgrap[7]=1 then
 		   begin
@@ -2010,8 +2010,8 @@ until done2;
            end
 		   else
 		  bottomsay(2,'DROPPED: '+obj^[dropping].n);erasebottom:=3;
-		  end;	   
-	   
+		  end;	
+	
      end;
        if dropping<>0 then
    begin
@@ -2066,8 +2066,8 @@ until done2;
      end;
       end;
      end;
-  
-  
+
+
   'G':begin
       ack.invisible:=0;
        getadjacentlocation(xmod,ymod,'GET ITEM (SELECT DIRECTION)',true);
@@ -2124,7 +2124,7 @@ until done2;
                end;
                end;
 
-              
+
           end; {gathering}
        if addslot=12 then
         begin;addslotc:=map[2,2,xmod,ymod].d;
@@ -2185,7 +2185,7 @@ until done2;
    {action-triggered talk}
    conversation(talktome,dropping);
    talktome:=0;
-  end else 
+  end else
   begin
    ack.invisible:=0;
    passtime(11);
@@ -2246,21 +2246,21 @@ until dropping>3;
        locnt^[addslot].obj:=Ack.PLvehicle;
        vehcount:=Ack.PLvehicle;
 	   Ack.PLvehicle:=0;
-	   
+	
              if obj^[vehcount].d[12]<>0 then
               run_macro(obj^[vehcount].d[12]) else
             begin
              clearbottom;bottomsay(0,'DISMOUNTING VEHICLE.');
 
-            end;	   
-	   
+            end;	
+	
        moved:=true;
      end;
        end;
 
    #201:begin
-   
-   
+
+
    if macrosuccess>0 then begin
     delay2(300);
     done:=true;
@@ -2352,7 +2352,7 @@ until dropping>3;
   end;
 
  if arrowmoved then writelog(0,'arrowmoved') else writelog(0,'no arrow');
- 
+
  if obj^[dri1].t=5 then
   if map[2,2,xloc,yloc].d<>0 then
    if arrowmoved then
@@ -2367,15 +2367,15 @@ until dropping>3;
   end; {done}
   arrowmoved:=false;
   until done;
-  
+
  if rgn<>thisregion then
   begin
    writelog(thisregion,'Leaving for new region: '+strnum(rgn));
    if region.room.wallgrap[4]>0 then
     run_macro(region.room.wallgrap[4]); {old exit macro: wallgrap 4}
- 
+
   end;
-  
+
  resurrect:=false;
  if doublepass then actionparser(0,0,0,0,0,0,0,0);
  savemap;

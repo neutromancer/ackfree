@@ -198,10 +198,10 @@ unit u_SMix; {Version 1.30}
 
       SamplingRate     : word;
 
-	  
+	
 
-	 
-	  
+	
+	
     procedure startupsmix;
 	 var BaseIO: word; IRQ, DMA, DMA16: byte;
      begin
@@ -209,16 +209,16 @@ unit u_SMix; {Version 1.30}
 	  smixstarted:=true;
 	  smix:=true;
 	  if (GetSettings(BaseIO, IRQ, DMA, DMA16)) then
-	  if not(InitSB(BaseIO, IRQ, DMA, 0)) then 
+	  if not(InitSB(BaseIO, IRQ, DMA, 0)) then
 	   begin; smix:=false; exit; end;
-	   
+	
 	  InitMixing;
-	  if not(InitXMS) then 
+	  if not(InitXMS) then
 	   begin; smix:=false; exit; end;
 	  {InitSharing;}
 
 	 end;
-	 
+	
     procedure shutdownsmix;	
 	 begin
 
@@ -228,21 +228,21 @@ unit u_SMix; {Version 1.30}
 
 	  ShutdownMixing;
       ShutdownSB;
-  
+
 
 	  {Shutdownsharing;}
 
 
-     end;	  
-	  
-	  
+     end;	
+	
+	
 	procedure smixsetvolume;
     begin
      Port[ResetPort-2]:=$22;
 	 Port[ResetPort-1]:=(v or (v SHL 4));
     end;	
-	  
-	  
+	
+	
 	procedure smixplay(i2:byte;s:string);
 	 var ignore,looping:boolean;
              i:byte;
@@ -272,14 +272,14 @@ unit u_SMix; {Version 1.30}
 	  begin
 	   if soundplaying(i) then StopSound(i);
            freesound(smixpointer[i]);
-	  end; 
+	  end;
 
      if LoadSound(smixpointer[i],s) then
 	  begin
 	   ignore:=StartSound(smixpointer[i], i, looping);
 	   soundloaded[i]:=true;
 	  end;
- 
+
     end;
 	
 	procedure smixstop(i2:byte);
@@ -290,19 +290,19 @@ unit u_SMix; {Version 1.30}
 
          for i:=ch1 to ch2 do
           begin
-	   if not smix then exit;		  
-	   if soundloaded[i]=true then 
+	   if not smix then exit;		
+	   if soundloaded[i]=true then
 	        begin
 	
 	          if soundplaying(i) then StopSound(i);
-	 
+	
 	          freesound(smixpointer[i]);
 
 	          soundloaded[i]:=false;
-	        end;  
+	        end;
           end;
 	 end;
-	 
+	
 	function smixplaying;
 	begin
 	 if i=1 then
@@ -317,7 +317,7 @@ unit u_SMix; {Version 1.30}
 	    else smixplaying:=0;
 	  end;
 	end;
-	  
+	
     function UpcaseStr(Str: string): string;
       var
         i: byte;
@@ -372,8 +372,8 @@ unit u_SMix; {Version 1.30}
         if IRQ     = $FF then GetSettings := false;
         if DMA     = $FF then GetSettings := false;
         {We can survive if there isn't a DMA16 channel}
-      end;	  
-	  
+      end;	
+	
     procedure WriteDSP(Value: byte);
       begin
         repeat until (Port[WritePort] and $80) = 0;

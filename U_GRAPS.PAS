@@ -122,7 +122,7 @@ begin
  if ((mouseon) and (mouseactive)) then hidemouse;
  for i:=1 to 16 do
   move(graphicdark^[bb,i],mem[scrnl:(xb*4)+scrnh[yy+i]],16);
- 
+
  { for i:=1 to 16 do for i1:=1 to 16 do
    if graphic^[bb,i,i1]=back then mem[scrnl:(xb*4+(i1-1))+scrnh[yy+i]]:=back
    else mem[scrnl:(xb*4+(i1-1))+scrnh[yy+i]]:=dark;
@@ -228,7 +228,7 @@ begin
  for i:=1 to 16 do for i1:=1 to 16 do
   if graphic^[over,i,i1]=tmask then
    mem[scrnl:(xb*4)+i1+scrnh[yy+i]-1]:=graphic^[under,i,i1]
-  else 
+  else
    mem[scrnl:(xb*4)+i1+scrnh[yy+i]-1]:=graphic^[over,i,i1];
 end;
 
@@ -240,7 +240,7 @@ begin
  for i:=1 to 16 do for i1:=1 to 16 do
   if graphic2^[over,i,i1]=tmask then
    mem[scrnl:(xb*4)+i1+scrnh[yy+i]-1]:=graphic^[under,i,i1]
-  else 
+  else
    mem[scrnl:(xb*4)+i1+scrnh[yy+i]-1]:=graphic2^[over,i,i1];
 end;
 
@@ -251,7 +251,7 @@ begin
  for i:=1 to 16 do for i1:=1 to 16 do
   if graphic2^[over,i,i1]=tmask then
    mem[scrnl:(xb*4)+i1+scrnh[yy+i]-1]:=graphic2^[under,i,i1]
-  else 
+  else
    mem[scrnl:(xb*4)+i1+scrnh[yy+i]-1]:=graphic2^[over,i,i1];
 end;
 
@@ -262,7 +262,7 @@ begin
 for i:=1 to 16 do for i1:=1 to 16 do
   if graphic^[over,i,i1]=tmask then
    mem[scrnl:(xb*4)+i1+scrnh[yy+i]-1]:=graphic2^[under,i,i1]
-  else 
+  else
    mem[scrnl:(xb*4)+i1+scrnh[yy+i]-1]:=graphic^[over,i,i1];
 
 end;
@@ -275,7 +275,7 @@ begin
  for i:=1 to 16 do for i1:=1 to 16 do
   if graphic^[over,i,i1]=tmask then
    mem[scrnl:(xb*4)+i1+scrnh[yy+i]-1]:=graphicdark^[under,i,i1]
-  else 
+  else
    mem[scrnl:(xb*4)+i1+scrnh[yy+i]-1]:=graphicdark^[over,i,i1];
 end;
 
@@ -287,7 +287,7 @@ var c,x,y:byte;
 
 begin
  assign(f,'TMASK.TXT');
- {$I-} reset(f); 
+ {$I-} reset(f);
  if ioresult<>0 then exit;
  read(f,s);
  val(s,i,ie);
@@ -306,13 +306,13 @@ begin
 	graphic^[c,x,y]:=0;
    end	else graphicmask^[c,x,y]:=0; }
 
-   {This creates the graphic mask.  
-       Now the terrain tile can be painted AND mask, 
-	   and the top tile can be painted XOR what's 
+   {This creates the graphic mask.
+       Now the terrain tile can be painted AND mask,
+	   and the top tile can be painted XOR what's
 	   on the screen.}
-   
-end;  
-  
+
+end;
+
 begin
 { getmem(graphic,(GRAPS+1)*sizeof(grapunit)); }
  graphic2enabled:=true;

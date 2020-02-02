@@ -41,7 +41,7 @@ begin
   if s='                              ' then s:='';
   if ((s<>'') or ((s='') and (lasttalkblank=false))) then
   begin
-  
+
   if talkyloc>169 then
   begin
    for i:=3 to 168 do move(mem[$a000:scrnh[i+9]+4],mem[$a000:scrnh[i]+4],256);
@@ -52,11 +52,11 @@ begin
    talksay(3,talkyloc,s);
    talkyloc:=talkyloc+8;
 
-  end;  
-   
+  end;
+
   end;
   if s='' then lasttalkblank:=true else lasttalkblank:=false;
-    
+
 end;
 
 
@@ -137,7 +137,7 @@ var
 procedure scrset;
  var c:byte;
 begin
- clearscreen; 
+ clearscreen;
  showbmp(65530,false);
 
  bottomsay(1,' PRESS Û5 A Û0..Û5 P Û0, TO PURCHASE,');
@@ -220,7 +220,7 @@ begin
          begin
           clearbottom;
           offer:=obj^[i].d[11]*256+obj^[i].d[12];
-	  
+	
           s:='NO';
           for i1:=1 to 16 do if merch[i1]=i then s:='YES';
 		  if s='YES' then
@@ -233,7 +233,7 @@ begin
           if i1<3 then i1:=3;
           if i1>20 then i1:=20+(i1 DIV 40);
           offer:=round(offer * (i1/26));
-		  
+		
           {"offer" is now the base price, modified for your INT, further modified to reflect
             the selling price IF it's something he sells}
 			
@@ -244,7 +244,7 @@ begin
            4:if s<>'YES' then offer:=offer+(offer DIV 3);
            5:if s<>'YES' then offer:=offer*2;
           end;
- 
+
           say(2,180,0,'OFFERED: '+strnum(offer));
           say(34,180,0,'ITEM: '+obj^[i].n);
           bottomsay(2,'ACCEPT OFFER? [Y/N]');
@@ -267,7 +267,7 @@ begin
    #27:done:=true;
   end;
  until done;
-  clearscreen; 
+  clearscreen;
  showbmp(65530,false);
 
 end;
@@ -354,17 +354,17 @@ case inkey of
 			 inc(upcount);
 			 s:=queries[upcount];
 			 cp:=length(s)+1;
-		    end; 
+		    end;
 		'P':if upcount>1 then
 		    begin {down arrow}
 			 dec(upcount);
 			 s:=queries[upcount];
-			 cp:=length(s)+1;		    
+			 cp:=length(s)+1;		
 		    end else
 			begin
 			 s:='';cp:=1;
 			 {blank line}
-			end; 
+			end;
         #75:if cp>1 then dec(cp);
         #77:if cp<length(s) then inc(cp) else
           if length(s)<maxchars then begin;inc(cp);s:=concat(s,' ');end;
@@ -381,7 +381,7 @@ if s<>#27 then
   for cp:=11 downto 1 do
    queries[cp+1]:=queries[cp];
    queries[1]:=s;
- 
+
 
 pausemouse:=false;
 showmouse;
@@ -461,7 +461,7 @@ begin
    end;
   seek(f,n-1);
   read(f,b);
-  if b=0 then 
+  if b=0 then
    begin
     alreadytalked:=0;
     b:=1;
@@ -471,9 +471,9 @@ begin
 
 	else alreadytalked:=b;
 
-  
+
   close(f);
- end; 
+ end;
 
  procedure setquestflag(d,n:byte);
  var f: file of byte;
@@ -483,10 +483,10 @@ begin
  {$I-} reset(f); {$I+}
  if ioresult<>0 then exit;
  seek(f,d-1);
-  write(f,n);  
+  write(f,n);
   close(f);
- end; 
- 
+ end;
+
 
 procedure show_response(topicat:word;var anger:byte;n:byte);
  var i:integer;
@@ -504,7 +504,7 @@ begin
  writelog(0,reason);	
  topic_done:=true;
 end;
- 
+
 begin
  stopsound(4);
  replysearch:=0;
@@ -540,14 +540,14 @@ begin
 
 		 savetalkscreen;
 		 showbmp(65530,false);
-         restoretalkscreen;	 
+         restoretalkscreen;	
 		 {say(70,160,0,copy(talk^[i].data,7,1));}
 	     {say(60,170,0,copy(talk^[i].data,8,pos('  ',talk^[i].data)-8));}
 	    end;
 	'D':begin
 	     for ii:=7 to 13 do if talk^[i].data[ii]='.' then iie:=ii;
          val(copy(talk^[i].data,7,iie-7),ii,iie);
-         if iie<>0 then ii:=0;     
+         if iie<>0 then ii:=0;
          if ii=0 then stopsound(4)
 		  else soundeffect(ii,4);
 
@@ -555,10 +555,10 @@ begin
 	'.':begin
 	     for ii:=7 to 13 do if talk^[i].data[ii]='.' then iie:=ii;
          val(copy(talk^[i].data,7,iie-7),ii,iie);
-         if iie<>0 then ii:=0;     
+         if iie<>0 then ii:=0;
          if ii=0 then stopsound(2)
 		  else soundeffect(ii,2);
-		 music_changed:=true; 
+		 music_changed:=true;
 
 	    end;		
     'I':begin;talk_done:=true;say_goodbye:=false;end;
@@ -577,7 +577,7 @@ begin
          end;
         end;
     'H':begin
-	     merchant(talk^[i].data);  
+	     merchant(talk^[i].data);
 		 bmpskinname:='TALK'+strnum(n)+'.BMP';
 		 showbmp(65530,false);
      	end;
@@ -605,13 +605,13 @@ begin
            if ii=1 then
             begin
 			 writelog(n,'Item-Take: Item is cash, $'+strnum(ii2)+', player has '+strnum(ack.pcash));
-			 if ack.pcash>=ii2 then 
+			 if ack.pcash>=ii2 then
 			   begin
 			    writelog(n,'Item-Take: Successful');
 			    ack.pcash:=ack.pcash-ii2;
 				itemtaken:=true;
 			   end;
-			 
+			
 			end else
 			begin
 			 writelog(n,'Item-Take: Item is object, '+obj^[ii].n);
@@ -621,8 +621,8 @@ begin
 			   writelog(n,'Item-Take: Successful');
 			   itemtaken:=true;
 			  end;
-             
-			end; 
+
+			end;
 	       if itemtaken=false then writelog(n,'Item-Take: Player did not have item');
         end;	
     {'M':varmerchant(talk^[i].data);}
@@ -631,9 +631,9 @@ begin
 	     setquestflag(n,2);
 	    end; {beginquest}
      'U':begin
-	      setquestflag(n,3);	 
+	      setquestflag(n,3);	
 	     end; {endquest}
-		 
+		
     'O':begin
         val(copy(talk^[i].data,8,pos('  ',talk^[i].data)-8),ii,iie);
         if iie<>0 then ii:=0;        {fhjkdsgfajsdhgfjsdhjnmgadyf}
@@ -671,7 +671,7 @@ begin
 	    bottomsay(1,'Û1(YOU SAID "YES")    ') else
      	 bottomsay(1,'Û1(YOU SAID "NO")    ');
 	  end else
-       if itemtaken then replysearch:=3 else replysearch:=4;	  
+       if itemtaken then replysearch:=3 else replysearch:=4;	
        {say(1,topic_yloc*8-7,1,'(YOU SAY YES)') else
                     say(1,topic_yloc*8-7,1,'(YOU SAY NO)');}
 
@@ -679,7 +679,7 @@ begin
     end;
   writelog(i,talk^[i].data+'  next:'+strnum(talk^[i].next));	
   if talk^[i].next<>0 then inc(i) else topicdone('EOF');
-  if (talk^[i].headertype<2) 
+  if (talk^[i].headertype<2)
    then topicdone('topic end');
  until topic_done;
 end;
@@ -748,7 +748,7 @@ begin
 	end;
    close(f);
   end; {chatting instead of loading dialogue}
- 
+
 
 
 end;
@@ -763,7 +763,7 @@ begin
  talkyloc:=17;
  loaddialogue(n);
  bmpskinname:='TALK'+strnum(n)+'.BMP';
- clearscreen; 
+ clearscreen;
  showbmp(65530,false);
  talk_done:=false;say_goodbye:=true;
  accept_query:=false;
@@ -774,15 +774,15 @@ begin
   3:query:='(ENDQ)';
   4..255:query:='(H'+strnum(i)+')';
   else query:='(INTRO)';
- end; 
-  
+ end;
+
  repeat
-   if accept_query then 
+   if accept_query then
     query:=get_query
 	else accept_query:=true;
    query_found:=false;i:=0;
    if (query=#27) or (query='BYE') or (query='GOODBYE') then query:='(BYE)';
-   
+
    if query='(BYE)' then talk_done:=true;
    {if (query<>'BYE') and (query<>'') then}
    repeat
@@ -791,11 +791,11 @@ begin
      if talk^[i].header=query then
        query_found:=true;
    until (query_found) or (talk^[i].next=0) or (i=999);
-   if (not query_found) and 
+   if (not query_found) and
      ((query='(HELLO)') or (query='(BEGINQ)') or (query='(ENDQ)')    )
 	 then
       begin;query:='(INTRO)';accept_query:=false;end;
-    
+
 {     if say_goodbye then
       begin;query:='(BYE)';accept_query:=false;end
        else talk_done:=true; }
@@ -804,8 +804,8 @@ begin
      clearbottom;
      if (query[1]<>'(') and (query[1]<>'*')
        then bottomsay(1,'Û1(YOU SAID "'+query+'")       ');
-	  writelog(n,'Player said "'+query+'"'); 
-	 writelog(n,'response is at line '+strnum(i)); 
+	  writelog(n,'Player said "'+query+'"');
+	 writelog(n,'response is at line '+strnum(i));
      show_response(i,anger,n);
     end else
    if query[1]='*' then
@@ -833,7 +833,7 @@ end;
 
  function file_exists(s:string):string;
  var dirinfo: searchrec;
- 
+
  begin
      FindFirst(s, AnyFile, dirinfo);
     if doserror=0 then file_exists:=dirinfo.name else file_exists:='';
@@ -982,7 +982,7 @@ var
     fly:=false; nomove_n:=false;
 	invisible:=0;
     nomove_s:=false; nomove_e:=false;
-    nomove_w:=false; 
+    nomove_w:=false;
 	poison:=0;
     HP[0]:=HP[selectrace];
     HPmax[0]:=HPmax[selectrace];
@@ -1286,7 +1286,7 @@ begin
          deletebunch('2*');
          deletebunch('3*');
 		 deletebunch('DQT');
-		 deletebunch('DQS');		 
+		 deletebunch('DQS');		
 {         say(38,191,4,'DONE');     }
          MASTERFILE:=TEMPMASTERFILE;
          MAPAFILE:='.1';
@@ -1295,7 +1295,7 @@ begin
          REGIONFILE:='.RGT';
          filefuture:=0;
         end;
-      else writelog(0,'Error, not loading or creating savegame'); 
+      else writelog(0,'Error, not loading or creating savegame');
 	  end;{case}
 end;
 
@@ -1330,7 +1330,7 @@ begin
 
   if Ack.titlemacro<>0 then
    run_macro(ack.titlemacro);
-   
+
   startskinbmp('START.BMP');
   game_selection;
 
@@ -1363,7 +1363,7 @@ begin
  if file_exists(ADVNAME+'.RGN')='' then rbad:=true;
  if file_exists(ADVNAME+'.ITM')='' then ibad:=true;
  if file_exists(ADVNAME+'.PPL')='' then pbad:=true;
- 
+
  if (ibad or rbad or pbad) then
   begin
    startskinbmp('START.BMP');
@@ -1388,8 +1388,8 @@ begin
     if sr.name[1]<>'.' then bytecopy(frompath+sr.name,topath+sr.name);
     findnext(sr);
    end;
-end;	  
-	  
+end;	
+	
 procedure savegame_menu;
 var
 valid:array[0..9] of boolean;
@@ -1412,7 +1412,7 @@ begin
 	 reset(f);
 	 readln(f,s);
 	 close(f);
-	end; 
+	end;
    say(SAVEX,SAVEY+(i*10),5,' '+strnum(i)+' Û0 '+s);
   end;
  say(SAVEX,SAVEY,5,' 0 Û1 (QUICKSAVE ONLY)');
@@ -1422,7 +1422,7 @@ begin
   if j=#27 then j:='0';
   case j of
    '0'..'9':begin;i:=ord(j)-48;done:=true;end;
-   end; 
+   end;
  until done;
  if i<>0 then
   begin
@@ -1433,21 +1433,21 @@ begin
     begin
 	 {create folder}
 	 mkdir('SAVED'+strnum(i));
-	end; 
+	end;
 	
    assign(f,'SAVED'+strnum(i)+'\SAVENAME.TXT');
    rewrite(f);
    writeln(f,s);
    close(f);
-   
+
    {copy saved game from game folder to savedX folder}
    bytecopyall('','X*','SAVED'+strnum(i)+'\');
    bytecopyall('','Y*','SAVED'+strnum(i)+'\');
    bytecopyall('','Z*','SAVED'+strnum(i)+'\');
-   bytecopyall('','PLY','SAVED'+strnum(i)+'\');  
-   bytecopyall('','DQS','SAVED'+strnum(i)+'\');   
-   bytecopyall('','RGX','SAVED'+strnum(i)+'\');    
-  end; 
+   bytecopyall('','PLY','SAVED'+strnum(i)+'\');
+   bytecopyall('','DQS','SAVED'+strnum(i)+'\');
+   bytecopyall('','RGX','SAVED'+strnum(i)+'\');
+  end;
   restorepage;
 end;
 
@@ -1474,7 +1474,7 @@ begin
 	 readln(f,s);
 	 close(f);
 	 say(SAVEX,SAVEY+(i*10),5,' '+strnum(i)+' Û0 '+s);
-	end; 
+	end;
   end;
  say(SAVEX,SAVEY,5,' 0 Û1 (USE MOST RECENT QUICKSAVE)');
  say(SAVEX,SAVEY+100,5,' C Û1 CREATE A NEW GAME');
@@ -1485,16 +1485,16 @@ begin
    '0'..'9':if valid[ord(j)-48] then begin;i:=ord(j)-48;done:=true;end;
    'C':begin;i:=0;filefuture:=1;done:=true;end;
    #27:halt;
-   end; 
+   end;
  until done;
  if i<>0 then
   begin
    {copy saved game i to game folder}
    bytecopyall('SAVED'+strnum(i)+'\','*','');
-  end; 
+  end;
  clearscreen;
-end;  
-  
+end;
+
 begin
  lastchatter:=0;
 end.

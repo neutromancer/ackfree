@@ -22,13 +22,13 @@ const MACROCOMMAND:cmdnamestype = ('SET','GOTO','IF','SMSG','LMSG','CLRSCR',
 
 {
  other places that need to be edited for macro vars/commands:
- 
+
  u_ack04: strvar
  i_macro1: compile
  o_play0:run_macro,mac_var, set_var
- 
- 
- 
+
+
+
 }
 
 
@@ -157,7 +157,7 @@ begin
       sync_app:=11;
       helpindex:=73;
       getmem(macro, 100 * sizeof (macrorec) );
-      getmem(obj, (MAXOBJS+1) * sizeof ( Objectrec ) );	  
+      getmem(obj, (MAXOBJS+1) * sizeof ( Objectrec ) );	
 	  if loadobjs=false then sync_app:=11; {ignore value}
       MacroMainMenu;
       end;

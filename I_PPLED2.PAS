@@ -50,26 +50,26 @@ begin
  assign(cf,ADVNAME+CREATUREFILE);
  {$I-} reset(cf); {$I+}
  if ioresult<>0 then begin;initcreatures;savecreatures;exit;end;
- 
+
  for i:=1 to 64 do read(cf,crc^[i]);
-  if not eof(cf) then   
+  if not eof(cf) then
     for i:=65 to MAXCRCS do read(cf,crc^[i])
    else
     begin
 	 for i:=65 to MAXCRCS do crc^[i].t:=0;
-	end; 
+	end;
  close(cf);
  assign(csf,ADVNAME+CREATURESOUNDFILE);
  {$I-} reset(csf); {$I+}
  if ioresult<>0 then
   begin;for i:=1 to MAXCRCS do crcsounds[i]:=0;exit;end;
  for i:=1 to 64 do read(csf,crcsounds[i]);
-  if not eof(csf) then   
+  if not eof(csf) then
     for i:=65 to MAXCRCS do read(csf,crcsounds[i])
    else
     begin
 	 for i:=65 to MAXCRCS do crcsounds[i]:=0;
-	end;  
+	end;
  close(csf);
 end;
 
@@ -223,7 +223,7 @@ if hm<>0 then
    say(34,114,1,objnam(fw));
    say(34,123,1,objnam(fr));
    say(34,132,1,objnam(ar));
-   
+
    for iii:=1 to 3 do
     begin
    if inv[iii]=0 then s:='NOTHING'
@@ -234,8 +234,8 @@ if hm<>0 then
 	end;
    say(10,143+(iii*9),1,s);
     end;
-   
- 
+
+
   end;
 end;
 end;
@@ -258,7 +258,7 @@ begin
   case j of
    #0:case j0 of
      #59:help;
-	 
+	
         #34:with crc^[whatcrc] do begin
                loadgraps2(false);
               say(1,183,0,'SELECT UP TO 3 GRAPHIC TILES TO USE');
@@ -287,8 +287,8 @@ begin
 
                loadgraps;
                setupscreen;fillscreen;
-             end;	 
-	 
+             end;	
+	
      #60:begin;whatcrc:=selectcreature(whatcrc);if whatcrc=0 then whatcrc:=1;
          setupscreen;fillscreen;end;
      #61:begin
@@ -412,7 +412,7 @@ begin
               val(s,touchm,i1);
 			  if s='000' then for i1:=1 to MAXCRCS do crc^[i1].touchm:=0;
               setupscreen;fillscreen;
-             end;			 
+             end;			
         'G':with crc^[whatcrc] do begin
               say(1,183,0,'SELECT A GRAPHIC TILE TO REPRESENT ');
               say(1,191,0,'THIS CREATURE.                     ');

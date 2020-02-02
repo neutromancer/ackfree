@@ -95,7 +95,7 @@ begin
     begin
     if pssp>26 then s:=chr((pssp-26) + 64)+'2'
      else s:=chr((pssp) + 64);
-	end else s:='?'; 
+	end else s:='?';
   19:s:=strnum(pssp);
   2,3,4:s:=objnam(pssp);
   5:s:=objnames[pssp];

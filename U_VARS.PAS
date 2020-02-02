@@ -190,8 +190,8 @@ begin
   clear_shortmsg;
   for i:=1 to 745 do write(f,shortmsg);
   close(f);
- end; 
- 
+ end;
+
 
 procedure load_shortmsgfile(mn:word);
  var f:file of shortmsgrec;
@@ -209,7 +209,7 @@ begin
   {$I-} reset(f); {$I+}
   if ioresult<>0 then begin;create_shortmsgfile;exit;end;
   if filesize(f)>=mn then seek(f,mn-1);
- end; 
+ end;
 
  read(f,shortmsg);
  close(f);

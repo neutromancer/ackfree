@@ -59,16 +59,16 @@ begin
  intr($21,regs);
 end;
 
-   
+
 procedure loadmapcolors;
 var cf:file of byte;
     i:byte;
 begin
  assign(cf,ADVNAME+'.MCO');
  {$I-} reset(cf); {$I+}
- if ioresult<>0 then 
+ if ioresult<>0 then
   begin
-   for i:=0 to 255 do mapcolors[i]:=i; 
+   for i:=0 to 255 do mapcolors[i]:=i;
   end else
   begin
    for i:=0 to 255 do read(cf,mapcolors[i]);

@@ -18,7 +18,7 @@ begin {alt-V}
           begin
            for xchunkloc:=1 to 20 do
             for ychunkloc:=1 to 12 do
-             
+
               if region.room.wmap[xchunkloc,ychunkloc]<>0 then
              begin
               {$I-}

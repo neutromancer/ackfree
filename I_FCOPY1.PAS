@@ -378,7 +378,7 @@ if ioresult<>0 then exit;
 seek(bf,(start-1)*128);
 if count>GRAPS then count:=GRAPS;
 if color16=2 then xc:=2 else xc:=8;
- for i:=1 to count do 
+ for i:=1 to count do
   begin
    for y:=1 to 16 do
    for x:=1 to xc do
@@ -407,9 +407,9 @@ if color16=2 then xc:=2 else xc:=8;
 		 othergrap^[i,y,(x-1)*8 +5]:=b AND 8;
 		 othergrap^[i,y,(x-1)*8 +6]:=b AND 4;
 		 othergrap^[i,y,(x-1)*8 +7]:=b AND 2;
-		 othergrap^[i,y,(x-1)*8 +8]:=b AND 1;		 
+		 othergrap^[i,y,(x-1)*8 +8]:=b AND 1;		
 
-        end;	  	  
+        end;	  	
      end; {case}
     end;
 
@@ -776,12 +776,12 @@ begin
             say(6,86,4,' PROGRESS FILES/SAVEGAMES? ');
             say(6,94,4,' PRESS [Y] TO CONFIRM.     ');
             if upcase(readkey)='Y' then
-              
+
 			  begin
 			   say(20,114,0,'WORKING...');
 			   deletesaves(ADVNAME);
-			  end; 
-			 
+			  end;
+			
 end;
 
 
@@ -897,13 +897,13 @@ begin
  {$I-} reset(cf); {$I+}
  if ioresult<>0 then begin;loadcreatures:=false;exit;end;
  for i:=1 to 64 do read(cf,crc^[i]);
-  if not eof(cf) then   
+  if not eof(cf) then
     for i:=65 to MAXCRCS do read(cf,crc^[i])
    else
     begin
 	 for i:=65 to MAXCRCS do crc^[i].t:=0;
-	end; 
- 
+	end;
+
 
  close(cf);
  assign(csf,ADVNAME+CREATURESOUNDFILE);
@@ -911,13 +911,13 @@ begin
  if ioresult<>0 then
   begin;for i:=1 to MAXCRCS do crcsounds[i]:=0;exit;end;
  for i:=1 to 64 do read(csf,crcsounds[i]);
-  if not eof(csf) then   
+  if not eof(csf) then
     for i:=65 to MAXCRCS do read(csf,crcsounds[i])
    else
     begin
 	 for i:=65 to MAXCRCS do crcsounds[i]:=0;
-	end;  
-  
+	end;
+
 
  close(csf);
  loadcreatures:=true;
@@ -959,7 +959,7 @@ begin
 			  10:writeln(f,'    Movement: As if riding: '+'#'+strnum(veh)+' '+obj^[veh].n);
 			 end;
      255:writeln(f,'    Movement: Any SPACE terrain (can fly)');
-    end;	 
+    end;	
 
     writeln(f,'');
 
@@ -1300,7 +1300,7 @@ begin
 
 	  say(1,140,0,'ENTER THE PATH AND NAME OF A RAW');
            say(1,148,0,'GRAPHIC TILE FILE TO LOAD.');
-           s:=readlin(1,158,38,0); 
+           s:=readlin(1,158,38,0);
            if s='' then s:=#27; }
            if s<>'' then
             begin
@@ -1320,8 +1320,8 @@ begin
             j2:=upcase(readkey);
             if j2='P' then color16:=2;
            end;}
-           
-		   
+
+		
            say(1,188,0,'IMPORT AS [N]ORMAL OR [S]ECONDARY?');
            j2:=upcase(readkey);
            if j2='N' then copysomegraps16(s,i,i2,color16);

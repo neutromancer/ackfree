@@ -12,9 +12,9 @@ begin
 
  xx:=xx*4;
  fillchar(mem[scrnl:xx+scrnh[yy+1]],2,ty1);fillchar(mem[scrnl:xx+2+scrnh[yy+1]],2,ty2);
- fillchar(mem[scrnl:xx+scrnh[yy+2]],2,ty1);fillchar(mem[scrnl:xx+2+scrnh[yy+2]],2,ty2); 
+ fillchar(mem[scrnl:xx+scrnh[yy+2]],2,ty1);fillchar(mem[scrnl:xx+2+scrnh[yy+2]],2,ty2);
  fillchar(mem[scrnl:xx+scrnh[yy+3]],2,ty2);fillchar(mem[scrnl:xx+2+scrnh[yy+3]],2,ty1);
- fillchar(mem[scrnl:xx+scrnh[yy+4]],2,ty2);fillchar(mem[scrnl:xx+2+scrnh[yy+4]],2,ty1);  
+ fillchar(mem[scrnl:xx+scrnh[yy+4]],2,ty2);fillchar(mem[scrnl:xx+2+scrnh[yy+4]],2,ty1);
 
 end;	
 	
@@ -336,7 +336,7 @@ begin
    read(f,pal[i,0]);
    read(f,pal[i,1]);
    read(f,pal[i,2]);
-  
+
   end;
 
  greg.ax:=$1012;
@@ -347,7 +347,7 @@ begin
  intr($10,greg);
 
 
-  
+
 end;
 }
 
@@ -586,43 +586,43 @@ if graphic^[bb,yloc,xloc]=tmask then
 		          if graphic^[bb,ylc,xlc]=tmask then
 				  begin
 				   if ylc>1 then
-				     if (graphic^[bb,ylc-1,xlc]<>tmask) and 
+				     if (graphic^[bb,ylc-1,xlc]<>tmask) and
  					  (graphic^[bb,ylc-1,xlc]<>palcolor[ord(j0)-48]) then
 					  graphic^[bb,ylc,xlc]:=palcolor[ord(j0)-48];
 				   if xlc>1 then
-				     if (graphic^[bb,ylc,xlc-1]<>tmask) and 
+				     if (graphic^[bb,ylc,xlc-1]<>tmask) and
  					  (graphic^[bb,ylc,xlc-1]<>palcolor[ord(j0)-48]) then
-					  graphic^[bb,ylc,xlc]:=palcolor[ord(j0)-48];				   
+					  graphic^[bb,ylc,xlc]:=palcolor[ord(j0)-48];				
 				   if ylc<16 then
-				     if (graphic^[bb,ylc+1,xlc]<>tmask) and 
+				     if (graphic^[bb,ylc+1,xlc]<>tmask) and
  					  (graphic^[bb,ylc+1,xlc]<>palcolor[ord(j0)-48]) then
 					  graphic^[bb,ylc,xlc]:=palcolor[ord(j0)-48];
 				   if xlc<16 then
-				     if (graphic^[bb,ylc,xlc+1]<>tmask) and 
+				     if (graphic^[bb,ylc,xlc+1]<>tmask) and
  					  (graphic^[bb,ylc,xlc+1]<>palcolor[ord(j0)-48]) then
 					  graphic^[bb,ylc,xlc]:=palcolor[ord(j0)-48];	
 
 				   if (ylc>1) and (xlc>1) then
-				     if (graphic^[bb,ylc-1,xlc-1]<>tmask) and 
+				     if (graphic^[bb,ylc-1,xlc-1]<>tmask) and
  					  (graphic^[bb,ylc-1,xlc-1]<>palcolor[ord(j0)-48]) then
 					  graphic^[bb,ylc,xlc]:=palcolor[ord(j0)-48];
-					  
+					
 				   if (ylc>1) and (xlc<16) then
-				     if (graphic^[bb,ylc-1,xlc+1]<>tmask) and 
+				     if (graphic^[bb,ylc-1,xlc+1]<>tmask) and
  					  (graphic^[bb,ylc-1,xlc+1]<>palcolor[ord(j0)-48]) then
 					  graphic^[bb,ylc,xlc]:=palcolor[ord(j0)-48];
 
 				   if (ylc<16) and (xlc>1) then
-				     if (graphic^[bb,ylc+1,xlc-1]<>tmask) and 
+				     if (graphic^[bb,ylc+1,xlc-1]<>tmask) and
  					  (graphic^[bb,ylc+1,xlc-1]<>palcolor[ord(j0)-48]) then
 					  graphic^[bb,ylc,xlc]:=palcolor[ord(j0)-48];
 
 				   if (ylc<16) and (xlc<16) then
-				     if (graphic^[bb,ylc+1,xlc+1]<>tmask) and 
+				     if (graphic^[bb,ylc+1,xlc+1]<>tmask) and
  					  (graphic^[bb,ylc+1,xlc+1]<>palcolor[ord(j0)-48]) then
-					  graphic^[bb,ylc,xlc]:=palcolor[ord(j0)-48];					  
-					  
-				  end; 
+					  graphic^[bb,ylc,xlc]:=palcolor[ord(j0)-48];					
+					
+				  end;
          end;
          say(5,190,0,'                            ');
          dispblock(bb);	
@@ -790,7 +790,7 @@ if graphic^[bb,yloc,xloc]=tmask then
                     tmask1:=lo(TEXTC0);
 					if tmask=lo(TEXTC0) then tmask2:=ack.darkforeground
 					 else tmask2:=tmask; 		
-                    dispblock(bb);					 
+                    dispblock(bb);					
 					end else
 					begin
 					assign(tf,'TMASK.TXT');
@@ -799,8 +799,8 @@ if graphic^[bb,yloc,xloc]=tmask then
                     say(32,191,0,'TRANSPARENCY DISABLED');	
 					dispblock(bb);
 					end;
-			   
-			   
+			
+			
 			       end;
                #71:begin
                     sc_x:=palcolor[sc_this] MOD 16;
@@ -906,7 +906,7 @@ begin
     if (ie<>0) or (ioresult<>0) or (i>255) or (i<0) then tmask:=-1 else tmask:=i;
 	close(f);
    end;	
-  tmask1:=lo(TEXTC0);if tmask=lo(TEXTC0) then tmask2:=ack.darkforeground else tmask2:=tmask; 
+  tmask1:=lo(TEXTC0);if tmask=lo(TEXTC0) then tmask2:=ack.darkforeground else tmask2:=tmask;
   using_animtiles:=false;
   grpedit_setupscreen;
    repeat

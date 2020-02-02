@@ -14,7 +14,7 @@ const BLANK='                                       '; {39 chars}
       R150=1000;
 	  DECOGRP=244;
 
-type 
+type
     {windowbuffertype=array[1..176,1..64] of byte;}
    {  screenbank=array[1..64000] of byte; }
      screenstriparray=array[1..20,1..320] of byte;
@@ -25,7 +25,7 @@ type
       data:array[1..10] of byte; {@}
      end;
      bmpimage=array[0..0] of byte;
-	 
+	
 var
     bmptemp:^bmpimage;
     entrancemacro:byte;
@@ -117,7 +117,7 @@ var xinloc,yinloc:byte;
     roomwide,roomtall:byte;
     map:array[1..3,1..3] of chunkrec;
     mapcolors:array[0..255] of byte;
-   
+
     type anim_rec = record
           t1,t2,t3,t4:byte;
           tb4,tb:boolean;
@@ -240,24 +240,24 @@ var dropcount:integer;
            map[wxloc DIV 16+1,wyloc DIV 16+1,
             wxloc MOD 16+1,wyloc MOD 16+1].d:=dropcount;
           end;
-		  
-		  
+		
+		
 	     writelog(dropcount,'flopitem: '+strnum(invn)+' of '+strnum(inv)+' at '+strnum(wxloc)+','+strnum(wyloc));
-		  
+		
         end;
 
 
 
-   
+
 procedure loadmapcolors;
 var cf:file of byte;
     i:byte;
 begin
  assign(cf,ADVNAME+'.MCO');
  {$I-} reset(cf); {$I+}
- if ioresult<>0 then 
+ if ioresult<>0 then
   begin
-   for i:=0 to 255 do mapcolors[i]:=i; 
+   for i:=0 to 255 do mapcolors[i]:=i;
   end else
   begin
    for i:=0 to 255 do read(cf,mapcolors[i]);
@@ -283,7 +283,7 @@ begin
 
  drawv(11,171,188,hi(TEXTC0));
  drawv(308,171,188,hi(TEXTC0));
- 
+
  for i:=1 to 37 do
    begin
    putletter(i*2+1,171,ord(shortmsg.chars[1,i]),shortmsg.attrs[1,i]);
@@ -312,11 +312,11 @@ begin
  writelog(n,'Loading mosaic');
  assign(mf,ADVNAME+MOSAICFILE);
  {$I-} reset(mf); {$I+}
- if ioresult<>0 then 
+ if ioresult<>0 then
   begin
    loadmosaic:=false;exit;
   end;
- if n>filesize(mf)+1 then 
+ if n>filesize(mf)+1 then
   begin
    loadmosaic:=false;exit;
   end;
@@ -428,7 +428,7 @@ end;
 procedure shortmessage(n:byte);
  var j:char;
 begin
- if n=0 then 
+ if n=0 then
  begin
   internal_shortmsg;
   exit;
@@ -499,7 +499,7 @@ begin
     w:=obj^[i].d[9]*256+obj^[i].d[10];
     if w<=30000 then
 	 t:=t+ack.pinv[i]*w;
-   end;	 
+   end;	
  if ack.plvehicle<>0 then
   max:=obj^[ack.plvehicle].d[9]*256+obj^[ack.plvehicle].d[10] else
   max:=ack.strength[0]*5;
@@ -623,18 +623,18 @@ begin
 
                {clear screen}
                {load new palette}
-			   
+			
 			   if n=65530 then
 			    begin
 
-				 name:=file_exists(bmpskinname); 
-				 
+				 name:=file_exists(bmpskinname);
+				
 				end else
 			   if n=65529 then
 			    begin
 
-				 name:=file_exists('ABOUT.BMP'); 
-				 
+				 name:=file_exists('ABOUT.BMP');
+				
 				end else				
 				begin
                  writelog(n,'Displaying BMP');
@@ -642,11 +642,11 @@ begin
 			     end;
               if name<>'' then
 
-			  
+			
               begin
 
               assign(bmph,name);
-              reset(bmph); 
+              reset(bmph);
 
               if ioresult=0 then
               begin
@@ -654,7 +654,7 @@ begin
                read(bmph,b);
                i2:=b;
                if i2=0 then i2:=256;
-			   headersize:=54+(i2*4);			   
+			   headersize:=54+(i2*4);			
 			   close(bmph);
 			   writelog(100,strnum(64000+headersize));
                assign(bmpf,name);	
@@ -673,10 +673,10 @@ begin
                 pal2[i,0]:=bmptemp^[54+(i*4)+2];				
 
                end;
-			  
+			
               {load palette off disk}
 
-			  
+			
               {load and display picture}
               if not transp then
 			  begin
@@ -693,14 +693,14 @@ begin
 				greg.es:=seg(pal1[0,0]);
 				greg.dx:=ofs(pal1[0,0]);
 				intr($10,greg);
-		 
-			    
+		
+			
                  if (pal1[0,1]<>pal2[0,1]) or
 				    (pal1[10,2]<>pal2[10,2]) or
 				    (pal1[20,1]<>pal2[20,1]) or
 				    (pal1[30,2]<>pal2[30,2]) or
 				    (pal1[40,1]<>pal2[40,1]) 				
-				  then 
+				  then
 				   begin
 				    i:=-1;
 
@@ -708,9 +708,9 @@ begin
 					  inc(i);
 					  i2:=pal1[i,0]+pal1[i,1]+pal1[i,2];
 					  until (i=255) or (i2<6);
-				    fillchar(mem[$a000:0000],64000,i); 
+				    fillchar(mem[$a000:0000],64000,i);
 				   end;
-			 
+			
 			      begin
                    {load palette}
                    greg.ax:=$1012;
@@ -719,7 +719,7 @@ begin
                    greg.es:=seg(pal2[0,0]);
                    greg.dx:=ofs(pal2[0,0]);
                    intr($10,greg);
-                  end;		  
+                  end;		
 			  {
               for i:=199 downto 0 do
 			   begin
@@ -732,8 +732,8 @@ begin
                 move(bmptemp^[((199-i)*320)+headersize],mem[$A000:i*320],320);
 			   end;
 
-			  
-			  end 
+			
+			  end
               else
                begin
 			     count:=headersize;
@@ -1002,12 +1002,12 @@ begin
  {$I-} reset(cf); {$I+}
  if ioresult<>0 then exit;
  for i:=1 to 64 do read(cf,crc^[i]);
-  if not eof(cf) then   
+  if not eof(cf) then
     for i:=65 to MAXCRCS do read(cf,crc^[i])
    else
     begin
 	 for i:=65 to MAXCRCS do crc^[i].t:=0;
-	end; 
+	end;
  close(cf);
 
  assign(csf,ADVNAME+CREATURESOUNDFILE);
@@ -1018,12 +1018,12 @@ begin
    exit;
   end;
  for i:=1 to 64 do read(csf,crcsounds[i]);
-  if not eof(csf) then   
+  if not eof(csf) then
     for i:=65 to MAXCRCS do read(csf,crcsounds[i])
    else
     begin
 	 for i:=65 to MAXCRCS do crcsounds[i]:=0;
-	end;  
+	end;
  close(csf);
  {$I+}
 end;
@@ -1101,7 +1101,7 @@ end;
    }
   end;
 
-  
+
 procedure player_inventory;
   var
    invlist:array[1..255,1..2] of byte;
@@ -1111,9 +1111,9 @@ procedure player_inventory;
   begin
    for i:=1 to 255 do begin;invlist[i,1]:=0;invlist[i,2]:=0;end;
    i1:=0;
-   
+
    for i2:=6 to 9 do
-   for i:=2 to 254 do 
+   for i:=2 to 254 do
     if obj^[i].t=i2 then
     if ACK.Pinv[i]<>0 then
 
@@ -1141,24 +1141,24 @@ procedure player_inventory;
   repeat
      clearscreen;
 	 say(1,0,6,' INVENTORY Û1 [PgUp] [PgDn] [ESC]');
-  
+
    for i:=0+top to 19+top do
     if i<256 then begin
 	 if invlist[i,2]=0 then
 	  begin {write item name}
 	   if invlist[i,1]<>0 then
-        begin	   
+        begin	
 		 if ack.pinv[invlist[i,1]]>1 then say(5,(i-top)*8+14,1,strnum(ack.pinv[invlist[i,1]])+'Û0 '+obj^[invlist[i,1]].n) else
 		  say(5,(i-top)*8+14,0,obj^[invlist[i,1]].n);
-		  
+		
 		 if obj^[invlist[i,1]].t<10 then
 		  putgrap(1,(i-top)*8+10,obj^[invlist[i,1]].d[1]);
 		 case obj^[invlist[i,1]].t of
 		  7,8:say(46,(i-top)*8+14,2,'DMG: '+strnum(obj^[invlist[i,1]].d[4]));
 		  9:say(46,(i-top)*8+14,2,'AC: '+strnum(round(obj^[invlist[i,1]].d[5]* (obj^[invlist[i,1]].d[6]/100)) ));
 		 end;
-		  
-		end; 
+		
+		end;
 	  end else
 	  if invlist[i,1]<>0 then begin {write short msg line}
 	   load_shortmsgfile(invlist[i,2]);
@@ -1170,8 +1170,8 @@ procedure player_inventory;
 		   putletter(i1*2+4,(i-top)*8+14,ord(shortmsg.chars[1,i1]),1)
 	  end;
   end;
-  
-  j:=readkey; if j=#0 then j:=readkey else 
+
+  j:=readkey; if j=#0 then j:=readkey else
    if j<>#27 then j:=#32;
   case j of
    #27:done:=true;
@@ -1182,7 +1182,7 @@ procedure player_inventory;
         if top<240 then top:=top+20 else top:=240;
        end;
    #72:if top>1 then top:=top-1;
-   #80:if top<240 then top:=top+1;	   
+   #80:if top<240 then top:=top+1;	
    #71:top:=1;
   end; {case}
 	
@@ -1191,10 +1191,10 @@ procedure player_inventory;
 
   end;
 
-  
-    
-  
-  
+
+
+
+
 procedure showplayerstatus;
  var
   j:char;
@@ -1216,7 +1216,7 @@ begin
  say(3,23,0,'STRENGTH: Û1'+strnum(ack.strength[0])+'    Û0MONEY: Û1'+strnum(ack.pcash));
 if ack.intelligence[0]<>0 then
  say(3,33,0,'INTELLIGENCE: Û1'+strnum(ack.intelligence[0]));
- 
+
  say(3,43,0,'WEAPON SKILL: Û1'+strnum(ack.weapskill[0]));
  say(3,53,0,'RANGED WEAPON SKILL: Û1'+strnum(ack.rweapskill[0]));
  say(3,63,0,'ENCUMBERANCE: Û1'+strnum(round(encumberance/4*100))+'% OF MAXIMUM');
@@ -1251,8 +1251,8 @@ until (j=#27) or (j='I');
 
  if upcase(j)='I' then
   player_inventory;
-  
-  
+
+
  restorepage;
  helpindex:=2;
 end;
@@ -1338,14 +1338,14 @@ procedure savemap;
      fc:word;
      aa,bb:byte;
 	 rc:rcrcarray;
-	 
+	
 procedure copyrc(start:byte);
 var i:byte;
 begin
  for i:=start+1 to start+64 do if i<255 then
   rc[i-start]:=rcrc^[i];
 end;
-	 
+	
 begin
  writelog(0,'Saving map');
  modified[thisregion]:=true;
@@ -1358,12 +1358,12 @@ begin
  assign(rcrcf,ADVNAME+MAPCFILE+strnum(thisregion));
  {$I-} rewrite(rcrcf); {$I+}
  if ioresult<>0 then exit;
- 
+
  	 for fc:=(64 DIV 64)-1 to ((RCMAX+2) DIV 64)-1 do
 	  begin
 	   copyrc(64 * fc);
 	   write(rcrcf,rc);
-	  end; 
+	  end;
 
  close(rcrcf);
  if region.rooms>20 then
@@ -1409,15 +1409,15 @@ begin
  for i:=start+1 to start+32 do
   wander_index^[i]:=wc[i-start];
 
-  
-end;	 
+
+end;	
 procedure copyrc(start:byte);
 var i:byte;
 begin
  for i:=start+1 to start+64 do if i<255 then
   rcrc^[i]:=rc[i-start];
 end;
-	 
+	
 begin
 
  assign(wcf,ADVNAME+MAPWFILE+strnum(n));
@@ -1431,7 +1431,7 @@ begin
    close(wcf); }
   end else
     begin
-   read(wcf,wc);   
+   read(wcf,wc);
    copywc(0);
    if eof(wcf) then
 	 for fc:=33 to WANDERMAX do
@@ -1446,7 +1446,7 @@ begin
     end;	
    close(wcf);
   end;
-  
+
 
  thisregion:=n;
  assign(rgf,ADVNAME+REGIONFILE);
@@ -1475,7 +1475,7 @@ begin
  assign(rcrcf,ADVNAME+MAPCFILE+strnum(n));
  {$I-} reset(rcrcf); {$I+}
  if ioresult<>0 then exit;
- 
+
     read(rcrcf,rc);
    copyrc(0);
    if eof(rcrcf) then
@@ -1580,7 +1580,7 @@ begin
        end;
 
       end;
-  196:if destcat=6 then ok:=true;  
+  196:if destcat=6 then ok:=true;
   204:case destcat of
       7,8,9:ok:=true;
       end;
@@ -1621,7 +1621,7 @@ begin
    if (obj^[c].t=currcat) and (Ack.PINV[c]>0) then
     if obj^[c].d[2]<>0 then
 	 begin;inc(numobjs);objlist[numobjs]:=c;end;
- 
+
   end else
  for c:=2 to 254 do
   if incats(obj^[c].t) then
@@ -1852,15 +1852,15 @@ begin
        begin
          if anim_screen[xc+1,yc+1].lit=0 then putdarkgrap2(xc*4+11,yc*16+18,agrap,
             ack.darkforeground,ack.darkbackground)
-           else 
+           else
 		    if anim_screen[xc+1,yc+1].under=0 then putgrap2(xc*4+11,yc*16+18,agrap)
-			 else 
+			 else
 			  begin
-			   if obj^[anim_screen[xc+1,yc+1].under].t<6 then 
+			   if obj^[anim_screen[xc+1,yc+1].under].t<6 then
 			   if (obj^[anim_screen[xc+1,yc+1].under].d[6]<>0) and (not anim_phase_one) then
 			   puttransgrap22(xc*4+11,yc*16+18,agrap,obj^[anim_screen[xc+1,yc+1].under].d[6])
 			   else puttransgrap21(xc*4+11,yc*16+18,agrap,obj^[anim_screen[xc+1,yc+1].under].d[1]);
-			  end; 
+			  end;
 
        end else begin
 
@@ -1904,24 +1904,24 @@ begin
          else if anim_screen[xc,yc].under=0 then
 		   putgrap2((xc*4-3 +(32-(anim_wide*2))),(yc*16-14 +(88-(anim_tall*8))),agrap)
 		   else
-		   
+		
 			  begin
-			   if obj^[anim_screen[xc,yc].under].t<6 then 
+			   if obj^[anim_screen[xc,yc].under].t<6 then
 			   if (obj^[anim_screen[xc,yc].under].d[6]<>0) and (not anim_phase_one) then
 			   puttransgrap22((xc*4-3 +(32-(anim_wide*2))),(yc*16-14 +(88-(anim_tall*8))),
 			      agrap,obj^[anim_screen[xc,yc].under].d[6])
 			   else puttransgrap21((xc*4-3 +(32-(anim_wide*2))),(yc*16-14 +(88-(anim_tall*8))),
 			      agrap,obj^[anim_screen[xc,yc].under].d[1]);
-			  end; 		   
-		   
-		   
+			  end; 		
+		
+		
      end
    else
       begin
        if anim_screen[xc,yc].lit=0 then
        putdarkgrap((xc*4-3 +(32-(anim_wide*2))),(yc*16-14 +(88-(anim_tall*8))),agrap)
-	   
-	   
+	
+	
            else if anim_screen[xc,yc].under=0 then putgrap((xc*4-3 +(32-(anim_wide*2))),
 		     (yc*16-14 +(88-(anim_tall*8))),agrap)
              else
@@ -1931,9 +1931,9 @@ begin
 			   else puttransgrap11((xc*4-3 +(32-(anim_wide*2))),(yc*16-14 +(88-(anim_tall*8))),
 			    agrap,obj^[anim_screen[xc,yc].under].d[1]);
 
-	   
-	   
-	   
+	
+	
+	
 
       end;
     end;
@@ -1941,18 +1941,18 @@ begin
  nextanim:=supergetclock+(ack.anim_speed*10);
  anim_phase_one:=anim_phase_one XOR true;
 end;
- 
+
 
 procedure anim_toggle;
 
  begin
   {if ack.hp[0]=0 then playerdeath;}
-  
+
   if supergetclock>nextanim then
    begin;anim_phase_one:=anim_phase_one XOR true;
     nextanim:=supergetclock+(ack.anim_speed*10);end;
-  
- 
+
+
  end;
 
 
@@ -2016,23 +2016,23 @@ var
 begin
  delayk:=false;
  gettime(h,m,s,ms);
- if starting_h > h then h:=h+24; 
+ if starting_h > h then h:=h+24;
  h:=h - starting_h;
  delayend := ((ms + delayms) DIV 100) +
-              (s*10) + (m*600) + (h*36000);           		 
+              (s*10) + (m*600) + (h*36000);           		
  repeat
    gettime(h,m,s,ms);
-   if starting_h > h then h:=h+24; 
+   if starting_h > h then h:=h+24;
    h:=h - starting_h;
    timenow := ((ms) DIV 100) +
-              (s*10) + (m*600) + (h*36000); 
+              (s*10) + (m*600) + (h*36000);
  until (timenow>=delayend) or keypressed;
  if keypressed then
   begin
    j:=readkey;
    if j=#27 then delayk:=true;
    if j=#0 then j:=readkey;
-  end; 
+  end;
 end;
 
 
@@ -2049,9 +2049,9 @@ begin
  {$I-} reset(f); {$I+}
  if ioresult<>0 then exit;
  seek(f,d-1);
-  write(f,n);  
+  write(f,n);
   close(f);
- end; 
+ end;
 
 function getquestflag(d:byte):byte;
  var f: file of byte; n:byte;
@@ -2062,12 +2062,12 @@ begin
  if ioresult<>0 then n:=0 else
  begin
   seek(f,d-1);
-  read(f,n);  
+  read(f,n);
   close(f);
  end;
- getquestflag:=n; 
- end;  
- 
+ getquestflag:=n;
+ end;
+
 function mac_var(ind:byte):word;
 var x:byte;
 begin
@@ -2131,7 +2131,7 @@ begin
   28:mac_var:=ack.invisible;
   29:mac_var:=ack.invis_icon;
   33:mac_var:=region.room.wallgrap[5];
-  34:mac_var:=region.room.wallgrap[6];  
+  34:mac_var:=region.room.wallgrap[6];
   end;
 end;
 
@@ -2154,7 +2154,7 @@ begin
        ack.variables2[data[ind,2]]:=val MOD 256;
        if data[ind,2]>7 then ack.variables2hi[data[ind,2]]:=val DIV 256;
 
-     end;	 
+     end;	
    2:begin
       if val>255 then val:=255;
      case data[ind,2] of
@@ -2178,11 +2178,11 @@ begin
       if data[ind,2]>1 then ack.Pinv[data[ind,2]]:=val else ack.pcash:=val;
       invchange:=true;
      end;
-	 
+	
   31:begin
 
 	   if obj^[data[ind,2]].t=9 then
-       begin	   
+       begin	
 	    if val>0 then
 	    begin
 	     ack.parmor[obj^[data[ind,2]].d[2]]:=data[ind,2];
@@ -2190,7 +2190,7 @@ begin
 	    end;
 	    if val=0 then
 	     ack.parmor[obj^[data[ind,2]].d[2]]:=0;
-	   end; 
+	   end;
     end;
 
   32:begin;if val>255 then val:=255;ack.pweapready:=val;if val>0 then if ack.pinv[val]=0 then ack.pinv[val]:=1;end;
@@ -2415,7 +2415,7 @@ begin
 				 {down} 'P':getadj_val:=2;
 				 {left} 'K':getadj_val:=3;
 				 {right} 'M':getadj_val:=4;
-				 
+				
 			     end; {0}
 		     end; {case}
 			until getadj_val>0;
@@ -2429,13 +2429,13 @@ begin
 			  else macrodone:=true;
 			end else
 			begin
-			 if region.rooms>249 then 
+			 if region.rooms>249 then
 				 getadj_x:=global_xloc+((global_xchunk-1)*16)
                  else getadj_x:=global_xloc;
-			 if region.rooms>249 then 
+			 if region.rooms>249 then
 				 getadj_y:=global_yloc+((global_ychunk-1)*16)
                  else getadj_y:=global_yloc;
-			 writelog(49,'GETADJ '+strnum(getadj_val)+' from '+strnum(getadj_x)+','+strnum(getadj_y));				 
+			 writelog(49,'GETADJ '+strnum(getadj_val)+' from '+strnum(getadj_x)+','+strnum(getadj_y));				
 			 case getadj_val of
 			    1:{up}
                  if getadj_y>1 then dec(getadj_y);
@@ -2444,10 +2444,10 @@ begin
 			    3:{left}
                  if getadj_x>1 then dec(getadj_x);
 				4:{right}
-				 inc(getadj_x);				 
+				 inc(getadj_x);				
 			 end; {case}
 			 writelog(49,'GETADJ result loc: '+strnum(getadj_x)+','+strnum(getadj_y));
-			 set_var(1,getadj_x); 
+			 set_var(1,getadj_x);
 			 set_var(2,getadj_y);
 			end; {not 27}
 		   end;
@@ -2500,25 +2500,25 @@ begin
 		   end;
 		   10:begin;if (w1 OR w2)>0 then macropointer:=w3-1;
 		   writelog(macropointer,' (if '+strnum(w1)+'|'+strnum(w2)+' then '+strnum(w3)+')');
-		   end;		   
+		   end;		
           end; {3case}
-		  
-		  if macropointer=-1 then 
+		
+		  if macropointer=-1 then
 		   begin {the condition was true}
 
 		    macropointer:=i; {leaves macro pointer unchanged: this line (next line will be next)}
-		   end else 
+		   end else
 		    if w3=0 then
 			begin {the condition was false, skip past any more if0's, then skip one more line.}
 			 i:=i+2; {sets macro pointer to line after next}
-			 while ((macro^[i-1].cmd=3) and 
-			  ((macro^[i-1].data[4,1]=0) and (macro^[i-1].data[4,3]=0))) 
-			  do inc(i); 
+			 while ((macro^[i-1].cmd=3) and
+			  ((macro^[i-1].data[4,1]=0) and (macro^[i-1].data[4,3]=0)))
+			  do inc(i);
 			 {if the next line is another if0, skip again}
-			 
+			
 			 macropointer:=i-1;
-			end; 
-		  
+			end;
+		
          end;
  {smsg} 4:if mac_var(1)<>0 then
           begin
@@ -2568,7 +2568,7 @@ begin
  {wkey} 7:waitkey;
  {gkey} 8:begin
            clear_keyboard_buffer;
-           j:=upcase(readkey);set_var(1,ord(j));if j=#0 then 
+           j:=upcase(readkey);set_var(1,ord(j));if j=#0 then
 		    case readkey of
 			     {up} 'H':set_var(1,128);
 				 {down} 'P':set_var(1,129);
@@ -2622,7 +2622,7 @@ begin
           for i1:=i to i+47 do for i2:=1 to 40 do
            begin
             llp:=rmcnt^[i1,i2];
-            if (llp=0) 
+            if (llp=0)
              then putpixel(i1-i+6,156+i2,mapcolors[0]) else
              putpixel(i1-i+6,156+i2,mapcolors[locnt^[llp].obj]);
            end;
@@ -2667,7 +2667,7 @@ begin
 	     if cmd<=24 then begin
 	      readkey_time:=0;
           if readkey_default<>#201 then readkey_default:=#255;  {trigger a map refresh after}
-		 end; 
+		 end;
 	     if region.rooms>249 then
 		  begin {world map}
 			  tempxch:=2+ ( (((mac_var(1)-1) DIV 16)+1) - global_xchunk);
@@ -2686,7 +2686,7 @@ begin
 			  {specified location is close enough -- do stuff.}
 			  case cmd of
 			   10:flopitem(((tempxch-1)*16)+tempxlo-1,((tempych-1)*16)+tempylo-1,mac_var(3),0);
-			   11:if (obj^[map[tempxch,tempych,tempxlo,tempylo].o].t>5) or (map[tempxch,tempych,tempxlo,tempylo].o=255) then 
+			   11:if (obj^[map[tempxch,tempych,tempxlo,tempylo].o].t>5) or (map[tempxch,tempych,tempxlo,tempylo].o=255) then
 			       if (mac_var(3)=0) or (mac_var(3)=map[tempxch,tempych,tempxlo,tempylo].o) then
 				   begin
 				    writelog(0,'maptake: '+strnum(map[tempxch,tempych,tempxlo,tempylo].o));
@@ -2696,7 +2696,7 @@ begin
 					 i:=map[tempxch,tempych,tempxlo,tempylo].d;
 					 map[tempxch,tempych,tempxlo,tempylo].o:=rcrc^[i].obj;
 					 map[tempxch,tempych,tempxlo,tempylo].d:=rcrc^[i].objdata;
-					 rcrc^[i].show:=false; 
+					 rcrc^[i].show:=false;
 					end else
 					begin
 				     i:=map[tempxch,tempych,tempxlo,tempylo].d;
@@ -2709,21 +2709,21 @@ begin
 			       i:=map[tempxch,tempych,tempxlo,tempylo].o;
 				   i1:=mac_var(3);
 			       if obj^[i1].t=5 then if obj^[i].t<>5 then map[tempxch,tempych,tempxlo,tempylo].d:=255;
-					 
+					
 			       map[tempxch,tempych,tempxlo,tempylo].o:=i1;
-				   
-				  end; 
+				
+				  end;
 			   25:map[tempxch,tempych,tempxlo,tempylo].d:=mac_var(3);
 			   26:begin;set_var(3,map[tempxch,tempych,tempxlo,tempylo].o);
 			       writelog(0,'maplook: '+strnum(map[tempxch,tempych,tempxlo,tempylo].o));
 				   end;
 			   27:set_var(3,map[tempxch,tempych,tempxlo,tempylo].d);
-			   
+			
 			  end; {case}
-		  
+		
 		     end else writelog(cmd,' map location not close enough'); {proximity}
-		  
-		  
+		
+		
 		  end {world map} else
 		  begin {room map}
 		      tempxlo:=mac_var(1);
@@ -2734,7 +2734,7 @@ begin
 			  writelog(cmd,' map editing: '+strnum(mac_var(1))+','+strnum(mac_var(2))+' --> '+
 			   strnum(tempxch)+','+strnum(tempych)+':'+strnum(temppoint)+' room '+strnum(global_xchunk));
 
-			  
+			
 			  case cmd of
 			   10:begin
 			     addslot:=0;
@@ -2751,24 +2751,24 @@ begin
 				  locnt^[addslot].objcode:=0;
 				  map[2,2,tempxlo,tempylo].o:=mac_var(3);
 				  map[2,2,tempxlo,tempylo].d:=0;
-				 end; 
+				 end;
 			    end; {10}
 			   11:if (mac_var(3)=0) or (mac_var(3)=map[2,2,tempxlo,tempylo].o) then
 			     begin
 			       rmcnt^[tempxch,tempych]:=locnt^[temppoint].p;
 				   locnt^[temppoint].obj:=0;
 				   temppoint:=rmcnt^[tempxch,tempych];
-				   if temppoint<>0 then 
+				   if temppoint<>0 then
 				    begin
 					 map[2,2,tempxlo,tempylo].o:=locnt^[temppoint].obj;
 				     map[2,2,tempxlo,tempylo].d:=locnt^[temppoint].objcode;
 					end else map[2,2,tempxlo,tempylo].o:=0;
 			      end;
 			   24:begin
-			   
+			
 			   		i:=map[2,2,tempxlo,tempylo].o;
 				    i1:=mac_var(3);
-			        if obj^[i1].t=5 then if obj^[i].t<>5 then 
+			        if obj^[i1].t=5 then if obj^[i].t<>5 then
 					 begin
 					  map[2,2,tempxlo,tempylo].d:=255;
 					  locnt^[temppoint].objcode:=255;
@@ -2780,11 +2780,11 @@ begin
 			   25:begin;map[2,2,tempxlo,tempylo].d:=mac_var(3);locnt^[temppoint].objcode:=mac_var(3);end;
 			   26:set_var(3,map[2,2,tempxlo,tempylo].o);
 			   27:set_var(3,map[2,2,tempxlo,tempylo].d);
-			   
-			  end; {case}		  
-		  
+			
+			  end; {case}		
+		
 		  end;
-	 
+	
 	    end;
 
 		
@@ -2925,7 +2925,7 @@ begin
   bytecopy(ADVNAME+TEMPMASTERFILE,ADVNAME+PLAYMASTERFILE);
   bytecopy(ADVNAME+'.RGT',ADVNAME+'.RGX');
   deletebunch('DQS');
-  if file_exists(ADVNAME+'.DQT')<>'' then bytecopy(ADVNAME+'.DQT',ADVNAME+'.DQS');  
+  if file_exists(ADVNAME+'.DQT')<>'' then bytecopy(ADVNAME+'.DQT',ADVNAME+'.DQS');
   say(71,182,0,'   ');
   for t0:=1 to 99 do modified[t0]:=false;
 end;
@@ -2939,17 +2939,17 @@ procedure cycletime;
 begin
  writelog(0,'cycletime begin');
 
- 
+
  hpregen:=(((ack.regen_hp*ack.strength[0]) / 2000) - (ack.poison / 10)) + hpregen_leftover;
- 
- 
+
+
  if hpregen>=0 then
   begin
    {regenerating}
    hpregen_leftover:=hpregen - trunc(hpregen);
    hpregen:=trunc(hpregen);
    if ack.hp[0]+hpregen>ack.hpmax[0] then ack.hp[0]:=ack.hpmax[0] else
-    ack.hp[0]:=ack.hp[0]+trunc(hpregen); 
+    ack.hp[0]:=ack.hp[0]+trunc(hpregen);
   end else
   begin
    {poisoned}
@@ -2958,8 +2958,8 @@ begin
    if ack.hp[0]-hpregen>0 then ack.hp[0]:=ack.hp[0]-trunc(hpregen) else
     ack.hp[0]:=0;
   end;
-  
- 
+
+
 
  mpregen:= trunc((ack.regen_mp*ack.intelligence[0]) / 2000);
  mpregen_leftover:= mpregen_leftover + ((ack.regen_mp*ack.intelligence[0]) / 2000) -
@@ -2984,7 +2984,7 @@ begin
 	 begin
 	  writelog(c,'Running hour macro, '+strnum(oldhour+1)+'-'+strnum(newhour));
       run_macro(ack.hourmacro);
-	 end; 
+	 end;
     oldhour:=ack.hour;
   end;
  end;
@@ -3214,7 +3214,7 @@ procedure mutesoundmenu;
  var j:char;
 begin
  clearbottom;
- 
+
  {
  bottomsay(1,'MUTE: N:NOTHING M:MUSIC A:ALL');
  bottomsay(2,'PRESS A KEY OR ESC TO CANCEL');
@@ -3224,7 +3224,7 @@ begin
   'M':begin;disable_sound:=false;disable_music:=true;stopsound(2);end;
   'A':begin;disable_sound:=true;disable_music:=true;stopsound(0);end;
   end;
- }  
+ }
  bottomsay(1,'ENTER VOLUME (0-5) OR PRESS M TO');
  bottomsay(2,'                    TOGGLE MUSIC');
  j:=upcase(readkey);
@@ -3234,8 +3234,8 @@ begin
       disable_music:=not(disable_music);
 	  if disable_music then stopsound(2);
 	  end;
- end; 
-  
+ end;
+
  clearbottom;
 end;
 

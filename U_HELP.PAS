@@ -158,7 +158,7 @@ begin
  until helpdone;
  initgraph;
  {loadpalette;}
- 
+
  setvisualpage(1);
  setactivepage(0);
  assign(tempf,copy(helpfile,1,length(helpfile)-12)+'ACKDATA0.TMP');

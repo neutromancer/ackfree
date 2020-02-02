@@ -30,15 +30,15 @@ begin
  assign(cf,ADVNAME+CREATUREFILE);
  {$I-} reset(cf); {$I+}
  if ioresult<>0 then begin;loadcreatures:=false;exit;end;
- 
+
   for i:=1 to 64 do read(cf,crc^[i]);
-  if not eof(cf) then   
+  if not eof(cf) then
     for i:=65 to MAXCRCS do read(cf,crc^[i])
    else
     begin
 	 for i:=65 to MAXCRCS do crc^[i].t:=0;
 	end;
- 
+
  close(cf);
  loadcreatures:=true;
 end;
@@ -77,7 +77,7 @@ var cf:file of byte;
 begin
  assign(cf,ADVNAME+'.MCO');
  {$I-} reset(cf); {$I+}
- if ioresult<>0 then 
+ if ioresult<>0 then
   begin
    mapcolors[i]:=0; mapcolors[255]:=0;
    for i:=1 to 254 do if obj^[i].t>5 then mapcolors[i]:=15 else mapcolors[i]:=i;
@@ -346,14 +346,14 @@ begin
                   say(1,191,0,'PRESS THE LETTER OF THE VAR TO USE ');
 
 			      passp:=ord(upcase(readkey));
-				  if (passp>=65) and (passp<=90) then 
+				  if (passp>=65) and (passp<=90) then
 				   passp:=(passp-64) +26
 				   else passp:=0;
 			     end;
 			  else passp:=0;
-             end; {case}			  
+             end; {case}			
              redisp:=true;
-             end;		 
+             end;		
          2,3,4:begin
              say(1,183,0,'SELECT THE ITEM.                   ');
              say(1,191,0,'                                   ');

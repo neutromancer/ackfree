@@ -181,14 +181,14 @@ procedure sweepdot;
   progress:real;
   w,w2,dc,counter,distance:word;
 begin
- 
+
  rise:=y2-y1; run:=x2-x1;
- distance:= round(((sqrt(sqr(abs(x2-x1)) + sqr(abs(y2-y1)))))); 
+ distance:= round(((sqrt(sqr(abs(x2-x1)) + sqr(abs(y2-y1))))));
 
  lastx:=0; lasty:=0;
  dc := round( (c/100) * delay_calibration * (1/500));
-  
- 
+
+
  for counter:=1 to distance do
  if (dotx<>x2) or (doty<>y2) then
  begin
@@ -201,41 +201,41 @@ begin
 	 if lastx+lasty>0 then
 	  {redraw the old dot}
 	  begin
-	      delay2(dc); 
+	      delay2(dc);
 	      if b then
 	       begin
 	        for b1:= -1 to 1 do for b2:= -1 to 1 do
 		 	   mem[scrnl:lastx+b1+scrnh[lasty+b2]]:=lastball[b1,b2];
-		   end else 
+		   end else
 	   mem[scrnl:lastx+scrnh[lasty]]:=lastdot;
-	  end; {redraw}	  
-		  
-	  {draw the new dot}	  
+	  end; {redraw}	
+		
+	  {draw the new dot}	
 	  if b then
-       begin	  
+       begin	
 	     for b1:= -1 to 1 do for b2:= -1 to 1 do
-  		 begin		 
+  		 begin		
 	       lastball[b1,b2]:=mem[scrnl:dotx+b1+scrnh[doty+b2]];
 	       mem[scrnl:dotx+b1+scrnh[doty+b2]]:= color;
-		  end; 
+		  end;
 	   end else
 	   begin
 	    lastdot:=mem[scrnl:dotx+scrnh[doty]];
 	    mem[scrnl:dotx+scrnh[doty]]:= color;
        end;
-	   
+	
    	  lastx:=dotx; lasty:=doty;
    end;	
 
-  
+
  end; {counter}
- 
+
 end;
 
 
 
 
-(* 
+(*
 procedure sweepball;
 var c,c2,xxx,yyy:integer;
 begin
@@ -245,7 +245,7 @@ begin
    xxx:=(round(x1+((x2-x1)*(c/4))))-2;
    yyy:=round(y1+((y2-y1)*(c/4)))-2;
    meml[scrnl:xxx+scrnh[yyy-2]]:=meml[scrnl:xxx+scrnh[yyy-2]] XOR $000F0F00;
-   for c2:=yyy-1 to yyy+1 do 
+   for c2:=yyy-1 to yyy+1 do
    begin
    meml[scrnl:xxx+scrnh[c2]]:=meml[scrnl:xxx+scrnh[c2]] XOR $0F0F0F0F;
    end;
@@ -254,7 +254,7 @@ begin
    delay2(speed);
 
    meml[scrnl:xxx+scrnh[yyy-2]]:=meml[scrnl:xxx+scrnh[yyy-2]] XOR $000F0F00;
-   for c2:=yyy-1 to yyy+1 do 
+   for c2:=yyy-1 to yyy+1 do
    begin
    meml[scrnl:xxx+scrnh[c2]]:=meml[scrnl:xxx+scrnh[c2]] XOR $0F0F0F0F;
    end;
@@ -282,12 +282,12 @@ begin
  for cx:=-1*thickness to thickness do
   for cy:=-1*thickness to thickness do
    begin
-    if sqr(cx)+sqr(cy)<=thick then sketchline(x1+cx,y1+cy,x2+cx,y2+cy,color);  
+    if sqr(cx)+sqr(cy)<=thick then sketchline(x1+cx,y1+cy,x2+cx,y2+cy,color);
    end;
- 
 
-end; 
- 
+
+end;
+
 procedure blankbox;
  var yc:integer;
 begin

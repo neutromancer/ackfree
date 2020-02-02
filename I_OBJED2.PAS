@@ -22,7 +22,7 @@ begin
      if (d[4] AND 64)=64 then say(71,13,0,'YES') else say(71,13,1,'NO ');
 
 
-     if d[1]<241 then 
+     if d[1]<241 then
 	  begin
 	   putgrap(32,22,d[1]);
 	   if d[6]<>0 then putgrap2(48,22,d[6]) else putgrap(48,22,0);
@@ -62,11 +62,11 @@ begin
      if d[4]>127 then
        say(21,13,0,'OPAQUE     ') else say(21,13,1,'TRANSPARENT');
      if (d[4] AND 64)=64 then say(71,13,0,'YES') else say(71,13,1,'NO ');
-     if d[1]<241 then 
+     if d[1]<241 then
 	  begin
 	   putgrap(32,22,d[1]);
 	   if d[6]<>0 then putgrap2(48,22,d[6]) else putgrap(48,22,0);
-      end else say(32,22,0,'SET ON EACH USE');	 
+      end else say(32,22,0,'SET ON EACH USE');	
      {if d[6]=d[1] then say(38,20,0,'<');}
      say(30,48,1,straction(d[2]));
      say(30,57,1,stractionp(d[2],d[3], ((d[1]=255) OR (t=3)) ));
@@ -165,11 +165,11 @@ begin
      say(40,91,1,strnum(d[4]));
      say(42,120,1,soundname(d[2]));
 
-	 
+	
      w:=(d[9]*256)+d[10];
 	 if w>30000 then say(30,101,1,'NO DROP')
-	  else say(30,101,1,strnum( w ));	 
-	 
+	  else say(30,101,1,strnum( w ));	
+	
      say(30,111,1,strnum( (d[11]*256)+d[12] ));
     end;
    8:with obj^[objnum] do begin
@@ -205,11 +205,11 @@ begin
       244:say(26,128,1,'BEAM');
      end;
      say(42,120,1,soundname(d[2]));
-	 
+	
      w:=(d[9]*256)+d[10];
 	 if w>30000 then say(30,148,1,'NO DROP')
-	  else say(30,148,1,strnum( w ));	 
-	 
+	  else say(30,148,1,strnum( w ));	
+	
      say(30,158,1,strnum( (d[11]*256)+d[12] ));
     end;
    9:with obj^[objnum] do begin
@@ -225,11 +225,11 @@ begin
      say(46,57,1,strnum(d[6])+'%   ');
      {if d[4]<>0 then say(48,68,1,objnam(d[4])) else say(48,68,1,'NONE');}
      say(48,78,1,strnum(d[5]));
-	 
+	
      w:=(d[9]*256)+d[10];
 	 if w>30000 then say(30,88,1,'NO DROP')
-	  else say(30,88,1,strnum( w ));	 
-	 
+	  else say(30,88,1,strnum( w ));	
+	
      say(30,98,1,strnum( (d[11]*256)+d[12] ));
      if d[14]<>0 then say(55,108,1,concat('#',strnum(d[14]),'  '))
       else say(55,108,1,'NONE');
@@ -264,8 +264,8 @@ begin
      if d[14]<>0 then say(55,132,1,concat('#',strnum(d[14]),'  '))
       else say(55,132,1,'NONE');
      {display examine message}
-	 
-	 
+	
+	
      say(46,141,1,strnum( (d[9]*256)+d[10] ));
 
 
@@ -393,7 +393,7 @@ begin
      say(1,91,0,  'MAX. DAMAGE:  Û5 D Û0:');
      say(1,101,0, 'WEIGHT:  Û5 W Û0:');
      say(1,111,0, 'PRICE:   Û5 P Û0:');
-     say(1,120,0,  'SOUND EFFECT:  Û5 S Û0:'); 
+     say(1,120,0,  'SOUND EFFECT:  Û5 S Û0:');
    end;
   8:begin {missile weap}
      say(0,2,6,    '    EDIT ITEM (RANGED WEAPON)           ');

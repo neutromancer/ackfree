@@ -14,7 +14,7 @@ procedure shutdownsound;
 procedure playsound(soundname:string; channel:byte);
 procedure stopsound(channel:byte);
 procedure stopmusic;
-function musicstatus:byte;  
+function musicstatus:byte;
 procedure allowmix;
 
 implementation

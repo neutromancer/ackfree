@@ -23,7 +23,7 @@ begin
 
 
 
-       
+
          done2:=false;
          sc_x:=mapcolors[wobj] MOD 16;sc_y:=mapcolors[wobj] DIV 16;
          for iee:=0 to 15 do
@@ -76,8 +76,8 @@ begin
 
 
 end;
-  
-  
+
+
 begin
 exchar:=#0;
 obj_blowupobj(wobj);
@@ -99,7 +99,7 @@ repeat
       #0:begin
           exchar:=readkey;
           case exchar of
-		{M}#50:selectmapcolor; 
+		{M}#50:selectmapcolor;
         {G}#34:begin
                say(1,183,0,'SELECT ANIMATION GRAPHIC TILE OR   ');
                say(1,191,0,'PRESS [ESC] TO NOT ANIMATE.        ');
@@ -199,19 +199,19 @@ repeat
 		    if d[8]>3 then say(36,151,0,'USE MACRO...     ') else
             say(36,151,0,strdisappear(d[8]));
            until updown(d[8],0,4)>0;
-		   if d[8]=4 then 
+		   if d[8]=4 then
 		    begin
              say(1,183,0,'ENTER MACRO NUMBER TO RUN IF THIS  ');
              say(1,191,0,'TERRAIN IS DESTROYED:              ');			
 			 ss:=readlin(45,191,3,1);
              if ss<>#27 then
               begin;val(ss,d[8],i);d[8]:=d[8]+5;end else d[8]:=0;
-			 
+			
 			end;
            say(34,151,0,' ');
            say(36,151,1,strdisappear(d[8]));
            obj_blowupobj(wobj);
-           obj_filldata(wobj);		   
+           obj_filldata(wobj);		
           end;
        'R':begin
              say(1,183,0,'SELECT THE OBJECT THAT WILL REPLACE');
@@ -239,7 +239,7 @@ repeat
       #0:begin
           exchar:=readkey;
           case exchar of
-		{M}#50:selectmapcolor; 
+		{M}#50:selectmapcolor;
         {T}#20:begin
                 if edittriggerp(d[9],42,74,d[10]) then
                begin;obj_blowupobj(wobj);obj_filldata(wobj);end
@@ -252,7 +252,7 @@ repeat
                d[6]:=grap_select_window(d[6],0);
                loadgraps;
                obj_blowupobj(wobj);
-               obj_filldata(wobj);end;			   
+               obj_filldata(wobj);end;			
         {A}#30:begin
                 helpindex:=44;
                 if editactionp(d[2],30,57,d[3]) then
@@ -300,19 +300,19 @@ repeat
 		    if d[8]>1 then say(36,151,0,'USE MACRO...     ') else
             say(36,151,0,strdisappear(d[8]));
            until updown(d[8],0,2)>0;
-		   if d[8]=2 then 
+		   if d[8]=2 then
 		    begin
              say(1,183,0,'ENTER MACRO NUMBER TO RUN IF THIS  ');
              say(1,191,0,'TERRAIN IS DESTROYED:              ');			
 			 ss:=readlin(45,191,3,1);
              if ss<>#27 then
               begin;val(ss,d[8],i);d[8]:=d[8]+5;end else d[8]:=0;
-			 
+			
 			end;
            say(34,151,0,' ');
            say(36,151,1,strdisappear(d[8]));
            obj_blowupobj(wobj);
-           obj_filldata(wobj);		   
+           obj_filldata(wobj);		
           end;
 
        'R':begin
@@ -351,7 +351,7 @@ repeat
       #0:begin
           exchar:=readkey;
           case exchar of
-		{M}#50:selectmapcolor; 
+		{M}#50:selectmapcolor;
 		  {A}#30:begin
                 helpindex:=44;
                 if editactionp(d[2],30,57,d[3]) then
@@ -367,7 +367,7 @@ repeat
                d[6]:=grap_select_window(d[6],0);
                loadgraps;
                obj_blowupobj(wobj);
-               obj_filldata(wobj);end;			   
+               obj_filldata(wobj);end;			
         {T}#20:begin
                 if edittriggerp(d[9],42,74,d[10]) then
                begin;obj_blowupobj(wobj);obj_filldata(wobj);end
@@ -480,7 +480,7 @@ repeat
       #0:begin
           exchar:=readkey;
           case exchar of
-		{M}#50:selectmapcolor; 
+		{M}#50:selectmapcolor;
 		  {R}#19:if d[4]<>0 then
           begin
            if d[4]=255 then
@@ -554,10 +554,10 @@ repeat
         'I':messager(61,98,d[8]);
         'W':begin
              ss:=readlin(30,144,5,1);
-			 if ss='00' then ss:='30001';			 
+			 if ss='00' then ss:='30001';			
              if ss<>#27 then
               begin;val(ss,ww,i);d[9]:=hi(ww);d[10]:=lo(ww);end;
-			  
+			
 			  w:=(d[9]*256)+d[10];
 	          if w>30000 then say(30,144,1,'NO DROP  ')
 	           else say(30,144,1,strnum( w )+'        ');
@@ -578,7 +578,7 @@ repeat
       #0:begin
           exchar:=readkey;
           case exchar of
-		{M}#50:selectmapcolor; 
+		{M}#50:selectmapcolor;
 		  {G}#34:begin
                say(1,183,0,'SELECT THE TILE SHOWN WHEN THE USER');
                say(1,191,0,'IS HOLDING WEAPON.    Š:NORMAL ICON');
@@ -628,7 +628,7 @@ repeat
             end;
         'W':begin
              ss:=readlin(30,101,5,1);
-			 if ss='00' then ss:='30001';			 
+			 if ss='00' then ss:='30001';			
              if ss<>#27 then
               begin;val(ss,ww,i);d[9]:=hi(ww);d[10]:=lo(ww);end;
 			  w:=(d[9]*256)+d[10];
@@ -650,7 +650,7 @@ repeat
       #0:begin
           exchar:=readkey;
           case exchar of
-		{M}#50:selectmapcolor; 
+		{M}#50:selectmapcolor;
 		  {A}#30:if d[6]<>0 then begin
            if d[6]=255 then
             begin
@@ -760,7 +760,7 @@ repeat
              end;
         'W':begin
              ss:=readlin(30,148,5,1);
-			 if ss='00' then ss:='30001';			 
+			 if ss='00' then ss:='30001';			
              if ss<>#27 then
               begin;val(ss,ww,i);d[9]:=hi(ww);d[10]:=lo(ww);end;
 			  w:=(d[9]*256)+d[10];
@@ -782,7 +782,7 @@ repeat
       #0:begin
          exchar:=readkey;
           case exchar of
-		{M}#50:selectmapcolor; 
+		{M}#50:selectmapcolor;
         {G}#34:if d[2]=1 then
               begin
                say(1,183,0,'SELECT THE TILE SHOWN WHEN THE USER');
@@ -834,7 +834,7 @@ repeat
         'X':messager(55,108,d[14]);
         'W':begin
              ss:=readlin(30,88,5,1);
-			 if ss='00' then ss:='30001';			 
+			 if ss='00' then ss:='30001';			
              if ss<>#27 then
               begin;val(ss,ww,i);d[9]:=hi(ww);d[10]:=lo(ww);end;
 
@@ -856,7 +856,7 @@ repeat
       #0:begin
           exchar:=readkey;
           case exchar of
-		{M}#50:selectmapcolor; 
+		{M}#50:selectmapcolor;
         {F}#33:if d[6]<>0 then begin
            if d[6]=255 then
             begin
@@ -1062,9 +1062,9 @@ repeat
   12:case upcase_sync(readkey) of
       #0:begin
 	      exchar:=readkey;
-		  if exchar=#50 then selectmapcolor; 
-		 end; 
-	    
+		  if exchar=#50 then selectmapcolor;
+		 end;
+	
       'G':begin
           say(1,183,0,'SELECT GRAPHIC TILE FOR THIS OBJECT');
            say(1,191,0,'Š:ABORT                            ');

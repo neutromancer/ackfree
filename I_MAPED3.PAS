@@ -60,7 +60,7 @@ begin
       begin
         crcsource:=0;
         used:=false;
-      end;	  
+      end;	
      assign(rcrcf,ADVNAME+MAPCFILE+strnum(n));
      {$I-} rewrite(rcrcf); {$I+}
      if ioresult<>0 then exit;
@@ -139,25 +139,25 @@ var i:byte;
 begin
  for i:=start+1 to start+32 do
   wc[i-start]:=wander_index^[i];
-end;	 
+end;	
 procedure copyrc(start:byte);
 var i:byte;
 begin
  for i:=start+1 to start+64 do if i<255 then
   rc[i-start]:=rcrc^[i];
-end;		 
-	 
+end;		
+	
 begin
 
  assign(wcf,ADVNAME+MAPWFILE+strnum(thisregion));
  rewrite(wcf);
- 
+
 	 for fc:=(32 DIV 32)-1 to (WANDERMAX DIV 32)-1 do
 	  begin
 	   copywc(32 * fc);
 	   write(wcf,wc);
-	  end; 
- 
+	  end;
+
 
  close(wcf);
 
@@ -170,13 +170,13 @@ begin
  assign(rcrcf,ADVNAME+MAPCFILE+strnum(thisregion));
  {$I-} rewrite(rcrcf); {$I+}
  if ioresult<>0 then exit;
- 
+
 	 for fc:=(64 DIV 64)-1 to ((RCMAX+2) DIV 64)-1 do
 	  begin
 	   copyrc(64 * fc);
 	   write(rcrcf,rc);
-	  end; 
- 
+	  end;
+
 
  close(rcrcf);
  if region.rooms>20 then
@@ -364,12 +364,12 @@ repeat
   end;
  for xsc:=0 to 10 do for ysc:=0 to 8 do
   begin
-  
-  
+
+
   if visimap[xsc,ysc]>240 then
    putgrap2(xsc*4+3,ysc*16+10,map[((xinloc+xsc+10) DIV 16)+1,((yinloc+ysc+11) DIV 16)+1,
       ((xinloc+xsc+10) MOD 16)+1, ((yinloc+ysc+11) MOD 16)+1].d)
-   else putgrap(xsc*4+3,ysc*16+10,visimap[xsc,ysc]);  
+   else putgrap(xsc*4+3,ysc*16+10,visimap[xsc,ysc]);
 
    {if noshow[xsc,ysc] then say(xsc*4+4,ysc*16+14,0,'W');}
 
@@ -396,16 +396,16 @@ begin {what's under me?}
  {say if wanderer here}
  {if wander_index^[1].x<>0 then}
   begin
-   for i:=1 to WANDERMAX do 
+   for i:=1 to WANDERMAX do
    begin
-    if wander_index^[i].x=chunk[2,2] then 
+    if wander_index^[i].x=chunk[2,2] then
     if wander_index^[i].xin=xinloc then
      if wander_index^[i].yin=yinloc then
       begin
        say(1,174,0,'W'+strnum(i)+': '+strnum(wander_index^[i].odds)+
         '% '+crc^[wander_index^[i].creature].n);
       end;
-	end;  
+	end;
 	
    for xsc:=0 to 10 do for ysc:=0 to 8 do
      if chunk[((xinloc+xsc+10) DIV 16)+1,((yinloc+ysc+11) DIV 16)+1]<>0 then
@@ -413,8 +413,8 @@ begin {what's under me?}
      if wander_index^[i].xin=((xinloc+xsc+10) MOD 16)+1 then
       if wander_index^[i].yin=((yinloc+ysc+11) MOD 16)+1 then
         say(xsc*4+4,ysc*16+14,0,'W');
-	  
-	  
+	
+	
 
   end;
  llr:=map[2,2,xinloc,yinloc].o; llr2:=map[2,2,xinloc,yinloc].d;
@@ -446,9 +446,9 @@ end;
  {clear_keyboard_buffer;}
  j:=upcase_sync(readkey);
  {if j<>#0 then say(1,1,0,j) else say(1,1,0,' ');}
- if save_the_maps then 
+ if save_the_maps then
   begin; savewmap; savemap; save_the_maps:=false; end;
-  
+
  if paws>=8990 then blankbox(1,174,198,199);
 
  case j of
@@ -789,7 +789,7 @@ end;
            map[2,2,xinloc,yinloc].d);
         showwalk;
        end;
-	 if layobj[ord(j)-64]<>0 then if (obj^[layobj[ord(j)-64]].t<5) 
+	 if layobj[ord(j)-64]<>0 then if (obj^[layobj[ord(j)-64]].t<5)
 	  then if obj^[layobj[ord(j)-64]].d[1]>240 then
 	   begin
 	    loadgraps2(false);
@@ -1040,9 +1040,9 @@ begin
 	  loadgraps2(false);
 	  putgrap(x*4-3 +(32-(roomwide*2)) ,y*16-14 +(88-(roomtall*8)),
        map[2,2,x,y].d);
-	  loadgraps; 
-	 end; 
-   end	 
+	  loadgraps;
+	 end;
+   end	
   else
    begin
     putgrap(x*4-3 +(32-(roomwide*2)) ,y*16-14 +(88-(roomtall*8)),
@@ -1054,7 +1054,7 @@ begin
  if roomtall<>11 then
   say(3,2,5,' N Û0: '+region.room.name[n]);
   for i:=1 to WANDERMAX do
-   if (wander_index^[i].x=n) 
+   if (wander_index^[i].x=n)
      then
       say(wander_index^[i].xin*4-2 +(32-(roomwide*2)) ,wander_index^[i].yin*16-10 +(88-(roomtall*8)),0,'W');
 
@@ -1139,7 +1139,7 @@ repeat
      with region.port[llr2] do
       if ry>32 then
         say(2,191,1,'PORTAL '+strnum(llr2)+' TO '+
-        strnum(region)+' '+strnum(rx)+' '+strnum(x) +' '+  strnum(y)) 
+        strnum(region)+' '+strnum(rx)+' '+strnum(x) +' '+  strnum(y))
       else say(2,191,1,'PORTAL '+strnum(llr2)+' TO '+
         strnum(region)+' 0 '+strnum((rx-1)*16 +x) +' '+  strnum((ry-1)*16 + y));
 
@@ -1161,10 +1161,10 @@ repeat
   end;
  until keypressed;
  j:=upcase_sync(readkey);
- 
-  if save_the_maps then 
+
+  if save_the_maps then
   begin; savemap; save_the_maps:=false; end;
- 
+
  if paws>=9990 then blankbox(3,183,316,200);
  paws:=0;
     xorthing(xorx,xory);xorthing(xorx+3,xory+12);xorthing(xorx,xory+12);
@@ -1340,7 +1340,7 @@ repeat
       i1:=0;
       for i:=1 to WANDERMAX do
        if (wander_index^[i].x=n) and (wander_index^[i].xin=xloc)
-        and (wander_index^[i].yin=yloc) then  
+        and (wander_index^[i].yin=yloc) then
           begin
            {remove wanderer}
            wander_index^[i].x:=0;
@@ -1457,7 +1457,7 @@ repeat
           if (dri1=0) and (dri<2551) and (dri>1) then
            begin;dri:=dri DIV 10;locnt^[addslot].objcode:=dri;end;
        end;
-      if layobj[ord(j)-64]<>0 then if (obj^[layobj[ord(j)-64]].t<5) 
+      if layobj[ord(j)-64]<>0 then if (obj^[layobj[ord(j)-64]].t<5)
 	  then if obj^[layobj[ord(j)-64]].d[1]>240 then
 	   begin
 	    loadgraps2(false);
@@ -1465,7 +1465,7 @@ repeat
 		lastgrap:=locnt^[addslot].objcode;
 		loadgraps;
 		showroom(n);erset;
-	   end;		   
+	   end;		
       getroom(n);
       maponly;
      end;
@@ -1481,7 +1481,7 @@ repeat
          region.port[locnt^[llp].objcode].used:=false;
         end;
 	 if addslot<>0 then
-      begin {no point in erasing nothing}	 
+      begin {no point in erasing nothing}	
        if looklevel=1 then begin
         locnt^[llp].obj:=0;
         rmcnt^[xloc+region.room.x1[n]-1,yloc+region.room.y1[n]-1]:=locnt^[llp].p;
@@ -1514,7 +1514,7 @@ begin
  if ioresult<>0 then rewrite(f);
  say(2,173,0,'** CHECKING REGION FOR DATA ERRORS **');
  say(2,182,0,'**         PLEASE WAIT...          **');
- say(2,191,0,'**                                 **'); 
+ say(2,191,0,'**                                 **');
  writeln(f,'Error checking for region #'+strnum(thisregion)+' "'+region.name+'"');
  writeln(f,'Region size: '+strnum(locntsize)+'/6400');
  writeln(f,' ');
@@ -1524,7 +1524,7 @@ begin
   for yc:=1 to 40 do
    begin
     p:=rmcnt^[xc,yc];
-   
+
     for xc2:=1 to 80 do
 	 for yc2:=1 to 40 do
 	  if (xc<>xc2) or (yc<>yc2) then
@@ -1536,13 +1536,13 @@ begin
 		  write(f,'Duplicate pointer found: '+strnum(xc)+','+strnum(yc)+
 		   ' and '+strnum(xc2)+','+strnum(yc2)+' pointer: @'+strnum(p));
 		  write(f,' next: @'+strnum(locnt^[p].p)+' OBJ# '+strnum(locnt^[p].obj));
-		  if (locnt^[p].obj<>0) and (locnt^[p].obj<>255) then 
+		  if (locnt^[p].obj<>0) and (locnt^[p].obj<>255) then
 		  writeln(f,' '+obj^[locnt^[p].obj].n) else writeln(f,' ');
           rmcnt^[xc2,yc2]:=0;
-		   
-		   
+		
+		
          {uh-oh, duplicate pointer}
-         
+
 
         end;
 	end;
@@ -1563,36 +1563,36 @@ begin
 	    else
 		 begin
 		  inc(errors);
-		  say(25,191,0,'ERRORS FOUND: '+strnum(errors));		  
+		  say(25,191,0,'ERRORS FOUND: '+strnum(errors));		
 		  writeln(f,'Duplicate pointer found: '+strnum(xc)+','+strnum(yc)+
 		   ' and '+strnum(sanity[p] DIV 256)+','+strnum(sanity[p] MOD 256)+' pointer: @'+strnum(p)+
 		   ' next: @'+strnum(locnt^[p].p));
-          rmcnt^[xc,yc]:=0;		  
-		 end; 
+          rmcnt^[xc,yc]:=0;		
+		 end;
 	   if p=locnt^[p].p then
 	    begin
 		  inc(errors);
-		  say(25,191,0,'ERRORS FOUND: '+strnum(errors));	 
+		  say(25,191,0,'ERRORS FOUND: '+strnum(errors));	
 		 writeln(f,'Pointer @'+strnum(p)+' points to itself!');
 		 locnt^[p].p:=0;
 		 p:=0;
-		end else 
+		end else
 	   p:=locnt^[p].p;
-	  
-	  end; {while}
-     
-	 
-	end; 
 	
-   
+	  end; {while}
+
+	
+	end;
+	
 
 
-   
- writeln(f,'Deep scan finished.');   
+
+
+ writeln(f,'Deep scan finished.');
  if errors=0 then writeln(f,'No errors found.');
  writeln(f,' '); writeln(f,' '); writeln(f,' ');
  close(f);
- if errors>0 then 
+ if errors>0 then
   begin
    say(10,182,0,strnum(errors)+' ERRORS FOUND AND REPAIRED.');
    say(20,191,0,'    PRESS A KEY.    ');
@@ -1604,7 +1604,7 @@ procedure deleteroom(n:byte);
  var xc,yc:byte;
 
 	 here_loop,here_next:word;
-	 
+	
 function notshared(r,x,y:byte):boolean;
 {returns true if no other rooms share this space}
 var i:byte;
@@ -1615,13 +1615,13 @@ begin
   if i<>r then
    if region.room.x1[i]<>0 then
     begin
-     if (region.room.x1[i]<=x) and (region.room.x2[i]>=x) 
+     if (region.room.x1[i]<=x) and (region.room.x2[i]>=x)
       and (region.room.y1[i]<=y) and (region.room.y2[i]>=y)
-       then notshared:=false;	  
+       then notshared:=false;	
     end;
 
-end; {notshared}	 
-	 
+end; {notshared}	
+	
 begin
  if n=0 then exit;
  getroom(n);
@@ -1632,9 +1632,9 @@ begin
   for yc:=region.room.y1[n] to region.room.y2[n] do
    if notshared(n,xc,yc) then
    begin
-   
+
     here_loop:=rmcnt^[xc,yc]; rmcnt^[xc,yc]:=0;
-  
+
     while here_loop<>0 do
 	   begin
 	    here_next:=locnt^[here_loop].p;
@@ -1649,21 +1649,21 @@ begin
            begin
             region.port[locnt^[here_loop].objcode].used:=false;
            end;
-      
+
 	     locnt^[here_loop].obj:=0; locnt^[here_loop].objcode:=0;
          locnt^[here_loop].p:=0;		
 		 here_loop:=here_next;
-		end {obj<>0} 
+		end {obj<>0}
 		 else
 		begin {obj=0}
 	     locnt^[here_loop].obj:=0; locnt^[here_loop].objcode:=0;
          locnt^[here_loop].p:=0;		
 		 here_loop:=0;
-		end; {obj=0} 
+		end; {obj=0}
 		
 	   end; {while}
-   end; {loop} 
-   
+   end; {loop}
+
  here_loop:=locntsize;
  while (locnt^[here_loop].obj=0) and (here_loop>5) do
   begin;dec(here_loop);dec(locntsize);end;

@@ -131,10 +131,10 @@ begin
     'M':if xloc<16 then inc(xloc);
 	#132:if n>1 then begin {control-pageup}
 	      savemosaic(n);savemosaic(n-1);dec(n);showbottom;
-		 end; 
+		 end;
 	
 
-		 
+		
 	#118:if n<250 then begin {control-pagedown}
 	      savemosaic(n);savemosaic(n+1);inc(n);showbottom;
 	     end;
@@ -372,7 +372,7 @@ procedure messager(xc,yc:byte);
 				 load_shortmsgfile(i1);
 				 i:=shortmessageedit(yc+8);
 				 if i<>0 then save_shortmsgfile(i1);
-				 
+				
 				end else
 				begin
                  if i1-1<=filesz then
@@ -526,9 +526,9 @@ while not keypressed do
 			 begin
 			  longmsg.chars[yl,i2]:=#1;
               longmsg.attrs[yl,i2]:=0;
-			 end;  
-           show_longmsg;			 
-          end;	  
+			 end;
+           show_longmsg;			
+          end;	
 	  #32:if yl<22 then
 	      begin {alt-D}
            for ii:=yl+1 to 22 do
@@ -551,7 +551,7 @@ while not keypressed do
               longmsg.attrs[22,i2]:=0;
 			 end;          			
            show_longmsg;
-          end;		  
+          end;		
       #18:result:=-1;
       #46:begin;clear_longmsg;show_longmsg;end;
       #120..#125:attr:=ord(j1)-119;

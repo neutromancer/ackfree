@@ -175,15 +175,15 @@ begin
  {$I-} reset(cf); {$I+}
  if ioresult<>0 then begin;loadcreatures:=false;exit;end;
 
- 
+
   for i:=1 to 64 do read(cf,crc^[i]);
-  if not eof(cf) then   
+  if not eof(cf) then
     for i:=65 to MAXCRCS do read(cf,crc^[i])
    else
     begin
 	 for i:=65 to MAXCRCS do crc^[i].t:=0;
 	end;
- 
+
  close(cf);
  loadcreatures:=true;
 end;
@@ -751,7 +751,7 @@ begin
   44:s:='SET HPREGEN';
   45:s:='SET MPREGEN';
   46:s:='SET POISON';
-  47:S:='RUN DIALOGUE';  
+  47:S:='RUN DIALOGUE';
   end; {case}
   straction:=s;
  end;
@@ -831,7 +831,7 @@ begin
                   if actp>240 then say(xloc,yloc,1,strnum(actp-240)+'   ') else
                     say(xloc,yloc,1,strnum(actp*10)+'   ');
                  end;
-                  
+
           21,0:exit;
           1:messager(53,183,actp);
           2:longmessager(53,183,actp);

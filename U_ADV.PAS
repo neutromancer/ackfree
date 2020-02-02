@@ -317,7 +317,7 @@ begin
 end;
 
 
- 
+
 procedure delay;
 
 begin

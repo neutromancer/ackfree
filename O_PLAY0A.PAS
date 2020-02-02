@@ -111,7 +111,7 @@ begin
      end;
   44:ack.regen_hp:=tmdata;
   45:ack.regen_mp:=tmdata;
-  46:ack.poison:=tmdata;  
+  46:ack.poison:=tmdata;
   47:begin
       readkey_default:='T';
 	  talktome:=tmdata;
@@ -377,7 +377,7 @@ begin
   37:begin
 (*     if doublepass then writelog(37,'doublepass true');
      if do_all then writelog(37,'do_all true');	
-     writelog(37,'caller: '+strnum(caller)+'  room: '+strnum(room));	 
+     writelog(37,'caller: '+strnum(caller)+'  room: '+strnum(room));	
      if (not doublepass) and (not do_all) and (caller=0) and (room<>0) then
        begin;prepare_second_pass(tmresult,tmspot,tmdta,room,x,y);
        exit;end;
@@ -487,7 +487,7 @@ begin
     if tmst<>0 then tmspot:=obj^[tmspot].d[12];
    end;
   writelog(tmdata,'Action parser, '+obj^[tmspot].n);
-  
+
   bumpnoise:=true;stepnoise:=true;
   readkey_time:=R150;
   if arcade then readkey_default:=#255 else
@@ -535,7 +535,7 @@ begin
       then begin
         doaction:=true;
         if obj^[tmspot].d[10]=1 then ack.pcash:=0
-         else 
+         else
          begin
           if ack.pinv[obj^[tmspot].d[10]]>0 then
            dec(ack.pinv[obj^[tmspot].d[10]])
@@ -724,14 +724,14 @@ begin
 	   {variable}
 	   	ppp:=ack.variables[pp];
 		if pp>7 then if ack.variableshi[pp]>0 then ppp:=255;
-	   
+	
 	  end;
 	   if p=24 then {var is zero}
 	    if ppp<>0 then result:=99;
 	   if p=25 then {var is not zero}
 	    if ppp=0 then result:=99;
 		
-	  
+	
 	  end else result:=99;
   end;
 
@@ -822,7 +822,7 @@ begin
      quartertile(i,ack.qtile[i]);
 
 end;
- 
+
 
 
 var lastdiagmouse:byte; {1:NS 0:EW}
@@ -836,16 +836,16 @@ function timed_readkey(var j2:char):char;
      ymoub0,ymoub1,ymoub2,ymoub3:byte;
      roomwide,roomtall:Byte;
 	 str1,str2:string;
-	 
+	
 procedure cursor(b:byte);
 var i:byte;
 begin
  for i:=0 to 7 do
   mem[scrnl:(5)+scrnh[i+188]]:=b;
 
-end;	 
-	 
-	 
+end;	
+	
+	
 begin
 
 if not disable_music then
@@ -874,19 +874,19 @@ begin {music is enabled}
    if ack.music<>region.room.wallgrap[5] then stopmusic;
    ack.music:=region.room.wallgrap[5];
   end;
-  
+
  {this was moved out of the while-loop because smix handles looping now}
  if ack.music<>0 then
-  if musicstatus=0 then soundeffect(ack.music,2); 
+  if musicstatus=0 then soundeffect(ack.music,2);
 end; {music is enabled}
 
 
-  
+
  lastaggro:=aggro;
  j2:=#0;
  if not keybuffer then clear_keyboard_buffer;
  {gettime(h,m,s,s1); if h<starth then h:=h+24; h:=h-starth;
- 
+
  timetostop:=(readkey_time DIV 10)+(s1 DIV 10)+(s*10)+(m*600)+(h*36000);}
  timetostop:=supergetclock+readkey_time;
  timenow:=0;
@@ -913,7 +913,7 @@ end; {music is enabled}
      if ((mousex DIV 8) > 65) and ((mousex DIV 8) < 78) then
       begin {bcase}
 {       if ack.showmenu<>0 then }
-       
+
        if ack.splituse=0 then {no C or R}
         case mousey of
         11..19:j:='A';
@@ -1195,7 +1195,7 @@ begin
  sharedcommand:=false;
  case j of
   '~':if transparency then scrollsay('TRANSPARENCY MASK: '+strnum(tmask)) else scrollsay('TRANSPARENCY IS OFF');
-  
+
   '-':if combatpacing<200 then
        begin
 	    combatpacing:=combatpacing+10;
@@ -1205,13 +1205,13 @@ begin
        begin
 	    combatpacing:=combatpacing-10;
 		scrollsay('COMBAT MESSAGE SPEED INCREASED ('+strnum((200-combatpacing) DIV 10)+')');
-	   end;	   
+	   end;	
   #6:if ack.cheat=123 then {control-f}
      begin
       ack.fly:=not (ack.fly);
 	  if ack.fly then scrollsay('FLIGHT MODE ON') else scrollsay('FLIGHT MODE OFF');
 	  sharedcommand:=true;
-	 end; 
+	 end;
   #7:scrollsay(strnum(XMSGetFreeMem));	 {control-G}
 
   #2:begin {control-b}
@@ -1236,7 +1236,7 @@ begin
           ack.hp:=ack.hpmax; ack.mp:=ack.mpmax; graphhp;
 
          end;
-  #26:if ack.cheat>98 then 
+  #26:if ack.cheat>98 then
        begin;scrollsay('GOING INVISIBLE...');ack.invisible:=255;end;
   #23:if ack.cheat=123 then begin {control-w}
           bottomsay(1,'WARP TO LOCATION');
@@ -1529,7 +1529,7 @@ begin
    if ((j=ack.extracommand[1]) and
     (j<>#27)) then
      begin
-     
+
      i:=ack.hour*60+ack.minute+(ack.days MOD 7)*24;
      run_macro(ack.extracommand1);
      if i<>(ack.hour*60+ack.minute+(ack.days MOD 7)*24) then
@@ -1682,7 +1682,7 @@ end;
 procedure startclock;
 var h,m,s,s1:word;
 begin
-  gettime(h,m,s,s1); 
+  gettime(h,m,s,s1);
   starth:=h;
 end;
 

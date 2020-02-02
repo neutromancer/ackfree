@@ -67,7 +67,7 @@ begin
  macroloaded:=0;
  macro_teleport:=false;
  entrancemacro:=0;
- 
+
  pass_message:=0;block_message:=0;
  if ack.anim_speed=0 then animate:=false else animate:=true;
  nextanim:=1;anim_phase_one:=true;
@@ -103,7 +103,7 @@ repeat
     lastaggro:=255;
     if old_rr<>0 then
       begin
-        
+
         ack.criminal:=0;
         loadmap(rr);
         old_rr:=rr;
@@ -184,7 +184,7 @@ begin
  getmem2(pointer(locnt), LOCNTMAX * sizeof(loccontrec));
  getmem2(pointer(obj), (MAXOBJS+2) * sizeof(objectrec));
  getmem2(pointer(wander_index), (WANDERMAX+1) * sizeof(wander_record));
- getmem2(pointer(rcrc), (RCMAX+1) * sizeof(rregioncreature)); 
+ getmem2(pointer(rcrc), (RCMAX+1) * sizeof(rregioncreature));
   obj^[0].d[1]:=0; obj^[0].t:=1; {this used to be 255, going to try it as 1}
   xinloc:=255;
   obj^[xinloc].t:=3;
@@ -215,7 +215,7 @@ begin
  ADVNAME:=copy(ss,i+1,length(ss)-i);
  bgi_dir:=copy(ss,2,i-2);
  calibratedelay(bgi_dir+'\SPEED.DAT');
- 
+
  loadconfig;
 
  case ack.hour of
@@ -235,14 +235,14 @@ begin
 
  graphicsmode;
  (* initgraph; {shouldn't need this! } *)
- 
- 
+
+
  check_requiredfiles;
- 
+
  loadcreatures;loadobjs;
 
  loadgraps2(true);
- 
+
  preparemask;
  initmouse;
 
@@ -295,8 +295,8 @@ begin
  oldhour:=ack.hour;
 
  prerender_dark(ack.darkforeground,ack.darkbackground);
- 
- 
+
+
  Ack_Walk_Server;
 end;
 

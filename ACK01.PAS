@@ -38,7 +38,7 @@ begin
  {$I-} reset(cf); {$I+}
  if ioresult<>0 then exit;
  for i:=1 to 64 do read(cf,crc^[i]);
-  if not eof(cf) then   
+  if not eof(cf) then
     for i:=65 to MAXCRCS do read(cf,crc^[i])
    else
     begin
@@ -1249,7 +1249,7 @@ begin
   fly:=false; nomove_n:=false;
   nomove_s:=false; nomove_e:=false;
   nomove_w:=false; unused:=false;
-  
+
   textcolors[0]:=15*256 + 0;
   textcolors[1]:=8*256 + 0;
   textcolors[2]:=7*256 + 0;
@@ -1657,7 +1657,7 @@ var cf:file of byte;
 begin
  assign(cf,ADVNAME+'.MCO');
  {$I-} reset(cf); {$I+}
- if ioresult<>0 then 
+ if ioresult<>0 then
   begin
    mapcolors[i]:=0; mapcolors[255]:=0;
    for i:=1 to 254 do if obj^[i].t>5 then mapcolors[i]:=15 else mapcolors[i]:=i;
@@ -1716,12 +1716,12 @@ begin
  getmem(rmcnt, 6400);
  getmem(locnt, LOCNTMAX * sizeof(loccontrec));
  getmem(crc, MAXCRCS * sizeof(creaturerec));
- getmem(graphic2, (GRAPS+1)*256 ); 
+ getmem(graphic2, (GRAPS+1)*256 );
  getmem(wander_index, (WANDERMAX+1) * sizeof(wander_record));
- getmem(rcrc, (RCMAX+1) * sizeof(rregioncreature)); 
- 
+ getmem(rcrc, (RCMAX+1) * sizeof(rregioncreature));
+
  LoadConfig;if not LoadObjs then ack.plvehicle:=0;
- loadgraps2(true);  
+ loadgraps2(true);
  ack.copytype:=0;
  TEXTC0:=ack.textcolors[0];
  TEXTC1:=ack.textcolors[1];
