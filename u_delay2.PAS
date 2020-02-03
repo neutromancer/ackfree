@@ -17,7 +17,7 @@ implementation
 var starting_h:word;
 
 
-function getclock;
+function getclock:word;
 var
  hh,mm,ss,ms:word;
 begin
@@ -26,7 +26,7 @@ begin
  getclock := ((ms) DIV 100) + (ss*10) + (mm*600) + (hh*36000);
 end;
 
-function supergetclock;
+function supergetclock:longint;
 var
  hh,mm,ss,ms:word;
 begin
@@ -47,7 +47,7 @@ end;
 
 
 
-procedure delay2;
+procedure delay2(delayms:word);
 var
  hh,mm,ss,ms,timenow,delayend:word;
 begin
@@ -70,7 +70,7 @@ begin
 end;
 
 *)
-procedure delay2;
+procedure delay2(delayms:word);
  var w,w2,w3,
   hh,mm,ss,ms,timenow,delayend:word;
 begin
@@ -111,7 +111,7 @@ begin
 end;
 
 
-procedure calibratedelay;
+procedure calibratedelay(path:string);
 
  {calibrate 1/20sec delay}
 var

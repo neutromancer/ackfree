@@ -57,12 +57,12 @@ begin
  intr($10,greg);
 end;
 
-function grapherrormsg;
+function grapherrormsg(n:integer):string;
 begin
  grapherrormsg:='Blah, blah';
 end;
 
-procedure setcolor;
+procedure setcolor(n:integer);
 begin
  thisgraphiccolor:=n;
 end;
@@ -75,7 +75,7 @@ begin
  n2:=t;
 end;
 
-procedure line;
+procedure line(x1,y1,x2,y2:word);
  var cx,cy:word;
      ucx,ucy:word;
      xd,yd:word;
@@ -122,33 +122,33 @@ begin
  lastlinex:=x2;lastliney:=y2;
 end;
 
-procedure lineto;
+procedure lineto(x,y:integer);
 begin
  line(lastlinex,lastliney,x,y);
 end;
 
-procedure putpixel;
+procedure putpixel(cx,cy,c:integer);
 begin
  mem[$a000:round(cy)*320 + round(cx)]:= c;
  lastlinex:=cx; lastliney:=cy;
 end;
 
-procedure setvisualpage;
+procedure setvisualpage(n:byte);
 begin
 end;
 
-procedure setactivepage;
+procedure setactivepage(n:byte);
 begin
 end;
 
-procedure detectgraph;
+procedure detectgraph(var gd,gm:integer);
 begin
  gm:=0;
  gd:=9;
 
 end;
 
-{procedure setrgbpalette;
+{procedure setrgbpalette(c,r,b,g:byte);
 begin
  greg.ax:=$1010;
  greg.bx:=c;

@@ -216,16 +216,16 @@ begin
 end;
 
 
-procedure cycle;
+procedure cycle(var v:byte;min,max:word;stepp:integer);
 begin
  v:=v+stepp;if v>max then v:=min;if v<min then v:=max;
 end;
 
 
-procedure getmem2;
+procedure getmem2(var varpointer:pointer;varsize:word);
  var ft:text;
 begin
- if maxavail>=varsize then
+ if {maxavail>=varsize} true then
   getmem(varpointer,varsize) else
    begin
     assign(ft,'CON');

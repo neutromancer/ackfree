@@ -274,7 +274,7 @@ begin
 end;
 
 { Checks if mouse has had a button pressed within a certain area }
-function mousein;
+function mousein(x1,y1,x2,y2:integer):boolean;
  var answer:boolean;
 begin
 
@@ -292,7 +292,7 @@ end;
 { Weird function: checks mousein(), and if it returns true, it
   will set a number (returned by function) and a character
   (in parameter list) to the specified values. }
-function checkmouse;
+function checkmouse(x1,y1,x2,y2,nv,n:integer;var cv:char;c:char):integer;
 begin
 
  if mousein(x1,y1,x2,y2) then
@@ -318,7 +318,7 @@ end;
 
 
 
-procedure delay;
+procedure delay(d:word);
 
 begin
  delay2(d);

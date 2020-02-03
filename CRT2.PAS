@@ -25,7 +25,7 @@ procedure writec(x,y,a:byte;s:String);
 
 implementation
 
-procedure textmode;
+procedure textmode(m:byte);
 begin
 end;
 
@@ -48,7 +48,7 @@ end;
 
 var saveportb:byte;
 
-procedure sound;
+procedure sound(hz:word);
 begin
  port[$43]:=$B6;
  port[$42]:=lo(hz);
@@ -64,11 +64,11 @@ begin
 end;
 
 
-procedure window;
+procedure window(x1,x2,y1,y2:integer);
 begin
 end;
 
-function readkey;
+function readkey:char;
 begin
  if ((mouseon) and (not mouseactive)) then showmouse;
  creg.ah:=0;
@@ -85,7 +85,7 @@ begin
  readkey:=char(creg.al);
 end;
 
-function keypressed;
+function keypressed:boolean;
  var kp:boolean;
 begin
  if ((mouseon) and (not mouseactive)) then showmouse;
@@ -117,7 +117,7 @@ procedure clreol;
 begin
 end;
 
-procedure gotoxy;
+procedure gotoxy(x,y:byte);
 begin
  creg.ah:=2;
  creg.bh:=0;
@@ -126,7 +126,7 @@ begin
  intr($10,creg);
 end;
 
-function wherex;
+function wherex:byte;
 begin
  creg.ah:=3;
  creg.bh:=0;
@@ -134,7 +134,7 @@ begin
  wherex:=creg.dl;
 end;
 
-function wherey;
+function wherey:byte;
 begin
  creg.ah:=3;
  creg.bh:=0;
@@ -142,7 +142,7 @@ begin
  wherey:=creg.dh;
 end;
 
-procedure writec;
+procedure writec(x,y,a:byte;s:String);
 begin
  { x,y,a,s }
  creg.ah:=$13;
